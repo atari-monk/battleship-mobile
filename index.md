@@ -1,12 +1,16 @@
 # battleship-mobile Documentation
 
-## 1. [Docs assumptions](docs/001_docs.md)
+## 1. Project
 
-## 2. Grid
+1. [Feature List](docs/feature_list.md)
+2. [Docs](docs/docs.md)
+3. [Project](docs/project.md)
+4. [Dev Server](docs/dev_server.md)
 
-### 1. Static grid component mockup
+## 2. Test
 
-- [Doc](docs/002_test_grid.md)
-- [Test](test/grid/001_static/index.html)
+1. [Static grid component mockup](test/grid/static/index.html)
 
-## [Feature List](docs/feature_list.md)
+## 3. Feature
+
+1. [Static grid component mockup](docs/static_grid.md)
