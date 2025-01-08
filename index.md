@@ -9,8 +9,9 @@
 
 ## 2. Test
 
+1. [Fullscreen request](test/full_screen/index.html)
 1. [Static grid component mockup](test/grid/static/index.html)
 
-## 3. Feature
+## 3. Feature Doc
 
 1. [Static grid component mockup](docs/static_grid.md)
