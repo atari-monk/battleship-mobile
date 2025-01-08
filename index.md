@@ -12,6 +12,7 @@
 1. [Fullscreen request](test/full_screen/index.html)
 2. [Menu](test/menu/index.html)
 3. [Static grid component mockup](test/grid_static/index.html)
+4. [Modular page](test/modular_page/index.html)
 
 ## 3. Feature Doc
 
