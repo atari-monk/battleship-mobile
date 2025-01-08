@@ -1,3 +1,5 @@
+# battleship-mobile Documentation
+
 ## 1. [Docs assumptions](docs/001_docs.md)
 
 ## 2. Grid
