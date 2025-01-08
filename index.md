@@ -10,7 +10,8 @@
 ## 2. Test
 
 1. [Fullscreen request](test/full_screen/index.html)
-1. [Static grid component mockup](test/grid/static/index.html)
+2. [Menu](test/menu/index.html)
+3. [Static grid component mockup](test/grid_static/index.html)
 
 ## 3. Feature Doc
 
