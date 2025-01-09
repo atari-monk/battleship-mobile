@@ -25,15 +25,3 @@
   align-items: center;
   font-size: 1.5em;
 }
-
-.static-grid__gui {
-  width: 100vw;
-  flex-grow: 1;
-  background-color: red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 1.5em;
-  box-sizing: border-box;
-}
