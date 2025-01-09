@@ -1,4 +1,4 @@
-.game-menu-container {
+.game-menu {
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #2c3e50, #3498db);
   color: white;
@@ -11,7 +11,7 @@
   overflow: hidden;
 }
 
-.game-menu {
+.game-menu__box {
   text-align: center;
   background: rgba(0, 0, 0, 0.6);
   padding: 20px;

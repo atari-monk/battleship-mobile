@@ -1,0 +1,39 @@
+.static-grid {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.static-grid__grid {
+  display: grid;
+  flex-grow: 9;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  width: 100vw;
+  gap: 2px;
+  box-sizing: border-box;
+}
+
+.static-grid__item {
+  background-color: lightblue;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+.static-grid__gui {
+  width: 100vw;
+  flex-grow: 1;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5em;
+  box-sizing: border-box;
+}

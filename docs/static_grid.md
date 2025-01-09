@@ -1,4 +1,4 @@
-# Static grid component mockup
+# Static grid
 
 ## Description
 

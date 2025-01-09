@@ -1,9 +1,8 @@
 import { loadComponent } from '../../script.js'
 
 const ids = {
-  fullScreenButton: 'fsFullScreenButton',
-  overlay: 'fsOverlay',
-  gameMenuContainer: 'gameMenuContainer',
+  fsOverlay: 'fsOverlay',
+  fsOverlayButton: 'fsOverlayButton',
 }
 
 const styles = {
@@ -26,8 +25,8 @@ export function init() {
   console.log(messages.initMsg)
 }
 
-const fullScreenButton = document.getElementById(ids.fullScreenButton)
-const overlay = document.getElementById(ids.overlay)
+const button = document.getElementById(ids.fsOverlayButton)
+const overlay = document.getElementById(ids.fsOverlay)
 
 const goFullScreen = async () => {
   if (document.documentElement.requestFullscreen) {
@@ -44,8 +43,8 @@ const goFullScreen = async () => {
   await showMenu()
 }
 
-fullScreenButton.addEventListener(events.click, goFullScreen)
+button.addEventListener(events.click, goFullScreen)
 
 async function showMenu() {
-  await loadComponent(ids.gameMenuContainer, componentFile.menu)
+  await loadComponent(componentFile.menu)
 }

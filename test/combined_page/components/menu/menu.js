@@ -1,9 +1,8 @@
 import { loadComponent } from '../../script.js'
 
 const ids = {
-  startButton: 'gameMenuStartButton',
-  gameMenuContainer: 'gameMenuContainer',
-  gridStaticContainer: 'gridStaticContainer',
+  gameMenu: 'gameMenu',
+  gameMenuStartButton: 'gameMenuStartButton',
 }
 
 const styles = {
@@ -19,7 +18,7 @@ const events = {
 }
 
 const componentFile = {
-  gridStatic: 'grid_static',
+  gridStatic: 'static_grid',
 }
 
 export function init() {
@@ -27,14 +26,14 @@ export function init() {
 }
 
 document
-  .getElementById(ids.startButton)
+  .getElementById(ids.gameMenuStartButton)
   .addEventListener(events.click, async () => {
     await showGridStatic()
   })
 
 async function showGridStatic() {
-  const menu = document.getElementById(ids.gameMenuContainer)
+  const menu = document.getElementById(ids.gameMenu)
   menu.classList.add(styles.hidden)
 
-  await loadComponent(ids.gridStaticContainer, componentFile.gridStatic)
+  await loadComponent(componentFile.gridStatic)
 }
