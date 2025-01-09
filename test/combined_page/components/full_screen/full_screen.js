@@ -1,13 +1,13 @@
 import { loadComponent } from '../../script.js'
 
 const ids = {
-  fullScreenButton: 'fs-fullScreenButton',
-  overlay: 'fs-overlay',
-  menuContainer: 'menu-container',
+  fullScreenButton: 'fsFullScreenButton',
+  overlay: 'fsOverlay',
+  menuContainer: 'menuContainer',
 }
 
 const styles = {
-  hidden: 'none',
+  hidden: 'fs-overlay--hidden',
 }
 
 const events = {
@@ -15,7 +15,7 @@ const events = {
 }
 
 const messages = {
-  initMsg: 'full screen overlay request component',
+  initMsg: 'full screen overlay',
 }
 
 const component = {
@@ -39,7 +39,7 @@ const goFullScreen = async () => {
   } else if (document.documentElement.msRequestFullscreen) {
     document.documentElement.msRequestFullscreen()
   }
-  overlay.style.display = styles.hidden
+  overlay.classList.add(styles.hidden)
 
   await showMenu()
 }

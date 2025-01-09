@@ -1,4 +1,4 @@
-.fs-overlay-component {
+.fs-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,11 +13,12 @@
   z-index: 9999;
 }
 
-.fs-overlay-content {
+.fs-overlay__content {
   text-align: center;
+  line-height: 1.8;
 }
 
-.fs-overlay-button {
+.fs-overlay__button {
   padding: 10px 20px;
   font-size: 18px;
   background-color: #4caf50;
@@ -28,6 +29,10 @@
   border-radius: 5px;
 }
 
-.fs-overlay-button:hover {
+.fs-overlay__button:hover {
   background-color: #45a049;
+}
+
+.fs-overlay--hidden {
+  display: none;
 }

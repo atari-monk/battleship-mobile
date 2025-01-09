@@ -27,7 +27,7 @@ export async function loadComponent(containerId, componentName) {
 
 // Load all components
 async function initPage() {
-  await loadComponent('full-screen-container', 'full_screen')
+  await loadComponent('fullScreenContainer', 'full_screen')
   //await loadComponent('menu-container', 'menu')
   //await loadComponent('grid-static-container', 'grid_static')
 }
