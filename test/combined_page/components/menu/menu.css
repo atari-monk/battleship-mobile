@@ -1,4 +1,4 @@
-/* #menu-container {
+.game-menu-container {
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #2c3e50, #3498db);
   color: white;
@@ -9,9 +9,9 @@
   align-items: center;
   height: 100vh;
   overflow: hidden;
-} */
+}
 
-#game-menu {
+.game-menu {
   text-align: center;
   background: rgba(0, 0, 0, 0.6);
   padding: 20px;
@@ -19,12 +19,12 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-#game-title {
+.game-menu__title {
   font-size: 2.5em;
   margin-bottom: 20px;
 }
 
-#start-button {
+.game-menu__start-button {
   font-size: 1.2em;
   padding: 10px 20px;
   margin: 20px 0;
@@ -36,12 +36,16 @@
   transition: background 0.3s ease;
 }
 
-#start-button:hover {
+.game-menu__start-button:hover {
   background: #c0392b;
 }
 
-#instructions {
+.game-menu__instructions {
   font-size: 1em;
   margin-top: 10px;
   line-height: 1.5;
+}
+
+.game-menu--hidden {
+  display: none;
 }

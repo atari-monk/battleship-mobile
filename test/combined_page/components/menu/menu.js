@@ -1,19 +1,40 @@
 import { loadComponent } from '../../script.js'
 
-export function init() {
-  console.log('menu component')
+const ids = {
+  startButton: 'gameMenuStartButton',
+  gameMenuContainer: 'gameMenuContainer',
+  gridStaticContainer: 'gridStaticContainer',
 }
 
-document.getElementById('start-button').addEventListener('click', async () => {
-  await showGridStatic()
-})
+const styles = {
+  hidden: 'game-menu--hidden',
+}
+
+const messages = {
+  initMsg: 'game menu',
+}
+
+const events = {
+  click: 'click',
+}
+
+const componentFile = {
+  gridStatic: 'grid_static',
+}
+
+export function init() {
+  console.log(messages.initMsg)
+}
+
+document
+  .getElementById(ids.startButton)
+  .addEventListener(events.click, async () => {
+    await showGridStatic()
+  })
 
 async function showGridStatic() {
-  console.log('showGridStatic test')
-  const menu = document.getElementById('menuContainer')
-  menu.classList.add('hide')
+  const menu = document.getElementById(ids.gameMenuContainer)
+  menu.classList.add(styles.hidden)
 
-  //const gridStatic = document.getElementById('grid-static-container')
-  //gridStatic.classList.remove('hide')
-  await loadComponent('gridStaticContainer', 'grid_static')
+  await loadComponent(ids.gridStaticContainer, componentFile.gridStatic)
 }
