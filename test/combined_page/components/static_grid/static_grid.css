@@ -13,15 +13,16 @@
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   width: 100vw;
-  gap: 2px;
+  gap: 0px;
   box-sizing: border-box;
+  background-color: black;
 }
 
 .static-grid__item {
-  background-color: lightblue;
-  border: 1px solid #ddd;
+  border: 1px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.5em;
+  transition: background-color 0.3s ease;
 }
