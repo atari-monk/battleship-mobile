@@ -1,11 +1,33 @@
 import { loadComponent } from '../../script.js'
 
-export function init() {
-  console.log('full screen overlay request component')
+const ids = {
+  fullScreenButton: 'fs-fullScreenButton',
+  overlay: 'fs-overlay',
+  menuContainer: 'menu-container',
 }
 
-const fullScreenButton = document.getElementById('fs-fullScreenButton')
-const overlay = document.getElementById('fs-overlay')
+const styles = {
+  hidden: 'none',
+}
+
+const events = {
+  click: 'click',
+}
+
+const messages = {
+  initMsg: 'full screen overlay request component',
+}
+
+const component = {
+  menu: 'menu',
+}
+
+export function init() {
+  console.log(messages.initMsg)
+}
+
+const fullScreenButton = document.getElementById(ids.fullScreenButton)
+const overlay = document.getElementById(ids.overlay)
 
 const goFullScreen = async () => {
   if (document.documentElement.requestFullscreen) {
@@ -17,13 +39,13 @@ const goFullScreen = async () => {
   } else if (document.documentElement.msRequestFullscreen) {
     document.documentElement.msRequestFullscreen()
   }
-  overlay.style.display = 'none'
+  overlay.style.display = styles.hidden
 
   await showMenu()
 }
 
-fullScreenButton.addEventListener('click', goFullScreen)
+fullScreenButton.addEventListener(events.click, goFullScreen)
 
 async function showMenu() {
-  await loadComponent('menu-container', 'menu')
+  await loadComponent(ids.menuContainer, component.menu)
 }
