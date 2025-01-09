@@ -14,6 +14,7 @@
 3. [Static grid](test/static_grid/index.html)
 4. [Modular page](test/modular_page/index.html)
 5. [Combined page](test/combined_page/index.html)
+6. [Overlay](test/overlay/index.html)
 
 ## 3. Feature Doc
 
