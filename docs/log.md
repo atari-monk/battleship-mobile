@@ -14,4 +14,5 @@
 6. 15:32 - 15:55, Improve desk, new music.
 7. 17:54 - 18:08, Ship placement validation.
 8. 18:09 - 18:33, Coffee, 10 pushups, 4 min step.
-9. 18:34 - , Ship placement.
+9. 18:34 - 19:27, Ship placement.
+10. 20:31 - 22:04, Toggle button.

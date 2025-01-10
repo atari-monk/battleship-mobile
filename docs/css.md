@@ -1,4 +1,21 @@
-# BEM
+# CSS
+
+## Not selectable
+
+To make an element not selectable in CSS, you can use the user-select property. This property controls the user's ability to select text or elements on a page.
+
+To prevent selection, you can set user-select to none like this:
+
+```css
+.element {
+  user-select: none;
+}
+```
+
+This will disable text selection for the .element class.
+This will make the content of the element non-selectable across modern browsers.
+
+## BEM
 
 **BEM (Block, Element, Modifier)** is a CSS naming convention that promotes code reusability, readability, and maintainability. It divides UI components into three parts:
 
