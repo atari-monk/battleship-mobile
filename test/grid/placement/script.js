@@ -11,6 +11,7 @@ function generateGridItems() {
 generateGridItems()
 
 let isHorizontal = true // Start with the ship being horizontal
+const placedShips = new Set() // To track the placed ships' cell indices
 
 function getCellIndex(x, y) {
   const cellSize = document
@@ -35,9 +36,10 @@ function validatePlacement(startIndex) {
       if (
         currentCol >= 10 ||
         currentIndex > 100 ||
-        reserved.has(currentIndex)
+        reserved.has(currentIndex) ||
+        placedShips.has(currentIndex) // Prevent placing over an already placed ship
       ) {
-        return false // Out of bounds or overlaps reserved
+        return false // Out of bounds or overlaps reserved or placed ships
       }
     }
   } else {
@@ -49,19 +51,20 @@ function validatePlacement(startIndex) {
         currentRow !== startRow + i ||
         currentIndex > 100 ||
         startCol >= 10 ||
-        reserved.has(currentIndex)
+        reserved.has(currentIndex) ||
+        placedShips.has(currentIndex) // Prevent placing over an already placed ship
       ) {
-        return false // Out of bounds or overlaps reserved
+        return false // Out of bounds or overlaps reserved or placed ships
       }
     }
   }
   return true // Valid placement
 }
 
-function paintCells(startIndex, color) {
+function paintPreview(startIndex, color) {
   const gridItems = document.querySelectorAll('.static-grid__item')
-  gridItems.forEach((item) => (item.style.backgroundColor = '')) // Clear all colors
 
+  // Only paint the preview (green/red) for the ship's cells
   const startRow = Math.floor((startIndex - 1) / 10)
   const startCol = (startIndex - 1) % 10
 
@@ -70,7 +73,9 @@ function paintCells(startIndex, color) {
     for (let i = 0; i < 5; i++) {
       const currentIndex = startIndex + i // Move right by columns
       if (startCol + i >= 10 || currentIndex > 100) break // Stop if out of bounds
-      gridItems[currentIndex - 1].style.backgroundColor = color // Update the color
+      if (!placedShips.has(currentIndex)) {
+        gridItems[currentIndex - 1].style.backgroundColor = color // Update the color (green or red)
+      }
     }
   } else {
     // Draw vertically
@@ -79,19 +84,57 @@ function paintCells(startIndex, color) {
       const currentRow = Math.floor((currentIndex - 1) / 10)
       if (currentRow !== startRow + i || currentIndex > 100 || startCol >= 10)
         break // Stop if out of bounds
-      gridItems[currentIndex - 1].style.backgroundColor = color // Update the color
+      if (!placedShips.has(currentIndex)) {
+        gridItems[currentIndex - 1].style.backgroundColor = color // Update the color (green or red)
+      }
     }
   }
+}
+
+function resetPreview() {
+  // Reset only the cells that are highlighted, without clearing the entire grid
+  const gridItems = document.querySelectorAll('.static-grid__item')
+  gridItems.forEach((item) => {
+    if (item.style.backgroundColor === 'blue') {
+      return // Skip blue cells (already placed ships)
+    }
+    if (item.style.backgroundColor) {
+      item.style.backgroundColor = '' // Clear only the preview
+    }
+  })
 }
 
 function paintOnHover(event) {
   const touch = event.touches ? event.touches[0] : event
   const index = getCellIndex(touch.clientX, touch.clientY)
 
+  resetPreview() // Reset the preview before applying the new one
+
   if (validatePlacement(index)) {
-    paintCells(index, 'green') // Valid placement: green
+    paintPreview(index, 'green') // Valid placement: green
   } else {
-    paintCells(index, 'red') // Invalid placement: red
+    paintPreview(index, 'red') // Invalid placement: red
+  }
+}
+
+function handleClick(event) {
+  const touch = event.touches ? event.touches[0] : event
+  const index = getCellIndex(touch.clientX, touch.clientY)
+
+  if (validatePlacement(index)) {
+    // Paint the ship in blue and mark the cells as occupied
+    paintPreview(index, 'blue')
+
+    // Mark these cells as "occupied" by the placed ship
+    if (isHorizontal) {
+      for (let i = 0; i < 5; i++) {
+        placedShips.add(index + i)
+      }
+    } else {
+      for (let i = 0; i < 5; i++) {
+        placedShips.add(index + i * 10)
+      }
+    }
   }
 }
 
@@ -105,6 +148,7 @@ function initGridEvents() {
   // Touch events
   container.addEventListener('touchmove', paintOnHover, { passive: true }) // Mark as passive
   container.addEventListener('touchstart', paintOnHover, { passive: true }) // Mark as passive
+  container.addEventListener('click', handleClick) // Add click event for permanent placement
 
   // Mouse Wheel event for switching orientation on PC
   container.addEventListener(
