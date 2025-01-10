@@ -22,6 +22,7 @@
 1. [Static](test/grid/static/index.html)
 2. [Click](test/grid/click/index.html)
 3. [Preview](test/grid/preview/index.html)
+4. [Orientation](test/grid/orientation/index.html)
 
 - Page
 
