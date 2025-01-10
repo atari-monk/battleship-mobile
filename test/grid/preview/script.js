@@ -37,26 +37,36 @@ function initGridEvents() {
   const container = document.querySelector('.static-grid__grid')
   let isDragging = false
 
-  container.addEventListener('mousedown', (event) => {
+  function startPainting(event) {
     isDragging = true
-    const index = getCellIndex(event.clientX, event.clientY)
+    const touch = event.touches ? event.touches[0] : event
+    const index = getCellIndex(touch.clientX, touch.clientY)
     paintCells(index, 'red')
-  })
+  }
 
-  container.addEventListener('mousemove', (event) => {
+  function movePainting(event) {
     if (isDragging) {
-      const index = getCellIndex(event.clientX, event.clientY)
+      const touch = event.touches ? event.touches[0] : event
+      const index = getCellIndex(touch.clientX, touch.clientY)
       paintCells(index, 'red')
     }
-  })
+  }
 
-  container.addEventListener('mouseup', () => {
+  function stopPainting() {
     isDragging = false
-  })
+  }
 
-  container.addEventListener('mouseleave', () => {
-    isDragging = false
-  })
+  // Mouse events
+  container.addEventListener('mousedown', startPainting)
+  container.addEventListener('mousemove', movePainting)
+  container.addEventListener('mouseup', stopPainting)
+  container.addEventListener('mouseleave', stopPainting)
+
+  // Touch events
+  container.addEventListener('touchstart', startPainting)
+  container.addEventListener('touchmove', movePainting)
+  container.addEventListener('touchend', stopPainting)
+  container.addEventListener('touchcancel', stopPainting)
 }
 
 initGridEvents()
