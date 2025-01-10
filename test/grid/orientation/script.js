@@ -26,12 +26,13 @@ function paintCells(startIndex, color) {
   gridItems.forEach((item) => (item.style.backgroundColor = '')) // Clear all colors
 
   const startRow = Math.floor((startIndex - 1) / 10)
+  const startCol = (startIndex - 1) % 10 // Determine the starting column
 
   if (isHorizontal) {
     // Draw horizontally
     for (let i = 0; i < 5; i++) {
       const currentIndex = startIndex + i // Move right by columns
-      if (currentIndex % 10 === 0 || currentIndex > 100) break // Stop if out of bounds
+      if (startCol + i >= 10 || currentIndex > 100) break // Stop if out of bounds
       gridItems[currentIndex - 1].style.backgroundColor = color // Update the color
     }
   } else {
@@ -39,7 +40,8 @@ function paintCells(startIndex, color) {
     for (let i = 0; i < 5; i++) {
       const currentIndex = startIndex + i * 10 // Move down by rows
       const currentRow = Math.floor((currentIndex - 1) / 10)
-      if (currentRow !== startRow + i || currentIndex > 100) break // Stop if out of bounds
+      if (currentRow !== startRow + i || currentIndex > 100 || startCol >= 10)
+        break // Stop if out of bounds
       gridItems[currentIndex - 1].style.backgroundColor = color // Update the color
     }
   }
@@ -59,54 +61,47 @@ function initGridEvents() {
   container.addEventListener('mouseenter', paintOnHover)
 
   // Touch events
-  container.addEventListener('touchmove', paintOnHover)
-  container.addEventListener('touchstart', paintOnHover) // To detect when user touches on the grid
+  container.addEventListener('touchmove', paintOnHover, { passive: true }) // Mark as passive
+  container.addEventListener('touchstart', paintOnHover, { passive: true }) // Mark as passive
 
   // Mouse Wheel event for switching orientation on PC
-  container.addEventListener('wheel', (event) => {
-    const currentIndex = getCellIndex(event.clientX, event.clientY)
+  container.addEventListener(
+    'wheel',
+    (event) => {
+      const currentIndex = getCellIndex(event.clientX, event.clientY)
 
-    if (event.deltaY > 0 || event.deltaX > 0) {
-      // Scroll down or right: Vertical orientation
-      isHorizontal = false
-    } else {
-      // Scroll up or left: Horizontal orientation
-      isHorizontal = true
-    }
+      if (event.deltaY > 0 || event.deltaX > 0) {
+        // Scroll down or right: Vertical orientation
+        isHorizontal = false
+      } else {
+        // Scroll up or left: Horizontal orientation
+        isHorizontal = true
+      }
 
-    // Repaint the cells to reflect the orientation change
-    paintCells(currentIndex, 'red')
-  })
+      // Repaint the cells to reflect the orientation change
+      paintCells(currentIndex, 'red')
+    },
+    { passive: true } // Mark as passive
+  )
 
-  // Swipe event for switching orientation on mobile
-  let touchStartX = 0
-  let touchStartY = 0
-
-  container.addEventListener('touchstart', (event) => {
-    touchStartX = event.touches[0].clientX
-    touchStartY = event.touches[0].clientY
-  })
+  // Double-tap event for switching orientation on mobile
+  let lastTapTime = 0
 
   container.addEventListener('touchend', (event) => {
+    const currentTime = new Date().getTime()
+    const timeDiff = currentTime - lastTapTime
+
     const touchEndX = event.changedTouches[0].clientX
     const touchEndY = event.changedTouches[0].clientY
-
-    const deltaX = touchEndX - touchStartX
-    const deltaY = touchEndY - touchStartY
-
     const currentIndex = getCellIndex(touchEndX, touchEndY)
 
-    // Detect swipe direction
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      // Horizontal swipe
-      isHorizontal = deltaX > 0 // Right swipe: Horizontal
-    } else {
-      // Vertical swipe
-      isHorizontal = deltaY > 0 // Down swipe: Vertical
+    if (timeDiff < 300 && timeDiff > 0) {
+      // Double-tap detected
+      isHorizontal = !isHorizontal // Toggle orientation
+      paintCells(currentIndex, 'red') // Repaint with the new orientation
     }
 
-    // Repaint the cells to reflect the orientation change
-    paintCells(currentIndex, 'red')
+    lastTapTime = currentTime
   })
 }
 
