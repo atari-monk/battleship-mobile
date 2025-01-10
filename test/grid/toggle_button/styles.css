@@ -1,0 +1,72 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.static-grid {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.static-grid__grid {
+  display: grid;
+  flex-grow: 9;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  width: 100vw;
+  gap: 0px;
+  box-sizing: border-box;
+  background-color: black;
+}
+
+.static-grid__item {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5em;
+  transition: background-color 0.3s ease;
+  color: rgba(255, 255, 255, 0.5);
+  user-select: none;
+}
+
+/* Toggle Button Styles */
+.toggle {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Prevent clicks outside the button */
+}
+
+.toggle__button {
+  position: relative;
+  width: 100px;
+  height: 100px; /* Make it a square */
+  border-radius: 50%; /* Perfect circle */
+  cursor: pointer;
+  pointer-events: auto; /* Allow clicks */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease; /* Smooth hover effect */
+}
+
+.toggle__button--toggled-on {
+  background: rgba(191, 194, 9, 0.5); /* Active state */
+}
+
+.toggle__button--toggled-off {
+  background: rgba(255, 255, 255, 0.5); /* Default state */
+}
