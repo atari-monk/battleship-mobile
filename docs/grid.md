@@ -1,4 +1,4 @@
-# Static grid
+# Grid
 
 ## Description
 

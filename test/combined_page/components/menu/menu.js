@@ -18,7 +18,7 @@ const events = {
 }
 
 const componentFile = {
-  gridStatic: 'static_grid',
+  grid: 'grid',
 }
 
 export function init() {
@@ -35,5 +35,5 @@ async function showGridStatic() {
   const menu = document.getElementById(ids.gameMenu)
   menu.classList.add(styles.hidden)
 
-  await loadComponent(componentFile.gridStatic)
+  await loadComponent(componentFile.grid)
 }

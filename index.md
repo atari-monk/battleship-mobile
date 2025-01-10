@@ -9,13 +9,22 @@
 
 ## 2. Test
 
-1. [Fullscreen overlay](test/full_screen/index.html)
-2. [Menu](test/menu/index.html)
-3. [Static grid](test/static_grid/index.html)
-4. [Modular page](test/modular_page/index.html)
-5. [Combined page](test/combined_page/index.html)
-6. [Overlay](test/overlay/index.html)
+- Components
 
-## 3. Feature Doc
+1. [Fullscreen Overlay](test/full_screen/index.html)
+2. [Game Menu](test/menu/index.html)
+3. [Message Overlay](test/overlay/index.html)
 
-1. [Static grid](docs/static_grid.md)
+- Grid
+
+1. [Static](test/grid/static/index.html)
+2. [Click](test/grid/click/index.html)
+
+- Page
+
+1. [Modular page](test/modular_page/index.html)
+2. [Combined page](test/combined_page/index.html)
+
+## 3. Doc
+
+1. [Grid](docs/grid.md)
