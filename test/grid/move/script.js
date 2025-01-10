@@ -35,38 +35,20 @@ function paintCells(startIndex, color) {
 
 function initGridEvents() {
   const container = document.querySelector('.static-grid__grid')
-  let isDragging = false
 
-  function startPainting(event) {
-    isDragging = true
+  function paintOnHover(event) {
     const touch = event.touches ? event.touches[0] : event
     const index = getCellIndex(touch.clientX, touch.clientY)
     paintCells(index, 'red')
   }
 
-  function movePainting(event) {
-    if (isDragging) {
-      const touch = event.touches ? event.touches[0] : event
-      const index = getCellIndex(touch.clientX, touch.clientY)
-      paintCells(index, 'red')
-    }
-  }
-
-  function stopPainting() {
-    isDragging = false
-  }
-
   // Mouse events
-  container.addEventListener('mousedown', startPainting)
-  container.addEventListener('mousemove', movePainting)
-  container.addEventListener('mouseup', stopPainting)
-  container.addEventListener('mouseleave', stopPainting)
+  container.addEventListener('mousemove', paintOnHover)
+  container.addEventListener('mouseenter', paintOnHover)
 
   // Touch events
-  container.addEventListener('touchstart', startPainting)
-  container.addEventListener('touchmove', movePainting)
-  container.addEventListener('touchend', stopPainting)
-  container.addEventListener('touchcancel', stopPainting)
+  container.addEventListener('touchmove', paintOnHover)
+  container.addEventListener('touchstart', paintOnHover) // To detect when user touches on the grid
 }
 
 initGridEvents()
