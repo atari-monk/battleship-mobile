@@ -17,19 +17,32 @@ const toggleButton = document.getElementById('toggle-button')
 // Toggle functionality
 let isToggled = false
 
-toggleButton.addEventListener('click', () => {
+// Function to handle toggling
+function handleToggle(event) {
   isToggled = !isToggled
 
   if (isToggled) {
-    console.log('Toggled ON')
     toggleButton.classList.add('toggle__button--toggled-on')
     toggleButton.classList.remove('toggle__button--toggled-off')
   } else {
-    console.log('Toggled OFF')
     toggleButton.classList.add('toggle__button--toggled-off')
     toggleButton.classList.remove('toggle__button--toggled-on')
   }
-})
+
+  isHorizontal = !isHorizontal
+
+  // Call paintOnHover if necessary (pass simulated event for touch or click)
+  const simulatedEvent = {
+    clientX: event.clientX,
+    clientY: event.clientY,
+    touches: event.touches,
+  }
+  paintOnHover(simulatedEvent)
+}
+
+// Add click and touch event listeners
+toggleButton.addEventListener('click', handleToggle)
+toggleButton.addEventListener('touchstart', handleToggle, { passive: true }) // Passive for touch events
 
 // Initialize default state
 toggleButton.classList.add('toggle__button--toggled-off')
@@ -195,26 +208,6 @@ function initGridEvents() {
     },
     { passive: true } // Mark as passive
   )
-
-  // Double-tap event for switching orientation on mobile
-  let lastTapTime = 0
-
-  container.addEventListener('touchend', (event) => {
-    const currentTime = new Date().getTime()
-    const timeDiff = currentTime - lastTapTime
-
-    const touchEndX = event.changedTouches[0].clientX
-    const touchEndY = event.changedTouches[0].clientY
-    const currentIndex = getCellIndex(touchEndX, touchEndY)
-
-    if (timeDiff < 300 && timeDiff > 0) {
-      // Double-tap detected
-      isHorizontal = !isHorizontal // Toggle orientation
-      paintOnHover(event) // Repaint with the new orientation
-    }
-
-    lastTapTime = currentTime
-  })
 }
 
 // Initialize grid and events
