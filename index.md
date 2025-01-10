@@ -24,6 +24,7 @@
 3. [Move](test/grid/move/index.html)
 4. [Orientation](test/grid/orientation/index.html)
 5. [Validation](test/grid/validation/index.html)
+6. [Placement](test/grid/placement/index.html)
 
 - Page
 
