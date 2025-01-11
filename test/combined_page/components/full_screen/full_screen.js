@@ -1,7 +1,10 @@
 import { loadComponent } from '../../script.js'
 
+const className = {
+  fsOverlay: '.component-full_screen',
+}
+
 const ids = {
-  fsOverlay: 'fsOverlay',
   fsOverlayButton: 'fsOverlayButton',
 }
 
@@ -26,7 +29,7 @@ export function init() {
 }
 
 const button = document.getElementById(ids.fsOverlayButton)
-const overlay = document.getElementById(ids.fsOverlay)
+const overlay = document.querySelector(className.fsOverlay)
 
 const goFullScreen = async () => {
   if (document.documentElement.requestFullscreen) {

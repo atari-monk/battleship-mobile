@@ -1,30 +1,30 @@
-.toggle {
+.component-toggle {
   position: fixed;
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Prevent clicks outside the button */
+  pointer-events: none;
 }
 
 .toggle__button {
   position: relative;
   width: 50px;
-  height: 50px; /* Make it a square */
-  border-radius: 50%; /* Perfect circle */
+  height: 50px;
+  border-radius: 50%;
   cursor: pointer;
-  pointer-events: auto; /* Allow clicks */
+  pointer-events: auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background 0.3s ease; /* Smooth hover effect */
+  transition: background 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* For screens smaller than 600px (mobile devices) */
 @media (max-width: 600px) and (orientation: portrait) {
   .toggle__button {
     width: 15vw;
@@ -32,7 +32,6 @@
   }
 }
 
-/* For screens larger than 600px (landscape view or larger screens) */
 @media (min-width: 601px) and (orientation: landscape) {
   .toggle__button {
     width: 7vw;
@@ -41,9 +40,9 @@
 }
 
 .toggle__button--toggled-on {
-  background: rgba(191, 194, 9, 0.5); /* Active state */
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .toggle__button--toggled-off {
-  background: rgba(255, 255, 255, 0.5); /* Default state */
+  background: rgba(255, 255, 255, 0.3);
 }

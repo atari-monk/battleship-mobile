@@ -1,11 +1,13 @@
-import { hitToggle, paintOnHover } from './../grid/grid.js'
+import {
+  hitToggle,
+  paintOnHover,
+  currentHoverPosition,
+} from './../grid/grid.js'
 
 const toggleButton = document.getElementById('toggle-button')
 
-// Toggle functionality
 let isToggled = false
 
-// Function to handle toggling
 function handleToggle(event) {
   isToggled = !isToggled
 
@@ -19,20 +21,29 @@ function handleToggle(event) {
 
   hitToggle()
 
-  // Call paintOnHover if necessary (pass simulated event for touch or click)
-  const simulatedEvent = {
-    clientX: event.clientX,
-    clientY: event.clientY,
-    touches: event.touches,
-  }
-  paintOnHover(simulatedEvent)
+  paintOnHover(currentHoverPosition)
+  console.log('isToggled', isToggled)
 }
 
-// Add click and touch event listeners
-toggleButton.addEventListener('click', handleToggle)
-toggleButton.addEventListener('touchstart', handleToggle, { passive: true }) // Passive for touch events
+let isTouch = false
 
-// Initialize default state
+toggleButton.addEventListener(
+  'touchstart',
+  (event) => {
+    isTouch = true
+    handleToggle(event)
+  },
+  { passive: true }
+)
+
+toggleButton.addEventListener('click', (event) => {
+  if (isTouch) {
+    isTouch = false
+    return
+  }
+  handleToggle(event)
+})
+
 toggleButton.classList.add('toggle__button--toggled-off')
 
 const messages = {

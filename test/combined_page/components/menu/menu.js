@@ -1,7 +1,10 @@
 import { loadComponent } from '../../script.js'
 
+const className = {
+  gameMenu: '.component-menu',
+}
+
 const ids = {
-  gameMenu: 'gameMenu',
   gameMenuStartButton: 'gameMenuStartButton',
 }
 
@@ -33,7 +36,7 @@ document
   })
 
 async function showGridStatic() {
-  const menu = document.getElementById(ids.gameMenu)
+  const menu = document.querySelector(className.gameMenu)
   menu.classList.add(styles.hidden)
 
   await loadComponent(componentFile.grid)

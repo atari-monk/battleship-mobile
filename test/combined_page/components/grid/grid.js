@@ -22,7 +22,7 @@ function handleAtack(cell) {
   }
 }
 
-//--
+//
 let isHorizontal = true
 const placedShips = new Set()
 
@@ -59,7 +59,6 @@ function validatePlacement(startIndex) {
       }
     }
   } else {
-    // Vertical validation
     for (let i = 0; i < 5; i++) {
       const currentIndex = startIndex + i * 10
       const currentRow = Math.floor((currentIndex - 1) / 10)
@@ -116,9 +115,17 @@ function resetPreview() {
   })
 }
 
+export let currentHoverPosition = null
+
 export function paintOnHover(event) {
   const touch = event.touches ? event.touches[0] : event
   const index = getCellIndex(touch.clientX, touch.clientY)
+
+  currentHoverPosition = {
+    clientX: touch.clientX,
+    clientY: touch.clientY,
+    touches: event.touches,
+  }
 
   resetPreview()
 
@@ -134,10 +141,8 @@ function handleClick(event) {
   const index = getCellIndex(touch.clientX, touch.clientY)
 
   if (validatePlacement(index)) {
-    // Paint the ship in blue and mark the cells as occupied
     paintPreview(index, 'blue')
 
-    // Mark these cells as "occupied" by the placed ship
     if (isHorizontal) {
       for (let i = 0; i < 5; i++) {
         placedShips.add(index + i)
@@ -153,33 +158,27 @@ function handleClick(event) {
 function initGridEvents() {
   const container = document.querySelector('.static-grid__grid')
 
-  // Mouse events
   container.addEventListener('mousemove', paintOnHover)
   container.addEventListener('mouseenter', paintOnHover)
 
-  // Touch events
-  container.addEventListener('touchmove', paintOnHover, { passive: true }) // Mark as passive
-  container.addEventListener('touchstart', paintOnHover, { passive: true }) // Mark as passive
-  container.addEventListener('click', handleClick) // Add click event for permanent placement
+  container.addEventListener('touchmove', paintOnHover, { passive: true })
+  container.addEventListener('touchstart', paintOnHover, { passive: true })
+  container.addEventListener('click', handleClick)
 
-  // Mouse Wheel event for switching orientation on PC
   container.addEventListener(
     'wheel',
     (event) => {
       const currentIndex = getCellIndex(event.clientX, event.clientY)
 
       if (event.deltaY > 0 || event.deltaX > 0) {
-        // Scroll down or right: Vertical orientation
         isHorizontal = false
       } else {
-        // Scroll up or left: Horizontal orientation
         isHorizontal = true
       }
 
-      // Repaint the cells to reflect the orientation change
       paintOnHover(event)
     },
-    { passive: true } // Mark as passive
+    { passive: true }
   )
 }
 
