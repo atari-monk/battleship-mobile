@@ -19,6 +19,7 @@ const events = {
 
 const componentFile = {
   grid: 'grid',
+  toggle: 'toggle',
 }
 
 export function init() {
@@ -36,4 +37,5 @@ async function showGridStatic() {
   menu.classList.add(styles.hidden)
 
   await loadComponent(componentFile.grid)
+  await loadComponent(componentFile.toggle)
 }

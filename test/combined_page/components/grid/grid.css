@@ -1,4 +1,4 @@
-.static-grid {
+.component-grid {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -19,10 +19,12 @@
 }
 
 .static-grid__item {
-  border: 1px solid white;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.5em;
   transition: background-color 0.3s ease;
+  color: rgba(255, 255, 255, 0.5);
+  user-select: none;
 }

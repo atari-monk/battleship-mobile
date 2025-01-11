@@ -4,8 +4,9 @@
 
 1. [Log](docs/log.md)
 2. [Project](docs/project.md)
-3. [CSS](docs/css.md)
-4. [Grid](docs/grid.md)
+3. [JS](docs/js.md)
+4. [CSS](docs/css.md)
+5. [Grid](docs/grid.md)
 
 ## 2. Tests
 
