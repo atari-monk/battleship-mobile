@@ -150,12 +150,34 @@ function handleClick(event) {
       }
     }
 
+    updateGridArray(index, shipSize)
     currentShipIndex++
+
     if (currentShipIndex >= shipSizes.length) {
       console.log('Fleet placement complete!')
       document
         .querySelector('.static-grid__grid')
         .removeEventListener('click', handleClick)
+
+      console.log('Final Grid Array:')
+      console.table(gridArray)
+    }
+  }
+}
+
+const gridArray = Array.from({ length: 10 }, () => Array(10).fill(0))
+
+function updateGridArray(startIndex, shipSize) {
+  const startRow = Math.floor((startIndex - 1) / 10)
+  const startCol = (startIndex - 1) % 10
+
+  if (isHorizontal) {
+    for (let i = 0; i < shipSize; i++) {
+      gridArray[startRow][startCol + i] = 1
+    }
+  } else {
+    for (let i = 0; i < shipSize; i++) {
+      gridArray[startRow + i][startCol] = 1
     }
   }
 }
