@@ -39,6 +39,13 @@ async function showGridStatic() {
   const menu = document.querySelector(className.gameMenu)
   menu.classList.add(styles.hidden)
 
-  await loadComponent(componentFile.grid)
+  const loadedComponents = await loadComponent(componentFile.grid)
+  const dataService = loadedComponents.find(
+    (comp) => comp.name === 'data_service'
+  )
+  const grid = loadedComponents.find((comp) => comp.name === componentFile.grid)
+  if (dataService && dataService.jsModule && grid && grid.jsModule) {
+    grid.jsModule.setDataService(dataService.jsModule)
+  }
   await loadComponent(componentFile.toggle)
 }

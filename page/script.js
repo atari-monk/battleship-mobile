@@ -1,4 +1,7 @@
-const loadedComponents = []
+import { DataService } from './service/data_service.js'
+import { Player } from './model/player.js'
+
+export const loadedComponents = []
 
 export async function loadComponent(componentName) {
   if (loadedComponents.includes(componentName)) {
@@ -23,8 +26,9 @@ export async function loadComponent(componentName) {
   document.head.appendChild(cssLink)
 
   // Load JS
+  let jsModule = null
   try {
-    const jsModule = await import(`${basePath}/${componentName}.js`)
+    jsModule = await import(`${basePath}/${componentName}.js`)
     if (jsModule.init) {
       jsModule.init()
     }
@@ -32,10 +36,15 @@ export async function loadComponent(componentName) {
     console.warn(`No JavaScript for component: ${componentName}`)
   }
 
-  loadedComponents.push(componentName)
+  loadedComponents.push({ name: componentName, jsModule })
+  return loadedComponents
 }
 
 async function initPage() {
+  const dataService = new DataService()
+  dataService.player1 = new Player('Captain Jack')
+  dataService.player2 = new Player('Blackbeard')
+  loadedComponents.push({ name: 'data_service', jsModule: dataService })
   await loadComponent('full_screen')
 }
 

@@ -12,3 +12,9 @@ or listed on a feature list.
 
 I am now of the opinion that refactoring is optimalization after project is finished,  
 or when nothing more can be done without it.
+
+## Project structure
+
+This time it is vanila stack.  
+Simple structure to fit topic.  
+Fells natural.

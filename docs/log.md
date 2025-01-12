@@ -29,4 +29,4 @@
 2. 16:56 - 17:12, Mobile version and pc version of grid are mostly same code so there will be no separate version at this point. Maybe release will be separate.
 3. 17:13 - 17:27, Refactor proj structure again.
 4. 17:28 - 18:01, Fleet placment data.
-5. 18:02 - ,
+5. 18:02 - 18:37, Passing dataService form app module to components and set grid data for player1.

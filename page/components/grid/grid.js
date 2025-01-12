@@ -159,8 +159,9 @@ function handleClick(event) {
         .querySelector('.static-grid__grid')
         .removeEventListener('click', handleClick)
 
-      console.log('Final Grid Array:')
-      console.table(gridArray)
+      console.log('Player1 Grid Array:')
+      _dataService.player1.grid = gridArray
+      console.table(_dataService.player1.grid)
     }
   }
 }
@@ -180,6 +181,13 @@ function updateGridArray(startIndex, shipSize) {
       gridArray[startRow + i][startCol] = 1
     }
   }
+}
+
+let _dataService = null
+
+export function setDataService(dataService) {
+  _dataService = dataService
+  console.log('setDataService', dataService, _dataService)
 }
 
 function initGridEvents() {
