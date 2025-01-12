@@ -2,6 +2,11 @@ const messages = {
   initMsg: 'grid',
 }
 
+const shipSizes = [5, 4, 3, 3, 2] // Classic fleet sizes
+let currentShipIndex = 0
+let isHorizontal = true
+const placedShips = new Set()
+
 function generateGridItems(isNr = false) {
   const container = document.querySelector('.static-grid__grid')
   for (let i = 1; i <= 100; i++) {
@@ -22,10 +27,6 @@ function handleAtack(cell) {
   }
 }
 
-//
-let isHorizontal = true
-const placedShips = new Set()
-
 export function hitToggle() {
   isHorizontal = !isHorizontal
 }
@@ -39,34 +40,29 @@ function getCellIndex(x, y) {
   return row * 10 + col + 1
 }
 
-function validatePlacement(startIndex) {
-  const gridItems = document.querySelectorAll('.static-grid__item')
+function validatePlacement(startIndex, shipSize) {
   const startRow = Math.floor((startIndex - 1) / 10)
   const startCol = (startIndex - 1) % 10
-  const reserved = new Set()
 
   if (isHorizontal) {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < shipSize; i++) {
       const currentIndex = startIndex + i
       const currentCol = startCol + i
       if (
         currentCol >= 10 ||
         currentIndex > 100 ||
-        reserved.has(currentIndex) ||
         placedShips.has(currentIndex)
       ) {
         return false
       }
     }
   } else {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < shipSize; i++) {
       const currentIndex = startIndex + i * 10
       const currentRow = Math.floor((currentIndex - 1) / 10)
       if (
         currentRow !== startRow + i ||
         currentIndex > 100 ||
-        startCol >= 10 ||
-        reserved.has(currentIndex) ||
         placedShips.has(currentIndex)
       ) {
         return false
@@ -76,14 +72,13 @@ function validatePlacement(startIndex) {
   return true
 }
 
-function paintPreview(startIndex, color) {
+function paintPreview(startIndex, shipSize, color) {
   const gridItems = document.querySelectorAll('.static-grid__item')
-
   const startRow = Math.floor((startIndex - 1) / 10)
   const startCol = (startIndex - 1) % 10
 
   if (isHorizontal) {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < shipSize; i++) {
       const currentIndex = startIndex + i
       if (startCol + i >= 10 || currentIndex > 100) break
       if (!placedShips.has(currentIndex)) {
@@ -91,7 +86,7 @@ function paintPreview(startIndex, color) {
       }
     }
   } else {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < shipSize; i++) {
       const currentIndex = startIndex + i * 10
       const currentRow = Math.floor((currentIndex - 1) / 10)
       if (currentRow !== startRow + i || currentIndex > 100 || startCol >= 10)
@@ -120,6 +115,7 @@ export let currentHoverPosition = null
 export function paintOnHover(event) {
   const touch = event.touches ? event.touches[0] : event
   const index = getCellIndex(touch.clientX, touch.clientY)
+  const shipSize = shipSizes[currentShipIndex]
 
   currentHoverPosition = {
     clientX: touch.clientX,
@@ -129,28 +125,37 @@ export function paintOnHover(event) {
 
   resetPreview()
 
-  if (validatePlacement(index)) {
-    paintPreview(index, 'green')
+  if (validatePlacement(index, shipSize)) {
+    paintPreview(index, shipSize, 'green')
   } else {
-    paintPreview(index, 'red')
+    paintPreview(index, shipSize, 'red')
   }
 }
 
 function handleClick(event) {
   const touch = event.touches ? event.touches[0] : event
   const index = getCellIndex(touch.clientX, touch.clientY)
+  const shipSize = shipSizes[currentShipIndex]
 
-  if (validatePlacement(index)) {
-    paintPreview(index, 'blue')
+  if (validatePlacement(index, shipSize)) {
+    paintPreview(index, shipSize, 'blue')
 
     if (isHorizontal) {
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < shipSize; i++) {
         placedShips.add(index + i)
       }
     } else {
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < shipSize; i++) {
         placedShips.add(index + i * 10)
       }
+    }
+
+    currentShipIndex++
+    if (currentShipIndex >= shipSizes.length) {
+      console.log('Fleet placement complete!')
+      document
+        .querySelector('.static-grid__grid')
+        .removeEventListener('click', handleClick)
     }
   }
 }
@@ -168,8 +173,6 @@ function initGridEvents() {
   container.addEventListener(
     'wheel',
     (event) => {
-      const currentIndex = getCellIndex(event.clientX, event.clientY)
-
       if (event.deltaY > 0 || event.deltaX > 0) {
         isHorizontal = false
       } else {

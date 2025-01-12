@@ -8,7 +8,7 @@ Changes stay in, reason is mistake in comment.
 git reset --soft HEAD~1
 ```
 
-Fix commit message and:
+Fix commit message commit and push:
 
 ```bash
 git push --force

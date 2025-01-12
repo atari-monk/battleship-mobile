@@ -25,4 +25,5 @@
 
 ### 12
 
-1. 16:22 - , Mobile and pc versions.
+1. 16:22 - 16:56, Place fleet.
+2. 16:56 - , Mobile version.
