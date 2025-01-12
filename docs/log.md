@@ -26,4 +26,5 @@
 ### 12
 
 1. 16:22 - 16:56, Place fleet.
-2. 16:56 - , Mobile version.
+2. 16:56 - 17:12, Mobile version and pc version of grid are mostly same code so there will be no separate version at this point. Maybe release will be separate.
+3. 17:13 - 17:27, Refactor proj structure again.

@@ -6,27 +6,30 @@
 2. [Project](docs/project.md)
 3. [JS](docs/js.md)
 4. [CSS](docs/css.md)
-5. [Grid](docs/grid.md)
+5. [GIT](docs/git.md)
+6. [Grid](docs/grid.md)
 
-## 2. Tests
+## 2. Components
 
-- Components
+1. [Fullscreen Overlay](component/full_screen/index.html)
+2. [Game Menu](component/menu/index.html)
+3. [Toggle Button](component/toggle_button/index.html)
 
-1. [Fullscreen Overlay](test/full_screen/index.html)
-2. [Game Menu](test/menu/index.html)
-3. [Toggle Button](test/toggle_button/index.html)
+## 3. Grid
 
-- Grid
+1. [Static](component/grid/static/index.html)
+2. [Click](component/grid/click/index.html)
+3. [Move](component/grid/move/index.html)
+4. [Orientation](component/grid/orientation/index.html)
+5. [Validation](component/grid/validation/index.html)
+6. [Placement](component/grid/placement/index.html)
+7. [Toggle Button](component/grid/toggle_button/index.html)
 
-1. [Static](test/grid/static/index.html)
-2. [Click](test/grid/click/index.html)
-3. [Move](test/grid/move/index.html)
-4. [Orientation](test/grid/orientation/index.html)
-5. [Validation](test/grid/validation/index.html)
-6. [Placement](test/grid/placement/index.html)
-7. [Toggle Button](test/grid/toggle_button/index.html)
+## 4. Protytype
 
-- Page
+1. [Modular](prototype/modular/index.html)
+   Experiment of making page out of components.
 
-1. [Modular](page/modular/index.html)
-2. [Combined](page/combined/index.html)
+## 5. [Page](page/index.html)
+
+Combined components to one page.
