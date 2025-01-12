@@ -28,5 +28,5 @@
 
 - Page
 
-1. [Modular page](test/modular_page/index.html)
-2. [Combined page](test/combined_page/index.html)
+1. [Modular](page/modular/index.html)
+2. [Combined](page/combined/index.html)
