@@ -21,4 +21,8 @@
 ### 11
 
 1. 13:10 - 15:00, Integrate grid to page.
-2. 21:31 -
+2. 21:31 - 22:20, Fix toogle button; Ship is not moved to it on switching orientation; Remove divs now generated in load component function.
+
+### 12
+
+1. 16:22 - , Mobile and pc versions.
