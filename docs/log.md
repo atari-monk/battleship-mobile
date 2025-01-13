@@ -30,3 +30,20 @@
 3. 17:13 - 17:27, Refactor proj structure again.
 4. 17:28 - 18:01, Fleet placment data.
 5. 18:02 - 18:37, Passing dataService form app module to components and set grid data for player1.
+6. 21:45 - 21:53, Test of fleet placing and battle in one grid; Better do them as separate components.
+
+### 12
+
+1. 08:57 - 10:15, Generate fleet placing component.  
+   Strings to vars, srp.
+2. Generate battle component.
+3. Set player2 fleet placement.
+4. Start first turn for random player.
+5. Code ai player turn.
+6. Show battle grid for player1.
+7. Code player turn.
+8. Code end condition.
+9. Generate overlay component with game messages.
+10. Polish the game.
+11. release single player game.
+12. Generate multiplayer version.
