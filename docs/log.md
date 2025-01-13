@@ -39,13 +39,14 @@
 2. 12:27 - 13:14, Generate battle component.
 3. 18:50 - 20:04, Encapsulated fleet grid module in class.
 4. 20:05 - 20:27, PlacementValidator class.
-5. Set player2 fleet placement.
-6. Start first turn for random player.
-7. Code ai player turn.
-8. Show battle grid for player1.
-9. Code player turn.
-10. Code end condition.
-11. Generate overlay component with game messages.
-12. Polish the game.
-13. release single player game.
-14. Generate multiplayer version.
+5. 20:28 - ,
+6. Set player2 fleet placement.
+7. Start first turn for random player.
+8. Code ai player turn.
+9. Show battle grid for player1.
+10. Code player turn.
+11. Code end condition.
+12. Generate overlay component with game messages.
+13. Polish the game.
+14. release single player game.
+15. Generate multiplayer version.

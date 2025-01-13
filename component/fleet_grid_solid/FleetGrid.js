@@ -1,13 +1,8 @@
 import { PlacementValidator } from './PlacementValidator.js'
+import { ShipPreview } from './ShipPreview.js'
 
 export class FleetGrid {
   constructor(dataService = null) {
-    this.placementValidator = new PlacementValidator()
-    this.messages = {
-      initMsg: 'fleet grid',
-      colmpete: 'Fleet placement complete!',
-      player1Grid: 'Player1 Grid Array:',
-    }
     this.cssClass = {
       dot: {
         grid: '.fleet-grid__grid',
@@ -15,8 +10,15 @@ export class FleetGrid {
       },
       cell: 'fleet-grid__item',
     }
-    this.html = { div: 'div' }
     this.colors = { blue: 'blue', green: 'green', red: 'red' }
+    this.placementValidator = new PlacementValidator()
+    this.shipPreview = new ShipPreview(this.cssClass, this.colors)
+    this.messages = {
+      initMsg: 'fleet grid',
+      colmpete: 'Fleet placement complete!',
+      player1Grid: 'Player1 Grid Array:',
+    }
+    this.html = { div: 'div' }
     this.events = {
       click: 'click',
       mousemove: 'mousemove',
@@ -32,6 +34,7 @@ export class FleetGrid {
     this.gridArray = Array.from({ length: 10 }, () => Array(10).fill(0))
     this._dataService = dataService
     this.currentHoverPosition = null
+    this.gridItems = null
   }
 
   generateGridItems() {
@@ -41,6 +44,7 @@ export class FleetGrid {
       gridItem.classList.add(this.cssClass.cell)
       container.appendChild(gridItem)
     }
+    this.gridItems = document.querySelectorAll(this.cssClass.dot.cell)
   }
 
   hitToggle() {
@@ -88,43 +92,43 @@ export class FleetGrid {
   //     return true
   //   }
 
-  paintPreview(startIndex, shipSize, color) {
-    const gridItems = document.querySelectorAll(this.cssClass.dot.cell)
-    const startRow = Math.floor((startIndex - 1) / 10)
-    const startCol = (startIndex - 1) % 10
+  //   paintPreview(startIndex, shipSize, color) {
+  //     const gridItems = document.querySelectorAll(this.cssClass.dot.cell)
+  //     const startRow = Math.floor((startIndex - 1) / 10)
+  //     const startCol = (startIndex - 1) % 10
 
-    if (this.isHorizontal) {
-      for (let i = 0; i < shipSize; i++) {
-        const currentIndex = startIndex + i
-        if (startCol + i >= 10 || currentIndex > 100) break
-        if (!this.placedShips.has(currentIndex)) {
-          gridItems[currentIndex - 1].style.backgroundColor = color
-        }
-      }
-    } else {
-      for (let i = 0; i < shipSize; i++) {
-        const currentIndex = startIndex + i * 10
-        const currentRow = Math.floor((currentIndex - 1) / 10)
-        if (currentRow !== startRow + i || currentIndex > 100 || startCol >= 10)
-          break
-        if (!this.placedShips.has(currentIndex)) {
-          gridItems[currentIndex - 1].style.backgroundColor = color
-        }
-      }
-    }
-  }
+  //     if (this.isHorizontal) {
+  //       for (let i = 0; i < shipSize; i++) {
+  //         const currentIndex = startIndex + i
+  //         if (startCol + i >= 10 || currentIndex > 100) break
+  //         if (!this.placedShips.has(currentIndex)) {
+  //           gridItems[currentIndex - 1].style.backgroundColor = color
+  //         }
+  //       }
+  //     } else {
+  //       for (let i = 0; i < shipSize; i++) {
+  //         const currentIndex = startIndex + i * 10
+  //         const currentRow = Math.floor((currentIndex - 1) / 10)
+  //         if (currentRow !== startRow + i || currentIndex > 100 || startCol >= 10)
+  //           break
+  //         if (!this.placedShips.has(currentIndex)) {
+  //           gridItems[currentIndex - 1].style.backgroundColor = color
+  //         }
+  //       }
+  //     }
+  //   }
 
-  resetPreview() {
-    const gridItems = document.querySelectorAll(this.cssClass.dot.cell)
-    gridItems.forEach((item) => {
-      if (item.style.backgroundColor === this.colors.blue) {
-        return
-      }
-      if (item.style.backgroundColor) {
-        item.style.backgroundColor = ''
-      }
-    })
-  }
+  //   resetPreview() {
+  //     const gridItems = document.querySelectorAll(this.cssClass.dot.cell)
+  //     gridItems.forEach((item) => {
+  //       if (item.style.backgroundColor === this.colors.blue) {
+  //         return
+  //       }
+  //       if (item.style.backgroundColor) {
+  //         item.style.backgroundColor = ''
+  //       }
+  //     })
+  //   }
 
   paintOnHover(event) {
     const touch = event.touches ? event.touches[0] : event
@@ -137,7 +141,7 @@ export class FleetGrid {
       touches: event.touches,
     }
 
-    this.resetPreview()
+    this.shipPreview.resetPreview(this.gridItems)
 
     if (
       this.placementValidator.validatePlacement(
@@ -147,9 +151,23 @@ export class FleetGrid {
         this.placedShips
       )
     ) {
-      this.paintPreview(index, shipSize, this.colors.green)
+      this.shipPreview.paintPreview(
+        index,
+        shipSize,
+        this.isHorizontal,
+        this.placedShips,
+        this.gridItems,
+        this.colors.green
+      )
     } else {
-      this.paintPreview(index, shipSize, this.colors.red)
+      this.shipPreview.paintPreview(
+        index,
+        shipSize,
+        this.isHorizontal,
+        this.placedShips,
+        this.gridItems,
+        this.colors.red
+      )
     }
   }
 
@@ -166,7 +184,14 @@ export class FleetGrid {
         this.placedShips
       )
     ) {
-      this.paintPreview(index, shipSize, this.colors.blue)
+      this.shipPreview.paintPreview(
+        index,
+        shipSize,
+        this.isHorizontal,
+        this.placedShips,
+        this.gridItems,
+        this.colors.blue
+      )
 
       if (this.isHorizontal) {
         for (let i = 0; i < shipSize; i++) {
