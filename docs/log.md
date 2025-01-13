@@ -36,7 +36,7 @@
 
 1. 08:57 - 10:15, Generate fleet placing component.  
    Strings to vars, srp.
-2. Generate battle component.
+2. 12:27 - 13:14, Generate battle component.
 3. Set player2 fleet placement.
 4. Start first turn for random player.
 5. Code ai player turn.

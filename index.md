@@ -25,6 +25,7 @@
 6. [Placement](component/grid/placement/index.html)
 7. [Toggle Button](component/grid/toggle_button/index.html)
 8. [Fleet](component/fleet_grid/fleet_grid.html)
+9. [Battle](component/battle_grid/battle_grid.html)
 
 ## 4. Protytype
 
