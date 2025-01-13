@@ -1,5 +1,6 @@
 import { PlacementValidator } from './PlacementValidator.js'
 import { ShipPreview } from './ShipPreview.js'
+import { GridRenderer } from './GridRenderer.js'
 
 export class FleetGrid {
   constructor(dataService = null) {
@@ -11,14 +12,15 @@ export class FleetGrid {
       cell: 'fleet-grid__item',
     }
     this.colors = { blue: 'blue', green: 'green', red: 'red' }
+    this.html = { div: 'div' }
     this.placementValidator = new PlacementValidator()
     this.shipPreview = new ShipPreview(this.cssClass, this.colors)
+    this.gridRenderer = new GridRenderer(this.cssClass, this.html)
     this.messages = {
       initMsg: 'fleet grid',
       colmpete: 'Fleet placement complete!',
       player1Grid: 'Player1 Grid Array:',
     }
-    this.html = { div: 'div' }
     this.events = {
       click: 'click',
       mousemove: 'mousemove',
@@ -37,102 +39,13 @@ export class FleetGrid {
     this.gridItems = null
   }
 
-  generateGridItems() {
-    const container = document.querySelector(this.cssClass.dot.grid)
-    for (let i = 1; i <= 100; i++) {
-      const gridItem = document.createElement(this.html.div)
-      gridItem.classList.add(this.cssClass.cell)
-      container.appendChild(gridItem)
-    }
-    this.gridItems = document.querySelectorAll(this.cssClass.dot.cell)
-  }
-
   hitToggle() {
     this.isHorizontal = !this.isHorizontal
   }
 
-  getCellIndex(x, y) {
-    const cellSize = document
-      .querySelector(this.cssClass.dot.cell)
-      .getBoundingClientRect()
-    const col = Math.floor(x / cellSize.width)
-    const row = Math.floor(y / cellSize.height)
-    return row * 10 + col + 1
-  }
-
-  //   validatePlacement(startIndex, shipSize) {
-  //     const startRow = Math.floor((startIndex - 1) / 10)
-  //     const startCol = (startIndex - 1) % 10
-
-  //     if (this.isHorizontal) {
-  //       for (let i = 0; i < shipSize; i++) {
-  //         const currentIndex = startIndex + i
-  //         const currentCol = startCol + i
-  //         if (
-  //           currentCol >= 10 ||
-  //           currentIndex > 100 ||
-  //           this.placedShips.has(currentIndex)
-  //         ) {
-  //           return false
-  //         }
-  //       }
-  //     } else {
-  //       for (let i = 0; i < shipSize; i++) {
-  //         const currentIndex = startIndex + i * 10
-  //         const currentRow = Math.floor((currentIndex - 1) / 10)
-  //         if (
-  //           currentRow !== startRow + i ||
-  //           currentIndex > 100 ||
-  //           this.placedShips.has(currentIndex)
-  //         ) {
-  //           return false
-  //         }
-  //       }
-  //     }
-  //     return true
-  //   }
-
-  //   paintPreview(startIndex, shipSize, color) {
-  //     const gridItems = document.querySelectorAll(this.cssClass.dot.cell)
-  //     const startRow = Math.floor((startIndex - 1) / 10)
-  //     const startCol = (startIndex - 1) % 10
-
-  //     if (this.isHorizontal) {
-  //       for (let i = 0; i < shipSize; i++) {
-  //         const currentIndex = startIndex + i
-  //         if (startCol + i >= 10 || currentIndex > 100) break
-  //         if (!this.placedShips.has(currentIndex)) {
-  //           gridItems[currentIndex - 1].style.backgroundColor = color
-  //         }
-  //       }
-  //     } else {
-  //       for (let i = 0; i < shipSize; i++) {
-  //         const currentIndex = startIndex + i * 10
-  //         const currentRow = Math.floor((currentIndex - 1) / 10)
-  //         if (currentRow !== startRow + i || currentIndex > 100 || startCol >= 10)
-  //           break
-  //         if (!this.placedShips.has(currentIndex)) {
-  //           gridItems[currentIndex - 1].style.backgroundColor = color
-  //         }
-  //       }
-  //     }
-  //   }
-
-  //   resetPreview() {
-  //     const gridItems = document.querySelectorAll(this.cssClass.dot.cell)
-  //     gridItems.forEach((item) => {
-  //       if (item.style.backgroundColor === this.colors.blue) {
-  //         return
-  //       }
-  //       if (item.style.backgroundColor) {
-  //         item.style.backgroundColor = ''
-  //       }
-  //     })
-  //   }
-
   paintOnHover(event) {
     const touch = event.touches ? event.touches[0] : event
-    const index = this.getCellIndex(touch.clientX, touch.clientY)
+    const index = this.gridRenderer.getCellIndex(touch.clientX, touch.clientY)
     const shipSize = this.shipSizes[this.currentShipIndex]
 
     this.currentHoverPosition = {
@@ -173,7 +86,7 @@ export class FleetGrid {
 
   handleClick(event) {
     const touch = event.touches ? event.touches[0] : event
-    const index = this.getCellIndex(touch.clientX, touch.clientY)
+    const index = this.gridRenderer.getCellIndex(touch.clientX, touch.clientY)
     const shipSize = this.shipSizes[this.currentShipIndex]
 
     if (
@@ -274,7 +187,8 @@ export class FleetGrid {
   }
 
   init() {
-    this.generateGridItems()
+    this.gridRenderer.generateGridItems()
+    this.gridItems = this.gridRenderer.getGridItems()
     this.initGridEvents()
     console.log(this.messages.initMsg)
   }
