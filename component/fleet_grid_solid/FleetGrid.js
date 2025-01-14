@@ -2,7 +2,8 @@ import { PlacementValidator } from './PlacementValidator.js'
 import { ShipPreview } from './ShipPreview.js'
 import { GridRenderer } from './GridRenderer.js'
 import { EventHandler } from './EventHandler.js'
-import { FleetLogic } from './FleetLogic.js'
+import { FleetLogic as FleetService } from './FleetService.js'
+import { PlacementHandler } from './PlacementHandler.js'
 
 export class FleetGrid {
   constructor(dataService = null) {
@@ -19,7 +20,14 @@ export class FleetGrid {
     this.shipPreview = new ShipPreview(this.cssClass, this.colors)
     this.gridRenderer = new GridRenderer(this.cssClass, this.html)
     this.eventHandler = new EventHandler(this)
-    this.logic = new FleetLogic(dataService)
+    this.fleetService = new FleetService(dataService)
+    this.placementHandler = new PlacementHandler(
+      this.gridRenderer,
+      this.placementValidator,
+      this.shipPreview,
+      this.fleetService,
+      this.colors
+    )
     this.messages = {
       initMsg: 'fleet grid',
       complete: 'fleet placement complete!',
@@ -38,76 +46,17 @@ export class FleetGrid {
   }
 
   paintOnHover(event) {
-    const touch = event.touches ? event.touches[0] : event
-    const index = this.gridRenderer.getCellIndex(touch.clientX, touch.clientY)
-    const shipSize = this.logic.shipSizes[this.logic.currentShipIndex]
-
-    this.currentHoverPosition = {
-      clientX: touch.clientX,
-      clientY: touch.clientY,
-      touches: event.touches,
-    }
-
-    this.shipPreview.resetPreview(this.gridItems)
-
-    if (
-      this.placementValidator.validatePlacement(
-        index,
-        shipSize,
-        this.logic.isHorizontal,
-        this.logic.placedShips
-      )
-    ) {
-      this.shipPreview.paintPreview(
-        index,
-        shipSize,
-        this.logic.isHorizontal,
-        this.logic.placedShips,
-        this.gridItems,
-        this.colors.green
-      )
-    } else {
-      this.shipPreview.paintPreview(
-        index,
-        shipSize,
-        this.logic.isHorizontal,
-        this.logic.placedShips,
-        this.gridItems,
-        this.colors.red
-      )
-    }
+    this.placementHandler.paintOnHover(event, this.gridItems)
   }
 
   handleClick(event) {
-    const touch = event.touches ? event.touches[0] : event
-    const index = this.gridRenderer.getCellIndex(touch.clientX, touch.clientY)
-
-    if (
-      this.logic.validateAndPlaceShip(
-        index,
-        this.placementValidator,
-        this.shipPreview,
-        this.gridItems,
-        this.colors
-      )
-    ) {
-      if (this.logic.isPlacementComplete()) {
-        console.log(this.messages.complete)
-        document
-          .querySelector(this.cssClass.dot.grid)
-          .removeEventListener(this.events.click, this.handleClick.bind(this))
-
-        console.log(this.messages.player1Grid)
-        this.logic.saveGridData()
-        console.table(this.logic.gridArray)
-      }
-    }
+    this.placementHandler.handleClick(event, this.gridItems)
   }
 
   handleWheel(event) {
-    this.logic.isHorizontal =
+    this.fleetService.isHorizontal =
       event.deltaY > 0 || event.deltaX > 0 ? false : true
-    this.paintOnHover(event)
+    this.placementHandler.paintOnHover(event, this.gridItems)
   }
 
   init() {
