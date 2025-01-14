@@ -1,12 +1,9 @@
+import { EventHandler } from './EventHandler.js'
+import { FleetService } from './FleetService.js'
+import { GridRenderer } from './GridRenderer.js'
+import { PlacementHandler } from './PlacementHandler.js'
 import { PlacementValidator } from './PlacementValidator.js'
 import { ShipPreview } from './ShipPreview.js'
-import { GridRenderer } from './GridRenderer.js'
-import { EventHandler } from './EventHandler.js'
-import { FleetLogic as FleetService } from './FleetService.js'
-import { PlacementHandler } from './PlacementHandler.js'
-import { FleetGridConfig } from './FleetGridConfig.js'
-import { DataService } from './../../shared_library/DataService.js'
-import { Player } from './../../shared_library/Player.js'
 
 export class FleetGrid {
   constructor(dataService, config) {
@@ -48,8 +45,3 @@ export class FleetGrid {
     console.log(this.config.messages.initMsg)
   }
 }
-
-const dataService = new DataService()
-dataService.player1 = new Player()
-const fleetGrid = new FleetGrid(dataService, new FleetGridConfig())
-fleetGrid.init()

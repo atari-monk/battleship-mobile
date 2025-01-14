@@ -3,7 +3,11 @@ import { Player } from './model/player.js'
 
 export const loadedComponents = []
 
-export async function loadComponent(componentName) {
+export async function loadComponent(
+  componentName,
+  rootDivClassName,
+  scripts = []
+) {
   if (loadedComponents.includes(componentName)) {
     console.warn(`Component already loaded: ${componentName}`)
     return
@@ -15,7 +19,7 @@ export async function loadComponent(componentName) {
   const html = await htmlResponse.text()
 
   const container = document.createElement('div')
-  container.className = `component-${componentName}`
+  container.className = `${rootDivClassName}`
   container.innerHTML = html
   document.body.appendChild(container)
 
@@ -25,6 +29,16 @@ export async function loadComponent(componentName) {
   cssLink.href = `${basePath}/${componentName}.css`
   document.head.appendChild(cssLink)
 
+  const allModules = []
+  for (const script of scripts) {
+    try {
+      const module = await import(`${basePath}/${script}`)
+      allModules.push({ name: script, module })
+    } catch (error) {
+      console.warn(`Failed to load script: ${script}`, error)
+    }
+  }
+
   // Load JS
   let jsModule = null
   try {
@@ -33,10 +47,13 @@ export async function loadComponent(componentName) {
       jsModule.init()
     }
   } catch (error) {
-    console.warn(`No JavaScript for component: ${componentName}`)
+    console.error(
+      `Error in main JavaScript for component: ${componentName}`,
+      error
+    )
   }
 
-  loadedComponents.push({ name: componentName, jsModule })
+  loadedComponents.push({ name: componentName, jsModule, allModules })
   return loadedComponents
 }
 
@@ -45,7 +62,7 @@ async function initPage() {
   dataService.player1 = new Player('Captain Jack')
   dataService.player2 = new Player('Blackbeard')
   loadedComponents.push({ name: 'data_service', jsModule: dataService })
-  await loadComponent('full_screen')
+  await loadComponent('full_screen', 'fs-overlay')
 }
 
 document.addEventListener('DOMContentLoaded', initPage)

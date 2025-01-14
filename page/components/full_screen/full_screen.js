@@ -1,7 +1,7 @@
 import { loadComponent } from '../../script.js'
 
 const className = {
-  fsOverlay: '.component-full_screen',
+  fsOverlay: '.fs-overlay',
 }
 
 const ids = {
@@ -49,5 +49,5 @@ const goFullScreen = async () => {
 button.addEventListener(events.click, goFullScreen)
 
 async function showMenu() {
-  await loadComponent(componentFile.menu)
+  await loadComponent(componentFile.menu, 'game-menu')
 }

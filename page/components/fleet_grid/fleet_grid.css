@@ -1,4 +1,4 @@
-.component-grid {
+.fleet-grid {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -7,7 +7,7 @@
   overflow-x: hidden;
 }
 
-.static-grid__grid {
+.fleet-grid__grid {
   display: grid;
   flex-grow: 9;
   grid-template-columns: repeat(10, 1fr);
@@ -18,7 +18,7 @@
   background-color: black;
 }
 
-.static-grid__item {
+.fleet-grid__item {
   border: 1px solid rgba(255, 255, 255, 0.5);
   display: flex;
   justify-content: center;

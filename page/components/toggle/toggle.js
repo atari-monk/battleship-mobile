@@ -1,9 +1,3 @@
-import {
-  hitToggle,
-  paintOnHover,
-  currentHoverPosition,
-} from './../grid/grid.js'
-
 const toggleButton = document.getElementById('toggle-button')
 
 let isToggled = false
@@ -19,9 +13,9 @@ function handleToggle(event) {
     toggleButton.classList.remove('toggle__button--toggled-on')
   }
 
-  hitToggle()
+  //hitToggle()
 
-  paintOnHover(currentHoverPosition)
+  //paintOnHover(currentHoverPosition)
   console.log('isToggled', isToggled)
 }
 
