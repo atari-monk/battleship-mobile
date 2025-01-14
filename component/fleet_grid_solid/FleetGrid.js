@@ -1,6 +1,7 @@
 import { PlacementValidator } from './PlacementValidator.js'
 import { ShipPreview } from './ShipPreview.js'
 import { GridRenderer } from './GridRenderer.js'
+import { EventHandler } from './EventHandler.js'
 
 export class FleetGrid {
   constructor(dataService = null) {
@@ -16,6 +17,7 @@ export class FleetGrid {
     this.placementValidator = new PlacementValidator()
     this.shipPreview = new ShipPreview(this.cssClass, this.colors)
     this.gridRenderer = new GridRenderer(this.cssClass, this.html)
+    this.eventHandler = new EventHandler(this)
     this.messages = {
       initMsg: 'fleet grid',
       colmpete: 'Fleet placement complete!',
@@ -147,49 +149,15 @@ export class FleetGrid {
     }
   }
 
-  initGridEvents() {
-    const container = document.querySelector(this.cssClass.dot.grid)
-
-    container.addEventListener(
-      this.events.mousemove,
-      this.paintOnHover.bind(this)
-    )
-    container.addEventListener(
-      this.events.mouseenter,
-      this.paintOnHover.bind(this)
-    )
-
-    container.addEventListener(
-      this.events.touchmove,
-      this.paintOnHover.bind(this),
-      { passive: true }
-    )
-    container.addEventListener(
-      this.events.touchstart,
-      this.paintOnHover.bind(this),
-      { passive: true }
-    )
-    container.addEventListener(this.events.click, this.handleClick.bind(this))
-
-    container.addEventListener(
-      this.events.wheel,
-      (event) => {
-        if (event.deltaY > 0 || event.deltaX > 0) {
-          this.isHorizontal = false
-        } else {
-          this.isHorizontal = true
-        }
-
-        this.paintOnHover(event)
-      },
-      { passive: true }
-    )
+  handleWheel(event) {
+    this.isHorizontal = event.deltaY > 0 || event.deltaX > 0 ? false : true
+    this.paintOnHover(event)
   }
 
   init() {
     this.gridRenderer.generateGridItems()
     this.gridItems = this.gridRenderer.getGridItems()
-    this.initGridEvents()
+    this.eventHandler.attachEvents()
     console.log(this.messages.initMsg)
   }
 }

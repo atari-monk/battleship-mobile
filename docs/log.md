@@ -32,7 +32,7 @@
 5. 18:02 - 18:37, Passing dataService form app module to components and set grid data for player1.
 6. 21:45 - 21:53, Test of fleet placing and battle in one grid; Better do them as separate components.
 
-### 12
+### 13
 
 1. 08:57 - 10:15, Generate fleet placing component.  
    Strings to vars.
@@ -42,15 +42,16 @@
 5. 20:28 - 20:52, ShipPreview class.
 6. 22:38 - 23:32, GridRenderer class.
 
-### 13
+### 14
 
-1. Set player2 fleet placement.
-2. Start first turn for random player.
-3. Code ai player turn.
-4. Show battle grid for player1.
-5. Code player turn.
-6. Code end condition.
-7. Generate overlay component with game messages.
-8. Polish the game.
-9. release single player game.
-10. Generate multiplayer version.
+1. 07:53 - , EventHandler class.
+2. Set player2 fleet placement.
+3. Start first turn for random player.
+4. Code ai player turn.
+5. Show battle grid for player1.
+6. Code player turn.
+7. Code end condition.
+8. Generate overlay component with game messages.
+9. Polish the game.
+10. release single player game.
+11. Generate multiplayer version.
