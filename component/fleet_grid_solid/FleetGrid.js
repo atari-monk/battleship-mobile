@@ -2,6 +2,7 @@ import { PlacementValidator } from './PlacementValidator.js'
 import { ShipPreview } from './ShipPreview.js'
 import { GridRenderer } from './GridRenderer.js'
 import { EventHandler } from './EventHandler.js'
+import { FleetLogic } from './FleetLogic.js'
 
 export class FleetGrid {
   constructor(dataService = null) {
@@ -18,10 +19,11 @@ export class FleetGrid {
     this.shipPreview = new ShipPreview(this.cssClass, this.colors)
     this.gridRenderer = new GridRenderer(this.cssClass, this.html)
     this.eventHandler = new EventHandler(this)
+    this.logic = new FleetLogic(dataService)
     this.messages = {
       initMsg: 'fleet grid',
-      colmpete: 'Fleet placement complete!',
-      player1Grid: 'Player1 Grid Array:',
+      complete: 'fleet placement complete!',
+      player1Grid: 'player1 grid array:',
     }
     this.events = {
       click: 'click',
@@ -31,24 +33,14 @@ export class FleetGrid {
       touchstart: 'touchstart',
       wheel: 'wheel',
     }
-    this.shipSizes = [5, 4, 3, 3, 2]
-    this.currentShipIndex = 0
-    this.isHorizontal = true
-    this.placedShips = new Set()
-    this.gridArray = Array.from({ length: 10 }, () => Array(10).fill(0))
-    this._dataService = dataService
     this.currentHoverPosition = null
     this.gridItems = null
-  }
-
-  hitToggle() {
-    this.isHorizontal = !this.isHorizontal
   }
 
   paintOnHover(event) {
     const touch = event.touches ? event.touches[0] : event
     const index = this.gridRenderer.getCellIndex(touch.clientX, touch.clientY)
-    const shipSize = this.shipSizes[this.currentShipIndex]
+    const shipSize = this.logic.shipSizes[this.logic.currentShipIndex]
 
     this.currentHoverPosition = {
       clientX: touch.clientX,
@@ -62,15 +54,15 @@ export class FleetGrid {
       this.placementValidator.validatePlacement(
         index,
         shipSize,
-        this.isHorizontal,
-        this.placedShips
+        this.logic.isHorizontal,
+        this.logic.placedShips
       )
     ) {
       this.shipPreview.paintPreview(
         index,
         shipSize,
-        this.isHorizontal,
-        this.placedShips,
+        this.logic.isHorizontal,
+        this.logic.placedShips,
         this.gridItems,
         this.colors.green
       )
@@ -78,8 +70,8 @@ export class FleetGrid {
       this.shipPreview.paintPreview(
         index,
         shipSize,
-        this.isHorizontal,
-        this.placedShips,
+        this.logic.isHorizontal,
+        this.logic.placedShips,
         this.gridItems,
         this.colors.red
       )
@@ -89,68 +81,32 @@ export class FleetGrid {
   handleClick(event) {
     const touch = event.touches ? event.touches[0] : event
     const index = this.gridRenderer.getCellIndex(touch.clientX, touch.clientY)
-    const shipSize = this.shipSizes[this.currentShipIndex]
 
     if (
-      this.placementValidator.validatePlacement(
+      this.logic.validateAndPlaceShip(
         index,
-        shipSize,
-        this.isHorizontal,
-        this.placedShips
+        this.placementValidator,
+        this.shipPreview,
+        this.gridItems,
+        this.colors
       )
     ) {
-      this.shipPreview.paintPreview(
-        index,
-        shipSize,
-        this.isHorizontal,
-        this.placedShips,
-        this.gridItems,
-        this.colors.blue
-      )
-
-      if (this.isHorizontal) {
-        for (let i = 0; i < shipSize; i++) {
-          this.placedShips.add(index + i)
-        }
-      } else {
-        for (let i = 0; i < shipSize; i++) {
-          this.placedShips.add(index + i * 10)
-        }
-      }
-
-      this.updateGridArray(index, shipSize)
-      this.currentShipIndex++
-
-      if (this.currentShipIndex >= this.shipSizes.length) {
-        console.log(this.messages.colmpete)
+      if (this.logic.isPlacementComplete()) {
+        console.log(this.messages.complete)
         document
           .querySelector(this.cssClass.dot.grid)
           .removeEventListener(this.events.click, this.handleClick.bind(this))
 
         console.log(this.messages.player1Grid)
-        this._dataService.player1.grid = this.gridArray
-        console.table(this._dataService.player1.grid)
-      }
-    }
-  }
-
-  updateGridArray(startIndex, shipSize) {
-    const startRow = Math.floor((startIndex - 1) / 10)
-    const startCol = (startIndex - 1) % 10
-
-    if (this.isHorizontal) {
-      for (let i = 0; i < shipSize; i++) {
-        this.gridArray[startRow][startCol + i] = 1
-      }
-    } else {
-      for (let i = 0; i < shipSize; i++) {
-        this.gridArray[startRow + i][startCol] = 1
+        this.logic.saveGridData()
+        console.table(this.logic.gridArray)
       }
     }
   }
 
   handleWheel(event) {
-    this.isHorizontal = event.deltaY > 0 || event.deltaX > 0 ? false : true
+    this.logic.isHorizontal =
+      event.deltaY > 0 || event.deltaX > 0 ? false : true
     this.paintOnHover(event)
   }
 
