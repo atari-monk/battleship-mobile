@@ -4,45 +4,28 @@ import { GridRenderer } from './GridRenderer.js'
 import { EventHandler } from './EventHandler.js'
 import { FleetLogic as FleetService } from './FleetService.js'
 import { PlacementHandler } from './PlacementHandler.js'
+import { FleetGridConfig } from './FleetGridConfig.js'
+import { DataService } from './../../shared_library/DataService.js'
+import { Player } from './../../shared_library/Player.js'
 
 export class FleetGrid {
-  constructor(dataService = null) {
-    this.cssClass = {
-      dot: {
-        grid: '.fleet-grid__grid',
-        cell: '.fleet-grid__item',
-      },
-      cell: 'fleet-grid__item',
-    }
-    this.colors = { blue: 'blue', green: 'green', red: 'red' }
-    this.html = { div: 'div' }
+  constructor(dataService, config) {
+    this.currentHoverPosition = null
+    this.gridItems = null
+
+    this.config = config
     this.placementValidator = new PlacementValidator()
-    this.shipPreview = new ShipPreview(this.cssClass, this.colors)
-    this.gridRenderer = new GridRenderer(this.cssClass, this.html)
-    this.eventHandler = new EventHandler(this)
+    this.shipPreview = new ShipPreview(this.config.cssClass, this.config.colors)
+    this.gridRenderer = new GridRenderer(this.config.cssClass, this.config.html)
+    this.eventHandler = new EventHandler(this, this.config)
     this.fleetService = new FleetService(dataService)
     this.placementHandler = new PlacementHandler(
       this.gridRenderer,
       this.placementValidator,
       this.shipPreview,
       this.fleetService,
-      this.colors
+      this.config.colors
     )
-    this.messages = {
-      initMsg: 'fleet grid',
-      complete: 'fleet placement complete!',
-      player1Grid: 'player1 grid array:',
-    }
-    this.events = {
-      click: 'click',
-      mousemove: 'mousemove',
-      mouseenter: 'mouseenter',
-      touchmove: 'touchmove',
-      touchstart: 'touchstart',
-      wheel: 'wheel',
-    }
-    this.currentHoverPosition = null
-    this.gridItems = null
   }
 
   paintOnHover(event) {
@@ -63,9 +46,11 @@ export class FleetGrid {
     this.gridRenderer.generateGridItems()
     this.gridItems = this.gridRenderer.getGridItems()
     this.eventHandler.attachEvents()
-    console.log(this.messages.initMsg)
+    console.log(this.config.messages.initMsg)
   }
 }
 
-const fleetGrid = new FleetGrid()
+const dataService = new DataService()
+dataService.player1 = new Player()
+const fleetGrid = new FleetGrid(dataService, new FleetGridConfig())
 fleetGrid.init()

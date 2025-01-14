@@ -46,14 +46,15 @@
 
 1. 07:53 - 08:14, EventHandler class.
 2. 10:02 - 11:04, FleetLogic class.
-3. 14:52 - ,
-4. Set player2 fleet placement.
-5. Start first turn for random player.
-6. Code ai player turn.
-7. Show battle grid for player1.
-8. Code player turn.
-9. Code end condition.
-10. Generate overlay component with game messages.
-11. Polish the game.
-12. release single player game.
-13. Generate multiplayer version.
+3. 14:52 - 15:27, PlacementHandler class.
+4. 15:47 - 16:20, FleetGridConfig class.
+5. Set player2 fleet placement.
+6. Start first turn for random player.
+7. Code ai player turn.
+8. Show battle grid for player1.
+9. Code player turn.
+10. Code end condition.
+11. Generate overlay component with game messages.
+12. Polish the game.
+13. release single player game.
+14. Generate multiplayer version.

@@ -1,36 +1,37 @@
 export class EventHandler {
-  constructor(fleetGrid) {
+  constructor(fleetGrid, config) {
     this.fleetGrid = fleetGrid
+    this.config = config
   }
 
   attachEvents() {
-    const container = document.querySelector(this.fleetGrid.cssClass.dot.grid)
+    const container = document.querySelector(this.config.cssClass.dot.grid)
 
     container.addEventListener(
-      this.fleetGrid.events.mousemove,
+      this.config.events.mousemove,
       this.fleetGrid.paintOnHover.bind(this.fleetGrid)
     )
     container.addEventListener(
-      this.fleetGrid.events.mouseenter,
+      this.config.events.mouseenter,
       this.fleetGrid.paintOnHover.bind(this.fleetGrid)
     )
     container.addEventListener(
-      this.fleetGrid.events.touchmove,
+      this.config.events.touchmove,
       this.fleetGrid.paintOnHover.bind(this.fleetGrid),
       { passive: true }
     )
     container.addEventListener(
-      this.fleetGrid.events.touchstart,
+      this.config.events.touchstart,
       this.fleetGrid.paintOnHover.bind(this.fleetGrid),
       { passive: true }
     )
     container.addEventListener(
-      this.fleetGrid.events.click,
+      this.config.events.click,
       this.fleetGrid.handleClick.bind(this.fleetGrid)
     )
 
     container.addEventListener(
-      this.fleetGrid.events.wheel,
+      this.config.events.wheel,
       this.fleetGrid.handleWheel.bind(this.fleetGrid),
       { passive: true }
     )
