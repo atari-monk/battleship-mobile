@@ -1,4 +1,4 @@
-import { loadComponent } from '../../script.js'
+import { componentSystem } from '../../script.js'
 
 const className = {
   gameMenu: '.game-menu',
@@ -39,27 +39,25 @@ async function showGridStatic() {
   const menu = document.querySelector(className.gameMenu)
   menu.classList.add(styles.hidden)
 
-  const loadedComponents = await loadComponent(
-    componentFile.grid,
-    'fleet-grid',
-    [
-      'EventHandler.js',
-      'FleetGridConfig.js',
-      'FleetGridConfig.js',
-      'FleetService.js',
-      'GridRenderer.js',
-      'PlacementValidator.js',
-      'ShipPreview.js',
-      'PlacementHandler.js',
-      'FleetGrid.js',
-    ]
-  )
-  const dataService = loadedComponents.find(
-    (comp) => comp.name === 'data_service'
-  )
-  const grid = loadedComponents.find((comp) => comp.name === componentFile.grid)
-  if (dataService && dataService.jsModule && grid && grid.jsModule) {
-    //grid.jsModule.setDataService(dataService.jsModule)
-  }
-  await loadComponent(componentFile.toggle, 'toggle')
+  await componentSystem.loadComponent(componentFile.grid, 'fleet-grid', [
+    'EventHandler.js',
+    'FleetGridConfig.js',
+    'FleetGridConfig.js',
+    'FleetService.js',
+    'GridRenderer.js',
+    'PlacementValidator.js',
+    'ShipPreview.js',
+    'PlacementHandler.js',
+    'FleetGrid.js',
+  ])
+  //   const dataService = loadedComponents.find(
+  //     (comp) => comp.name === 'data_service'
+  //   )
+  //   const grid = componentSystem.loadedComponents.find(
+  //     (comp) => comp.name === componentFile.grid
+  //   )
+  //   if (dataService && dataService.jsModule && grid && grid.jsModule) {
+  //     //grid.jsModule.setDataService(dataService.jsModule)
+  //   }
+  await componentSystem.loadComponent(componentFile.toggle, 'toggle')
 }

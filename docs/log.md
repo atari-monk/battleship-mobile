@@ -48,14 +48,16 @@
 2. 10:02 - 11:04, FleetLogic class.
 3. 14:52 - 15:27, PlacementHandler class.
 4. 15:47 - 16:29, FleetGridConfig class.
-5. 18:57 - ,
-6. Set player2 fleet placement.
-7. Start first turn for random player.
-8. Code ai player turn.
-9. Show battle grid for player1.
-10. Code player turn.
-11. Code end condition.
-12. Generate overlay component with game messages.
-13. Polish the game.
-14. release single player game.
-15. Generate multiplayer version.
+5. 18:57 - 20:47, Using Fleet Grid component with many js in page, updated component loader for this.
+6. 13:06 - 15:46, Component system; From one method loading component to 4 classes.
+7. Fix things broken by extracting SRP classes.
+8. Set player2 fleet placement.
+9. Start first turn for random player.
+10. Code ai player turn.
+11. Show battle grid for player1.
+12. Code player turn.
+13. Code end condition.
+14. Generate overlay component with game messages.
+15. Polish the game.
+16. release single player game.
+17. Generate multiplayer version.
