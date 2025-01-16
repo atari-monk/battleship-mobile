@@ -1,4 +1,4 @@
-# Log
+# Log Task
 
 ## 2025
 
@@ -49,15 +49,25 @@
 3. 14:52 - 15:27, PlacementHandler class.
 4. 15:47 - 16:29, FleetGridConfig class.
 5. 18:57 - 20:47, Using Fleet Grid component with many js in page, updated component loader for this.
-6. 13:06 - 15:46, Component system; From one method loading component to 4 classes.
-7. Fix things broken by extracting SRP classes.
-8. Set player2 fleet placement.
-9. Start first turn for random player.
-10. Code ai player turn.
-11. Show battle grid for player1.
-12. Code player turn.
-13. Code end condition.
-14. Generate overlay component with game messages.
-15. Polish the game.
-16. release single player game.
-17. Generate multiplayer version.
+
+### 15
+
+1. 13:06 - 15:46, Component system; From one method loading component to 4 classes.
+
+### 16
+
+1.
+
+### Plan
+
+1. Fix things broken by extracting SRP classes.
+2. Set player2 fleet placement.
+3. Start first turn for random player.
+4. Code ai player turn.
+5. Show battle grid for player1.
+6. Code player turn.
+7. Code end condition.
+8. Generate overlay component with game messages.
+9. Polish the game.
+10. release single player game.
+11. Generate multiplayer version.

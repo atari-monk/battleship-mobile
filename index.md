@@ -2,12 +2,13 @@
 
 ## 1. Docs
 
-1. [Log](docs/log.md)
-2. [Project](docs/project.md)
-3. [JS](docs/js.md)
-4. [CSS](docs/css.md)
-5. [GIT](docs/git.md)
-6. [Grid](docs/grid.md)
+1. [Log Task](docs/log_task.md)
+1. [Log Detail](docs/log_detail.md)
+1. [Project](docs/project.md)
+1. [JS](docs/js.md)
+1. [CSS](docs/css.md)
+1. [GIT](docs/git.md)
+1. [Grid](docs/grid.md)
 
 ## 2. Components
 
