@@ -11,6 +11,7 @@ export class PlacementHandler {
     this.shipPreview = shipPreview
     this.fleetService = fleetService
     this.colors = colors
+    this.currentHoverPosition = null
   }
 
   paintOnHover(event, gridItems) {
@@ -18,6 +19,12 @@ export class PlacementHandler {
     const index = this.getCellIndex(touch.clientX, touch.clientY)
     const shipSize =
       this.fleetService.shipSizes[this.fleetService.currentShipIndex]
+
+    this.currentHoverPosition = {
+      clientX: touch.clientX,
+      clientY: touch.clientY,
+      touches: event.touches,
+    }
 
     this.shipPreview.resetPreview(gridItems)
 

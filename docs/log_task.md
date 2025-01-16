@@ -59,6 +59,7 @@
 1. 10:47 - 11:07, component_service - gui component classes
 2. 11:08 - 11:41, use new guiContener in page
 3. 13:37 - 15:20, load components setters with dependency on service
+4. 17:13 - 17:45, fixed toggle ship orientation button
 
 ### Plan
 

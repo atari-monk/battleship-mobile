@@ -1,6 +1,10 @@
+import { guiContener } from '../../script.js'
+
 const toggleButton = document.getElementById('toggle-button')
 
 let isToggled = false
+
+const gridInstance = guiContener.getComponentInstance('fleet_grid')
 
 function handleToggle(event) {
   isToggled = !isToggled
@@ -13,10 +17,9 @@ function handleToggle(event) {
     toggleButton.classList.remove('toggle__button--toggled-on')
   }
 
-  //hitToggle()
+  gridInstance.fleetService.toggleOrientation()
 
-  //paintOnHover(currentHoverPosition)
-  console.log('isToggled', isToggled)
+  gridInstance.paintOnHover(gridInstance.placementHandler.currentHoverPosition)
 }
 
 let isTouch = false
