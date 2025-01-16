@@ -13,11 +13,23 @@ export class GUIComponentStorage {
     )
   }
 
-  addComponent(componentName, jsModule, allModules) {
-    this.loadedComponents.push({ name: componentName, jsModule, allModules })
+  addComponent(componentName, jsModule, allModules, jsInstance) {
+    this.loadedComponents.push({
+      name: componentName,
+      jsModule,
+      allModules,
+      jsInstance,
+    })
   }
 
   removeComponent(componentIndex) {
     this.loadedComponents.splice(componentIndex, 1)
+  }
+
+  getComponentByName(componentName) {
+    const component = this.loadedComponents.find(
+      (comp) => comp.name === componentName
+    )
+    return component
   }
 }

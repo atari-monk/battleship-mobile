@@ -68,8 +68,8 @@ export class PlacementHandler {
           .querySelector('.fleet-grid__grid')
           .removeEventListener('click', this.handleClick.bind(this))
 
-        console.log('player1 grid array:')
         this.fleetService.saveGridData()
+        console.log('player1 grid array:')
         console.table(this.fleetService.gridArray)
       }
     }

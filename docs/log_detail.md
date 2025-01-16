@@ -8,3 +8,4 @@
 
 - rename and folder GUIComponent classes
 - merge their code and generate ServiceComponent classes
+- use it in page to fix after refactors and store service in contener

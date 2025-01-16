@@ -1,11 +1,14 @@
 export class FleetService {
-  constructor(dataService = null, shipSizes = [5, 4, 3, 3, 2]) {
+  set dataService(dataService) {
+    this._dataService = dataService
+  }
+
+  constructor(shipSizes = [5, 4, 3, 3, 2]) {
     this.shipSizes = shipSizes
     this.currentShipIndex = 0
     this.isHorizontal = true
     this.placedShips = new Set()
     this.gridArray = Array.from({ length: 10 }, () => Array(10).fill(0))
-    this._dataService = dataService
   }
 
   toggleOrientation() {
@@ -77,6 +80,7 @@ export class FleetService {
   saveGridData() {
     if (this._dataService) {
       this._dataService.player1.grid = this.gridArray
+      console.log('data_service updated')
     }
   }
 }

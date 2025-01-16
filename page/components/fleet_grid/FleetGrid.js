@@ -6,7 +6,11 @@ import { PlacementValidator } from './PlacementValidator.js'
 import { ShipPreview } from './ShipPreview.js'
 
 export class FleetGrid {
-  constructor(dataService, config) {
+  set dataService(dataService) {
+    this.fleetService.dataService = dataService
+  }
+
+  constructor(config) {
     this.gridItems = null
 
     this.config = config
@@ -14,7 +18,7 @@ export class FleetGrid {
     this.shipPreview = new ShipPreview(this.config.cssClass, this.config.colors)
     this.gridRenderer = new GridRenderer(this.config.cssClass, this.config.html)
     this.eventHandler = new EventHandler(this, this.config)
-    this.fleetService = new FleetService(dataService)
+    this.fleetService = new FleetService()
     this.placementHandler = new PlacementHandler(
       this.gridRenderer,
       this.placementValidator,

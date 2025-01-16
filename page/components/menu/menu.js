@@ -1,6 +1,6 @@
-import { guiContener } from '../../script.js'
+import { guiContener, serviceContener } from '../../script.js'
 
-const className = {
+const className_dot = {
   gameMenu: '.game-menu',
 }
 
@@ -20,9 +20,27 @@ const events = {
   click: 'click',
 }
 
-const componentFile = {
-  grid: 'fleet_grid',
+const component = {
+  grid: {
+    name: 'fleet_grid',
+    className: 'fleet-grid',
+    scripts: [
+      'EventHandler.js',
+      'FleetGridConfig.js',
+      'FleetGridConfig.js',
+      'FleetService.js',
+      'GridRenderer.js',
+      'PlacementValidator.js',
+      'ShipPreview.js',
+      'PlacementHandler.js',
+      'FleetGrid.js',
+    ],
+  },
   toggle: 'toggle',
+}
+
+const service = {
+  data_service: 'data_service',
 }
 
 export function init() {
@@ -36,28 +54,16 @@ document
   })
 
 async function showGridStatic() {
-  const menu = document.querySelector(className.gameMenu)
+  const menu = document.querySelector(className_dot.gameMenu)
   menu.classList.add(styles.hidden)
 
-  await guiContener.loadComponent(componentFile.grid, 'fleet-grid', [
-    'EventHandler.js',
-    'FleetGridConfig.js',
-    'FleetGridConfig.js',
-    'FleetService.js',
-    'GridRenderer.js',
-    'PlacementValidator.js',
-    'ShipPreview.js',
-    'PlacementHandler.js',
-    'FleetGrid.js',
-  ])
-  //   const dataService = loadedComponents.find(
-  //     (comp) => comp.name === 'data_service'
-  //   )
-  //   const grid = componentSystem.loadedComponents.find(
-  //     (comp) => comp.name === componentFile.grid
-  //   )
-  //   if (dataService && dataService.jsModule && grid && grid.jsModule) {
-  //     //grid.jsModule.setDataService(dataService.jsModule)
-  //   }
-  await guiContener.loadComponent(componentFile.toggle, 'toggle')
+  const { name, className, scripts } = component.grid
+  await guiContener.loadComponent(name, className, scripts)
+
+  const dataService = serviceContener.getServiceByName(service.data_service)
+  const gridInstance = guiContener.getComponentInstance(component.grid.name)
+  if (dataService && gridInstance) {
+    gridInstance.fleetService.dataService = dataService
+  }
+  await guiContener.loadComponent(component.toggle, 'toggle')
 }

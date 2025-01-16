@@ -1,16 +1,18 @@
 export class ServiceLoader {
-  set serviceClass(serviceClass) {
-    this._serviceClass = serviceClass
+  set serviceInstance(serviceInstance) {
+    this._serviceInstance = serviceInstance
   }
 
   set serviceName(serviceName) {
     this._serviceName = serviceName
   }
 
-  loadService(...args) {
+  loadService() {
     try {
-      const serviceInstance = new this._serviceClass(...args)
-      return { name: this._serviceName, instance: serviceInstance }
+      if (!this._serviceInstance) {
+        throw new Error('Service instance is not set.')
+      }
+      return { name: this._serviceName, instance: this._serviceInstance }
     } catch (error) {
       console.error(`Failed to load service: ${this._serviceName}`, error)
       return null

@@ -4,7 +4,7 @@ import { GUIComponentStorage } from './gui_component/GUIComponentStorage.js'
 import { GUIComponentContener } from './gui_component/GUIComponentContener.js'
 
 export class GUIContenerFactory {
-  genereteGUIContener() {
+  generete() {
     const componentLoader = new GUIComponentLoader()
     const componentUnloader = new GUIComponentUnloader()
     const componentStorage = new GUIComponentStorage()

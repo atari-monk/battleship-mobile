@@ -1,30 +1,30 @@
-export class ServiceRegistry {
+export class ServiceContener {
   constructor(serviceLoader, serviceUnloader, serviceStorage) {
     this.loader = serviceLoader
     this.unloader = serviceUnloader
     this.storage = serviceStorage
   }
 
-  loadService(serviceName, serviceClass, ...args) {
+  loadService(serviceName, serviceInstance) {
     if (this.storage.isServiceLoaded(serviceName)) {
-      console.warn(`Service already loaded: ${serviceName}`)
+      console.warn(`service already loaded: ${serviceName}`)
       return
     }
 
-    this.loader.serviceClass = serviceClass
     this.loader.serviceName = serviceName
+    this.loader.serviceInstance = serviceInstance
 
-    const serviceData = this.loader.loadService(...args)
+    const serviceData = this.loader.loadService()
     if (serviceData) {
       this.storage.addService(serviceName, serviceData.instance)
-      console.log(`Service loaded: ${serviceName}`)
+      console.log(`service loaded: ${serviceName}`)
     }
   }
 
   unloadService(serviceName) {
     const serviceIndex = this.storage.findServiceIndex(serviceName)
     if (serviceIndex === -1) {
-      console.warn(`Service not loaded: ${serviceName}`)
+      console.warn(`service not loaded: ${serviceName}`)
       return
     }
 
@@ -32,6 +32,10 @@ export class ServiceRegistry {
     this.unloader.unloadService(serviceData.instance)
 
     this.storage.removeService(serviceIndex)
-    console.log(`Service unloaded: ${serviceName}`)
+    console.log(`service unloaded: ${serviceName}`)
+  }
+
+  getServiceByName(serviceName) {
+    return this.storage.getServiceByName(serviceName)
   }
 }

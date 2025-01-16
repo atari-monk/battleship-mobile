@@ -26,7 +26,18 @@ export class GUIComponentContener {
         scripts.length > 0 ? await loader.loadScripts(scripts) : []
 
       const jsModule = await loader.loadJsModule()
-      this.componentStorage.addComponent(componentName, jsModule, allModules)
+
+      let jsInstance = null
+      if (jsModule && jsModule.default) {
+        jsInstance = jsModule.default
+      }
+
+      this.componentStorage.addComponent(
+        componentName,
+        jsModule,
+        allModules,
+        jsInstance
+      )
     } catch (error) {
       console.error(`Error loading component: ${componentName}`, error)
     }
@@ -62,5 +73,14 @@ export class GUIComponentContener {
         unloadFromMemory ? ' and removed from memory' : ''
       }`
     )
+  }
+
+  getComponentByName(componentName) {
+    return this.componentStorage.getComponentByName(componentName)
+  }
+
+  getComponentInstance(componentName) {
+    const component = this.componentStorage.getComponentByName(componentName)
+    return component ? component.jsInstance : null
   }
 }

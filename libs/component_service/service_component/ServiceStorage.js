@@ -20,4 +20,11 @@ export class ServiceStorage {
   removeService(serviceIndex) {
     this.loadedServices.splice(serviceIndex, 1)
   }
+
+  getServiceByName(serviceName) {
+    const service = this.loadedServices.find(
+      (service) => service.name === serviceName
+    )
+    return service ? service.instance : null
+  }
 }
