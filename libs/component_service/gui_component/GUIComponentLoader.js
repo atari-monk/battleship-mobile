@@ -1,4 +1,4 @@
-export class ComponentLoader {
+export class GUIComponentLoader {
   set basePath(basePath) {
     this._basePath = basePath
   }
@@ -19,6 +19,13 @@ export class ComponentLoader {
     link.rel = 'stylesheet'
     link.href = `${this._basePath}/${this._componentName}.css`
     document.head.appendChild(link)
+  }
+
+  generateContainer(rootDivClassName, html) {
+    const container = document.createElement('div')
+    container.className = rootDivClassName
+    container.innerHTML = html
+    return container
   }
 
   async loadScripts(scripts) {

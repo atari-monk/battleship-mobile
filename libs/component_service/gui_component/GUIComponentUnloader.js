@@ -1,4 +1,4 @@
-export class ComponentUnloader {
+export class GUIComponentUnloader {
   set basePath(basePath) {
     this._basePath = basePath
   }

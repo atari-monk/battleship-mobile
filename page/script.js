@@ -57,7 +57,7 @@
 //   return loadedComponents
 // }
 
-import { ComponentSystemFactory } from './../libs/component/ComponentSystemFactory.js'
+import { ComponentSystemFactory } from './../libs/component_service/ComponentSystemFactory.js'
 
 export const componentSystem =
   new ComponentSystemFactory().genereteComponentSystem()
