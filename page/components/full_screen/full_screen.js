@@ -1,4 +1,4 @@
-import { componentSystem } from '../../script.js'
+import { guiContener } from '../../script.js'
 
 const className = {
   fsOverlay: '.fs-overlay',
@@ -49,5 +49,5 @@ const goFullScreen = async () => {
 button.addEventListener(events.click, goFullScreen)
 
 async function showMenu() {
-  await componentSystem.loadComponent(componentFile.menu, 'game-menu')
+  await guiContener.loadComponent(componentFile.menu, 'game-menu')
 }

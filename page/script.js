@@ -57,17 +57,21 @@
 //   return loadedComponents
 // }
 
-import { ComponentSystemFactory } from './../libs/component_service/ComponentSystemFactory.js'
+import {
+  GUIContenerFactory,
+  ServiceContenerFactory,
+} from './../libs/component_service/index.js'
 
-export const componentSystem =
-  new ComponentSystemFactory().genereteComponentSystem()
+export const guiContener = new GUIContenerFactory().genereteGUIContener()
+export const serviceContener =
+  new ServiceContenerFactory().genereteServiceContener()
 
 async function initPage() {
   //   const dataService = new DataService()
   //   dataService.player1 = new Player('Captain Jack')
   //   dataService.player2 = new Player('Blackbeard')
   //   loadedComponents.push({ name: 'data_service', jsModule: dataService })
-  await componentSystem.loadComponent('full_screen', 'fs-overlay')
+  await guiContener.loadComponent('full_screen', 'fs-overlay')
 }
 
 document.addEventListener('DOMContentLoaded', initPage)

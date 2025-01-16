@@ -1,4 +1,4 @@
-export class GUIComponentService {
+export class GUIComponentContener {
   constructor(componentLoader, componentUnloader, componentStorage) {
     this.loader = componentLoader
     this.unloader = componentUnloader

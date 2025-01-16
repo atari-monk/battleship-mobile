@@ -56,7 +56,8 @@
 
 ### 16
 
-1. 10:47 - ,
+1. 10:47 - 11:07, component_service - gui component classes
+2. 11:08 -
 
 ### Plan
 

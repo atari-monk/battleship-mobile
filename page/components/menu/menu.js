@@ -1,4 +1,4 @@
-import { componentSystem } from '../../script.js'
+import { guiContener } from '../../script.js'
 
 const className = {
   gameMenu: '.game-menu',
@@ -39,7 +39,7 @@ async function showGridStatic() {
   const menu = document.querySelector(className.gameMenu)
   menu.classList.add(styles.hidden)
 
-  await componentSystem.loadComponent(componentFile.grid, 'fleet-grid', [
+  await guiContener.loadComponent(componentFile.grid, 'fleet-grid', [
     'EventHandler.js',
     'FleetGridConfig.js',
     'FleetGridConfig.js',
@@ -59,5 +59,5 @@ async function showGridStatic() {
   //   if (dataService && dataService.jsModule && grid && grid.jsModule) {
   //     //grid.jsModule.setDataService(dataService.jsModule)
   //   }
-  await componentSystem.loadComponent(componentFile.toggle, 'toggle')
+  await guiContener.loadComponent(componentFile.toggle, 'toggle')
 }
