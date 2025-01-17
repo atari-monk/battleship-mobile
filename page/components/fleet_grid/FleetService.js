@@ -80,7 +80,6 @@ export class FleetService {
   saveGridData() {
     if (this._dataService) {
       this._dataService.player1.grid = this.gridArray
-      console.log('data_service updated')
     }
   }
 }
