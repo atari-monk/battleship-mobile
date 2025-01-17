@@ -3,7 +3,9 @@ export class FleetService {
     this._dataService = dataService
   }
 
-  constructor(shipSizes = [5, 4, 3, 3, 2]) {
+  constructor(config, shipSizes = [5, 4, 3, 3, 2]) {
+    this.config = config
+    this.cssClass = config.cssClass
     this.shipSizes = shipSizes
     this.currentShipIndex = 0
     this.isHorizontal = true
@@ -80,6 +82,13 @@ export class FleetService {
   saveGridData() {
     if (this._dataService) {
       this._dataService.player1.grid = this.gridArray
+
+      document
+        .querySelector(this.cssClass.dot.root)
+        .classList.add(this.config.styles.hidden)
+      document
+        .querySelector(this.cssClass.dot.toogle)
+        .classList.add(this.config.styles.hidden)
     }
   }
 }

@@ -15,10 +15,10 @@ export class FleetGrid {
 
     this.config = config
     this.placementValidator = new PlacementValidator()
-    this.shipPreview = new ShipPreview(this.config.cssClass, this.config.colors)
-    this.gridRenderer = new GridRenderer(this.config.cssClass, this.config.html)
-    this.eventHandler = new EventHandler(this, this.config)
-    this.fleetService = new FleetService()
+    this.shipPreview = new ShipPreview(config.cssClass, config.colors)
+    this.gridRenderer = new GridRenderer(config.cssClass, config.html)
+    this.eventHandler = new EventHandler(this, config)
+    this.fleetService = new FleetService(config)
     this.placementHandler = new PlacementHandler(
       this.gridRenderer,
       this.placementValidator,

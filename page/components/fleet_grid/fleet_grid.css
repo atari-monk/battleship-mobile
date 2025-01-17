@@ -28,3 +28,7 @@
   color: rgba(255, 255, 255, 0.5);
   user-select: none;
 }
+
+.fleet-grid--hidden {
+  display: none;
+}

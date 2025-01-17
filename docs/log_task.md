@@ -62,18 +62,17 @@
 ### 17
 
 1. 06:24 - 06:45, set fleet for player2
-2. 06:46 - , 
+2. 06:46 - 07:30, battle grid SOLID 
+3. 08:09 - 08:44, hide fleet grid, toogle controls
 
 ### Plan
 
-1. Fix things broken by extracting SRP classes.
-2. Set player2 fleet placement.
-3. Start first turn for random player.
-4. Code ai player turn.
-5. Show battle grid for player1.
-6. Code player turn.
-7. Code end condition.
-8. Generate overlay component with game messages.
-9. Polish the game.
-10. release single player game.
-11. Generate multiplayer version.
+1. Start first turn for random player.
+2. Code ai player turn.
+3. Show battle grid for player1.
+4. Code player turn.
+5. Code end condition.
+6. Generate overlay component with game messages.
+7. Polish the game.
+8. release single player game.
+9. Generate multiplayer version.
