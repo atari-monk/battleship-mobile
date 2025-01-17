@@ -1,3 +1,5 @@
+import { guiContener } from '../../script.js'
+
 export class FleetService {
   set dataService(dataService) {
     this._dataService = dataService
@@ -79,7 +81,7 @@ export class FleetService {
     return this.currentShipIndex >= this.shipSizes.length
   }
 
-  saveGridData() {
+  async saveGridData() {
     if (this._dataService) {
       this._dataService.player1.grid = this.gridArray
 
@@ -89,6 +91,11 @@ export class FleetService {
       document
         .querySelector(this.cssClass.dot.toogle)
         .classList.add(this.config.styles.hidden)
+
+      await guiContener.loadComponent(
+        this.config.component.battleGrid,
+        this.config.cssClass.battleGrid
+      )
     }
   }
 }

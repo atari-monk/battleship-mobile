@@ -8,7 +8,9 @@ export class FleetGridConfig {
         toogle: '.toggle',
       },
       cell: 'fleet-grid__item',
+      battleGrid: 'battle-grid',
     }
+    this.component = { battleGrid: 'battle_grid' }
     this.styles = { hidden: 'hidden' }
     this.colors = { blue: 'blue', green: 'green', red: 'red' }
     this.html = { div: 'div' }

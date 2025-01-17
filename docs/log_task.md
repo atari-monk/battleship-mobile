@@ -63,7 +63,8 @@
 
 1. 06:24 - 06:45, set fleet for player2
 2. 06:46 - 07:30, battle grid SOLID 
-3. 08:09 - 08:44, hide fleet grid, toogle controls
+3. 08:09 - 08:49, hide fleet grid and toogle
+4. 08:50 - 09:06, load battle grid
 
 ### Plan
 
