@@ -8,9 +8,9 @@ export const guiContener = new GUIContenerFactory().generete()
 export const serviceContener = new ServiceContenerFactory().generete()
 const dataService = new DataServiceFactory().generete()
 
-async function initPage() {
+async function init() {
   serviceContener.loadService('data_service', dataService)
   await guiContener.loadComponent('full_screen', 'fs-overlay')
 }
 
-document.addEventListener('DOMContentLoaded', initPage)
+document.addEventListener('DOMContentLoaded', init)

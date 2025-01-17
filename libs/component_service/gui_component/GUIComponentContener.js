@@ -1,4 +1,8 @@
 export class GUIComponentContener {
+  set basePath(path) {
+    this._basePath = path
+  }
+
   constructor(componentLoader, componentUnloader, componentStorage) {
     this.loader = componentLoader
     this.unloader = componentUnloader
@@ -11,9 +15,9 @@ export class GUIComponentContener {
       return
     }
 
-    const basePath = `./../../../page/components/${componentName}`
     const loader = this.loader
-    loader.basePath = basePath
+    if (!this._basePath) throw new Error('_basePath needs to be set!')
+    loader.basePath = `${this._basePath}/${componentName}`
     loader.componentName = componentName
 
     try {

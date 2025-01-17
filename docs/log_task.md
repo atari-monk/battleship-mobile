@@ -65,6 +65,7 @@
 2. 06:46 - 07:30, battle grid SOLID 
 3. 08:09 - 08:49, hide fleet grid and toogle
 4. 08:50 - 09:06, load battle grid
+5. 09:51 - , 
 
 ### Plan
 

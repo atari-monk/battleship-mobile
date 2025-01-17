@@ -29,6 +29,7 @@
 9. [Battle](component/battle_grid/battle_grid.html)
 10. [Fleet SOLID](component/fleet_grid_solid/fleet_grid.html)
 11. [Battle SOLID](component/battle_grid_solid/battle_grid.html)
+12. [Battle Fleet](component/battle_grid_fleet/index.html)
 
 ## 4. Protytype
 

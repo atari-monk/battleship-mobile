@@ -13,3 +13,4 @@
 
 - hide fleet grid component
 - load battle grid component
+- generate new component to experiment loading fleet map to battle grid 
