@@ -1,10 +1,8 @@
-# Log Task
+# Log Task 2025
 
-## 2025
+## 1
 
-### 1
-
-#### 10
+### 10
 
 1. 10:04 - 10:36, Project reorganization.
 2. 10:37 - 10:43, Docs reorganization.
@@ -60,6 +58,11 @@
 2. 11:08 - 11:41, use new guiContener in page
 3. 13:37 - 15:20, load components setters with dependency on service
 4. 17:13 - 17:45, fixed toggle ship orientation button
+
+### 17
+
+1. 06:24 - 06:45, set fleet for player2
+2. 06:46 - , 
 
 ### Plan
 
