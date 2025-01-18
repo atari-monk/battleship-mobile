@@ -1,18 +1,16 @@
 export class BattleGridConfig {
   constructor() {
+    this.color = { blue: 'blue', green: 'green', red: 'red' }
     this.cssClass = {
-      dot: {
-        grid: '.battle-grid__grid',
-        cell: '.battle-grid__item',
-      },
-      cell: 'battle-grid__item',
+      fleetGrid: 'battle-grid',
+      fleetGridGrid: 'battle-grid__grid',
+      fleetGridCell: 'battle-grid__item',
     }
-    this.colors = { blue: 'blue', green: 'green', red: 'red' }
     this.html = { div: 'div' }
-    this.messages = {
+    this.message = {
       initMsg: 'battle grid',
     }
-    this.events = {
+    this.event = {
       click: 'click',
       mousemove: 'mousemove',
       mouseenter: 'mouseenter',
@@ -20,5 +18,9 @@ export class BattleGridConfig {
       touchstart: 'touchstart',
       wheel: 'wheel',
     }
+  }
+
+  dot(text) {
+    return `.${text}`
   }
 }

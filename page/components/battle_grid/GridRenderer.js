@@ -2,28 +2,26 @@ export class GridRenderer {
   constructor(config) {
     this.gridItems = null
     this.config = config
-    this.html = config.html
-    this.cssClass = config.cssClass
-    this.events = config.events
   }
 
   generateGridItems() {
-    const container = document.querySelector(this.cssClass.dot.grid)
+    const selector = this.config.dot(this.config.cssClass.fleetGrid)
+    const container = document.querySelector(selector)
     if (!container) {
-      throw new Error(
-        `Container with selector ${this.cssClass.dot.grid} not found.`
-      )
+      throw new Error(`Container with selector ${selector} not found.`)
     }
 
     for (let i = 1; i <= 100; i++) {
-      const gridItem = document.createElement(this.html.div)
-      gridItem.classList.add(this.cssClass.cell)
-      gridItem.addEventListener(this.events.click, () =>
+      const gridItem = document.createElement(this.config.html.div)
+      gridItem.classList.add(this.config.cssClass.fleetGridCell)
+      gridItem.addEventListener(this.config.event.click, () =>
         this.handleAtack(gridItem)
       )
       container.appendChild(gridItem)
     }
-    this.gridItems = document.querySelectorAll(this.cssClass.dot.cell)
+    this.gridItems = document.querySelectorAll(
+      this.config.dot(this.config.cssClass.fleetGridCell)
+    )
   }
 
   handleAtack(cell) {
@@ -44,7 +42,7 @@ export class GridRenderer {
 
   getCellIndex(x, y) {
     const cellSize = document
-      .querySelector(this.cssClass.dot.cell)
+      .querySelector(this.config.cssClass.fleetGridCell)
       .getBoundingClientRect()
     const col = Math.floor(x / cellSize.width)
     const row = Math.floor(y / cellSize.height)

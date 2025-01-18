@@ -6,27 +6,25 @@ export class GridRenderer {
   constructor(config) {
     this.gridItems = null
     this.config = config
-    this.html = config.html
-    this.cssClass = config.cssClass
-    this.events = config.events
   }
 
   generateGridItems() {
-    const container = document.querySelector(this.cssClass.dot.grid)
+    const { cssClass: css, html, event, dot } = this.config
+    const selector = dot(css.battleGridGrid)
+    console.log('selector', selector)
+    const container = document.querySelector(selector)
     if (!container) {
-      throw new Error(
-        `Container with selector ${this.cssClass.dot.grid} not found.`
-      )
+      throw new Error(`Container with selector ${selector} not found.`)
     }
 
     for (let i = 1; i <= 100; i++) {
-      const gridItem = document.createElement(this.html.div)
-      gridItem.classList.add(this.cssClass.cell)
+      const gridItem = document.createElement(html.div)
+      gridItem.classList.add(css.battleGridCell)
       container.appendChild(gridItem)
     }
-    this.gridItems = document.querySelectorAll(this.cssClass.dot.cell)
+    this.gridItems = document.querySelectorAll(dot(css.battleGridCell))
 
-    container.addEventListener(this.events.click, (event) =>
+    container.addEventListener(event.click, (event) =>
       this.handleGlobalAtack(event)
     )
   }
@@ -39,8 +37,9 @@ export class GridRenderer {
   }
 
   getCellIndex(x, y) {
+    const { cssClass: css, dot } = this.config
     const cellSize = document
-      .querySelector(this.cssClass.dot.cell)
+      .querySelector(dot(css.battleGridCell))
       .getBoundingClientRect()
     const col = Math.floor(x / cellSize.width)
     const row = Math.floor(y / cellSize.height)
@@ -64,7 +63,8 @@ export class GridRenderer {
   }
 
   handleGlobalAtack(event) {
-    const container = document.querySelector(this.cssClass.dot.grid)
+    const { cssClass: css, dot } = this.config
+    const container = document.querySelector(dot(css.battleGrid))
     const rect = container.getBoundingClientRect()
 
     const x = event.clientX - rect.left

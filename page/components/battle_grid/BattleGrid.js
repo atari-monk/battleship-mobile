@@ -13,6 +13,6 @@ export class BattleGrid {
   init() {
     this.gridRenderer.generateGridItems()
     this.gridItems = this.gridRenderer.getGridItems()
-    console.log(this.config.messages.initMsg)
+    console.log(this.config.message.initMsg)
   }
 }

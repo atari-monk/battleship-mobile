@@ -73,6 +73,7 @@
 1. 05:47 - 06:19, feat(data): add game turn model
 2. 06:20 - 07:10, refactor(config): fix config format
 3. 07:11 - 08:15, refactor(proj): structure reorganization
+4. 09:18 - ,
 
 ### Plan
 
