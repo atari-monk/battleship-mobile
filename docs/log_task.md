@@ -76,7 +76,13 @@
 4. 09:18 - 10:06, fix battle grid config
 5. 10:07 - 10:22, feat(grid): use battle grid with fleet data
 6. 11:03 - 12:03, refactor(log): make log tell a game story in numbered list
-7. 12:40 - 14:11, feat(grid): show data for current player in battle grid, refactor(config): config for menu
+7. 12:40 - 14:15, feat(grid): show data for current player in battle grid, refactor(config): config for menu
+8. 14:16 - 14:26, reaserched next changes needed
+9. 16:00 - 16:34, implementing rearch
+10. 17:52 - 19:18, feat(grid): two components on one page enabled, battlegrid for current player in turn 1
+
+- Total 493 ÷ 60 = 8 hours and 14 minutes
+- Honest day work :)
 
 ### Plan
 

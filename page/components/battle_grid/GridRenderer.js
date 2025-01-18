@@ -8,9 +8,9 @@ export class GridRenderer {
     this.config = config
   }
 
-  generateGridItems() {
+  generateGridItems(id) {
     const { cssClass: css, html, event, dot } = this.config
-    const selector = dot(css.battleGridGrid)
+    const selector = `#${id} .battle-grid__grid`
     const container = document.querySelector(selector)
     if (!container) {
       throw new Error(`Container with selector ${selector} not found.`)

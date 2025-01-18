@@ -3,88 +3,108 @@ export class GUIComponentContainer {
     this._basePath = path
   }
 
-  constructor(componentLoader, componentUnloader, componentStorage) {
+  constructor(
+    componentLoader,
+    componentUnloader,
+    componentStorage,
+    instanceStorage
+  ) {
     this.loader = componentLoader
     this.unloader = componentUnloader
     this.componentStorage = componentStorage
+    this.instanceStorage = instanceStorage
   }
 
-  async loadComponent(componentName, rootDivClassName, scripts = []) {
+  async loadComponentResources(componentName, scripts = []) {
     if (this.componentStorage.isComponentLoaded(componentName)) {
-      console.warn(`Component already loaded: ${componentName}`)
+      console.warn(`Component resources already loaded: ${componentName}`)
       return
     }
 
-    const loader = this.loader
     if (!this._basePath) throw new Error('_basePath needs to be set!')
-    loader.basePath = `${this._basePath}/${componentName}`
-    loader.componentName = componentName
+    this.loader.basePath = `${this._basePath}/${componentName}`
+    this.loader.componentName = componentName
 
     try {
-      const html = await loader.loadHtml()
-      const container = loader.generateContainer(rootDivClassName, html)
-      document.body.appendChild(container)
-
-      await loader.loadCss()
+      const html = await this.loader.loadHtml()
+      await this.loader.loadCss()
       const allModules =
-        scripts.length > 0 ? await loader.loadScripts(scripts) : []
-
-      const jsModule = await loader.loadJsModule()
-
-      let jsInstance = null
-      if (jsModule && jsModule.default) {
-        jsInstance = jsModule.default
-      }
+        scripts.length > 0 ? await this.loader.loadScripts(scripts) : []
+      const jsModule = await this.loader.loadJsModule()
 
       this.componentStorage.addComponent(
         componentName,
         jsModule,
         allModules,
-        jsInstance
+        html
       )
     } catch (error) {
-      console.error(`Error loading component: ${componentName}`, error)
+      console.error(
+        `Error loading component resources: ${componentName}`,
+        error
+      )
     }
   }
 
-  unloadComponent(componentName, unloadFromMemory = false) {
-    const componentIndex =
-      this.componentStorage.findComponentIndex(componentName)
-    if (componentIndex === -1) {
-      console.warn(`Component not loaded: ${componentName}`)
+  createInstance(componentName, rootDivClassName, uniqueDivId) {
+    const component = this.componentStorage.getComponentByName(componentName)
+    if (!component) {
+      console.error(`Component not loaded: ${componentName}`)
+      return null
+    }
+
+    const container = document.createElement('div')
+    container.className = rootDivClassName
+    container.id = uniqueDivId
+    container.innerHTML = component.html
+    document.body.appendChild(container)
+
+    let jsInstance = null
+    if (component.jsModule && component.jsModule.default) {
+      jsInstance = component.jsModule.default
+    }
+
+    this.instanceStorage.addInstance(
+      componentName,
+      uniqueDivId,
+      jsInstance,
+      container
+    )
+
+    return { container, jsInstance }
+  }
+
+  getInstanceById(uniqueId) {
+    return this.instanceStorage.getInstanceById(uniqueId)
+  }
+
+  getInstancesByComponentName(componentName) {
+    return this.instanceStorage.getInstancesByComponentName(componentName)
+  }
+
+  removeInstanceById(uniqueId) {
+    const instance = this.instanceStorage.getInstanceById(uniqueId)
+    if (!instance) {
+      console.warn(`Instance not found: ${uniqueId}`)
       return
     }
 
-    const unloader = this.unloader
-    unloader.basePath = `./components/${componentName}`
-    unloader.componentName = componentName
-
-    unloader.unloadHtml()
-    unloader.unloadCss()
-    unloader.unloadScripts(
-      this.componentStorage.loadedComponents[componentIndex].allModules.map(
-        (module) => module.name
-      )
-    )
-    unloader.unloadJsModule()
-
-    if (unloadFromMemory) {
-      this.componentStorage.removeComponent(componentIndex)
+    if (instance.container) {
+      instance.container.remove()
     }
-
-    console.log(
-      `Component unloaded: ${componentName}${
-        unloadFromMemory ? ' and removed from memory' : ''
-      }`
-    )
+    this.instanceStorage.removeInstanceById(uniqueId)
+    console.log(`Instance removed: ${uniqueId}`)
   }
 
-  getComponentByName(componentName) {
-    return this.componentStorage.getComponentByName(componentName)
-  }
-
-  getComponentInstance(componentName) {
-    const component = this.componentStorage.getComponentByName(componentName)
-    return component ? component.jsInstance : null
+  removeInstancesByComponentName(componentName) {
+    const instances =
+      this.instanceStorage.getInstancesByComponentName(componentName)
+    instances.forEach((instance) => {
+      if (instance.container) {
+        instance.container.remove()
+      }
+    })
+    this.instanceStorage.removeInstancesByComponentName(componentName)
+    console.log(`All instances of component removed: ${componentName}`)
   }
 }

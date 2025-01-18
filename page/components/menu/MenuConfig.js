@@ -17,6 +17,7 @@ export class MenuConfig {
       fleetGrid: {
         name: 'fleet_grid',
         cssClass: { component: 'fleet-grid' },
+        ids: { id1: 'fleet-grid-1' },
         scripts: [
           'EventHandler.js',
           'FleetGridConfig.js',
@@ -29,7 +30,11 @@ export class MenuConfig {
           'FleetGrid.js',
         ],
       },
-      toggle: { name: 'toggle', cssClass: { component: 'toggle' } },
+      toggle: {
+        name: 'toggle',
+        cssClass: { component: 'toggle' },
+        ids: { id1: 'toggle-1' },
+      },
     }
   }
 

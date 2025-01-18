@@ -75,31 +75,45 @@ export class FleetService {
   }
 
   async saveGridData() {
-    const dataService = this._dataService
-    if (dataService) {
-      dataService.player1.grid = this.gridArray
+    if (!this._dataService) return
+    this._dataService.player1.grid = this.gridArray
 
-      document
-        .querySelector(this.config.dot(this.config.cssClass.fleetGrid))
-        .classList.add(this.config.style.hidden)
-      document
-        .querySelector(this.config.dot(this.config.cssClass.toogle))
-        .classList.add(this.config.style.hidden)
+    document
+      .querySelector(this.config.dot(this.config.cssClass.fleetGrid))
+      .classList.add(this.config.style.hidden)
+    document
+      .querySelector(this.config.dot(this.config.cssClass.toogle))
+      .classList.add(this.config.style.hidden)
 
-      dataService.initializeTurn()
-      dataService.turn.printTurnInfo()
+    this._dataService.initializeTurn()
+    this._dataService.turn.printTurnInfo()
 
-      await guiContener.loadComponent(
-        this.config.component.battleGrid,
-        this.config.cssClass.battleGrid
-      )
+    await guiContener.loadComponentResources(this.config.component.battleGrid)
 
-      const battleGrid = guiContener.getComponentInstance(
-        this.config.component.battleGrid
-      )
-      if (dataService && battleGrid) {
-        battleGrid.gridRenderer.dataService = dataService
-      }
+    const battleGrid1 = guiContener.createInstance(
+      'battle_grid',
+      'battle-grid',
+      'battle-grid-1'
+    ).jsInstance
+    const battleGrid2 = guiContener.createInstance(
+      'battle_grid',
+      'battle-grid',
+      'battle-grid-2'
+    ).jsInstance
+    battleGrid1.init('battle-grid-1')
+    battleGrid2.init('battle-grid-2')
+    if (this._dataService && battleGrid1 && battleGrid2) {
+      battleGrid1.gridRenderer.dataService = this._dataService
+      battleGrid2.gridRenderer.dataService = this._dataService
     }
+
+    if (this._dataService.turn.currentPlayer === this._dataService.player1.name)
+      document
+        .getElementById('battle-grid-1')
+        .classList.add('battle-grid--hidden')
+    if (this._dataService.turn.currentPlayer === this._dataService.player2.name)
+      document
+        .getElementById('battle-grid-2')
+        .classList.add('battle-grid--hidden')
   }
 }

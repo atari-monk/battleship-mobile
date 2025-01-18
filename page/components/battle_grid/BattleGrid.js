@@ -10,8 +10,8 @@ export class BattleGrid {
     this.gridRenderer = gridRenderer
   }
 
-  init() {
-    this.gridRenderer.generateGridItems()
+  init(id) {
+    this.gridRenderer.generateGridItems(id)
     this.gridItems = this.gridRenderer.getGridItems()
     console.log(this.config.message.initMsg)
   }
