@@ -1,3 +1,5 @@
+import { Turn } from './Turn.js'
+
 export class DataService {
   constructor() {
     this.player1 = null

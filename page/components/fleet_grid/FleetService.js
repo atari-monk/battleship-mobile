@@ -85,6 +85,9 @@ export class FleetService {
         .querySelector(this.config.dot(this.config.cssClass.toogle))
         .classList.add(this.config.style.hidden)
 
+      this._dataService.initializeTurn()
+      this._dataService.turn.printTurnInfo()
+
       await guiContener.loadComponent(
         this.config.component.battleGrid,
         this.config.cssClass.battleGrid

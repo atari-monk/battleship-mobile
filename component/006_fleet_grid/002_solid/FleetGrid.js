@@ -5,8 +5,8 @@ import { EventHandler } from './EventHandler.js'
 import { FleetLogic as FleetService } from './FleetService.js'
 import { PlacementHandler } from './PlacementHandler.js'
 import { FleetGridConfig } from './FleetGridConfig.js'
-import { DataService } from './../../libs/data_service/DataService.js'
-import { Player } from './../../libs/data_service/Player.js'
+import { DataService } from './../../../libs/data_service/DataService.js'
+import { Player } from './../../../libs/data_service/Player.js'
 
 export class FleetGrid {
   constructor(dataService, config) {
