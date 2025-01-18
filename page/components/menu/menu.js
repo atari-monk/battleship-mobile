@@ -1,69 +1,45 @@
 import { guiContener, serviceContener } from '../../script.js'
+import { MenuConfig } from './MenuConfig.js'
 
-const className_dot = {
-  gameMenu: '.game-menu',
-}
-
-const ids = {
-  gameMenuStartButton: 'gameMenuStartButton',
-}
-
-const styles = {
-  hidden: 'game-menu--hidden',
-}
-
-const messages = {
-  initMsg: 'game menu',
-}
-
-const events = {
-  click: 'click',
-}
-
-const component = {
-  grid: {
-    name: 'fleet_grid',
-    className: 'fleet-grid',
-    scripts: [
-      'EventHandler.js',
-      'FleetGridConfig.js',
-      'FleetGridConfig.js',
-      'FleetService.js',
-      'GridRenderer.js',
-      'PlacementValidator.js',
-      'ShipPreview.js',
-      'PlacementHandler.js',
-      'FleetGrid.js',
-    ],
-  },
-  toggle: 'toggle',
-}
-
-const service = {
-  data_service: 'data_service',
-}
+const config = new MenuConfig()
 
 export function init() {
-  console.log(messages.initMsg)
+  console.log(config.component.menu.msg.initMsg)
 }
 
 document
-  .getElementById(ids.gameMenuStartButton)
-  .addEventListener(events.click, async () => {
+  .getElementById(config.component.menu.id.menuStartButton)
+  .addEventListener(config.component.menu.event.click, async () => {
     await showGridStatic()
   })
 
 async function showGridStatic() {
-  const menu = document.querySelector(className_dot.gameMenu)
-  menu.classList.add(styles.hidden)
+  const {
+    cssClass: { component: menuClass },
+    style: { hidden: menuStyle },
+  } = config.component.menu
+  document.querySelector(config.dot(menuClass)).classList.add(menuStyle)
 
-  const { name, className, scripts } = component.grid
-  await guiContener.loadComponent(name, className, scripts)
+  const {
+    name: fleetGridName,
+    scripts,
+    cssClass: { component: fleetGrid1Class },
+  } = config.component.fleetGrid
+  const {} = config.component.fleetGrid
+  await guiContener.loadComponent(fleetGridName, fleetGrid1Class, scripts)
 
-  const dataService = serviceContener.getServiceByName(service.data_service)
-  const gridInstance = guiContener.getComponentInstance(component.grid.name)
-  if (dataService && gridInstance) {
-    gridInstance.fleetService.dataService = dataService
+  const dataService = serviceContener.getServiceByName(
+    config.service.dataService.name
+  )
+  const grid1 = guiContener.getComponentInstance(fleetGridName)
+
+  if (dataService && grid1) {
+    grid1.fleetService.dataService = dataService
   }
-  await guiContener.loadComponent(component.toggle, 'toggle')
+
+  const {
+    name: toggleName,
+    cssClass: { component: toggleClass },
+  } = config.component.toggle
+  await guiContener.loadComponent(toggleName, toggleClass)
 }
