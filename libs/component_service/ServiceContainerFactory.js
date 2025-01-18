@@ -1,13 +1,13 @@
 import { ServiceLoader } from './service_component/ServiceLoader.js'
 import { ServiceUnloader } from './service_component/ServiceUnloader.js'
 import { ServiceStorage } from './service_component/ServiceStorage.js'
-import { ServiceContener } from './service_component/ServiceContener.js'
+import { ServiceContainer } from './service_component/ServiceContainer.js'
 
-export class ServiceContenerFactory {
+export class ServiceContainerFactory {
   generete() {
     const serviceLoader = new ServiceLoader()
     const serviceUnloader = new ServiceUnloader()
     const serviceStorage = new ServiceStorage()
-    return new ServiceContener(serviceLoader, serviceUnloader, serviceStorage)
+    return new ServiceContainer(serviceLoader, serviceUnloader, serviceStorage)
   }
 }

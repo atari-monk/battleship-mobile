@@ -75,6 +75,7 @@
 3. 07:11 - 08:15, refactor(proj): structure reorganization
 4. 09:18 - 10:06, fix battle grid config
 5. 10:07 - 10:22, feat(grid): use battle grid with fleet data
+6. 11:03 - 12:03, refactor(log): make log tell a game story in numbered list
 
 ### Plan
 

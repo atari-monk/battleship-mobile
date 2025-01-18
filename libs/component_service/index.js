@@ -1,2 +1,2 @@
-export { GUIContenerFactory } from './GUIContenerFactory.js'
-export { ServiceContenerFactory } from './ServiceContenerFactory.js'
+export { GUIContainerFactory as GUIContenerFactory } from './GUIContainerFactory.js'
+export { ServiceContainerFactory as ServiceContenerFactory } from './ServiceContainerFactory.js'

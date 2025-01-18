@@ -1,4 +1,4 @@
-export class GUIComponentContener {
+export class GUIComponentContainer {
   set basePath(path) {
     this._basePath = path
   }

@@ -11,7 +11,6 @@ export class GridRenderer {
   generateGridItems() {
     const { cssClass: css, html, event, dot } = this.config
     const selector = dot(css.battleGridGrid)
-    console.log('selector', selector)
     const container = document.querySelector(selector)
     if (!container) {
       throw new Error(`Container with selector ${selector} not found.`)

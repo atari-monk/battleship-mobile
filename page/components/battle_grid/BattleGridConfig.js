@@ -8,7 +8,7 @@ export class BattleGridConfig {
     }
     this.html = { div: 'div' }
     this.message = {
-      initMsg: 'battle grid',
+      initMsg: '7. Component:\n\tbattle grid',
     }
     this.event = {
       click: 'click',

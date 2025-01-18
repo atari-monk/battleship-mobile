@@ -1,13 +1,20 @@
-export class ServiceContener {
+export class ServiceContainer {
   constructor(serviceLoader, serviceUnloader, serviceStorage) {
     this.loader = serviceLoader
     this.unloader = serviceUnloader
     this.storage = serviceStorage
+    this.msg = {
+      SERVICE_ALREADY_LOADED: (serviceName) =>
+        `Service already loaded: ${serviceName}`,
+      SERVICE_NOT_LOADED: (serviceName) => `Service not loaded: ${serviceName}`,
+      SERVICE_LOADED: (serviceName) => `2. Service loaded:\n\t${serviceName}`,
+      SERVICE_UNLOADED: (serviceName) => `Service unloaded: ${serviceName}`,
+    }
   }
 
   loadService(serviceName, serviceInstance) {
     if (this.storage.isServiceLoaded(serviceName)) {
-      console.warn(`service already loaded: ${serviceName}`)
+      console.warn(this.msg.SERVICE_ALREADY_LOADED(serviceName))
       return
     }
 
@@ -17,14 +24,14 @@ export class ServiceContener {
     const serviceData = this.loader.loadService()
     if (serviceData) {
       this.storage.addService(serviceName, serviceData.instance)
-      console.log(`service loaded: ${serviceName}`)
+      console.debug(this.msg.SERVICE_LOADED(serviceName))
     }
   }
 
   unloadService(serviceName) {
     const serviceIndex = this.storage.findServiceIndex(serviceName)
     if (serviceIndex === -1) {
-      console.warn(`service not loaded: ${serviceName}`)
+      console.warn(this.msg.SERVICE_NOT_LOADED(serviceName))
       return
     }
 
@@ -32,7 +39,7 @@ export class ServiceContener {
     this.unloader.unloadService(serviceData.instance)
 
     this.storage.removeService(serviceIndex)
-    console.log(`service unloaded: ${serviceName}`)
+    console.debug(this.msg.SERVICE_UNLOADED(serviceName))
   }
 
   getServiceByName(serviceName) {

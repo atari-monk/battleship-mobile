@@ -23,6 +23,6 @@ export class Turn {
   }
 
   printTurnInfo() {
-    console.log(`Turn: ${this.nr}, Current Player: ${this.currentPlayer}`)
+    console.debug(`5. Turn: ${this.nr}, Current Player: ${this.currentPlayer}`)
   }
 }

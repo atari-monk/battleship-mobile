@@ -70,14 +70,16 @@ export class PlacementHandler {
       )
     ) {
       if (this.fleetService.isPlacementComplete()) {
-        console.log('fleet placement complete!')
+        console.debug(this.config.message.complete)
         document
           .querySelector('.fleet-grid__grid')
           .removeEventListener('click', this.handleClick.bind(this))
 
         this.fleetService.saveGridData()
-        console.log('player1 grid array:')
-        console.table(this.fleetService.gridArray)
+        const output = this.fleetService.gridArray
+          .map((row) => row.join(' '))
+          .join('\n\t\t')
+        console.debug(this.config.message.player1Data(output))
       }
     }
   }

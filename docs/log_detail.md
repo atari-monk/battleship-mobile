@@ -14,3 +14,7 @@
 - hide fleet grid component
 - load battle grid component
 - generate new component to experiment loading fleet map to battle grid 
+
+### 18
+
+- now log needs to tell the story of a game
