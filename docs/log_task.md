@@ -66,7 +66,11 @@
 3. 08:09 - 08:49, hide fleet grid and toogle
 4. 08:50 - 09:06, load battle grid
 5. 09:51 - 12:34, test grid in component battle grid fleet (test page in component folder)
-6. 17:20 - 18:26, react to ship hit using fleet placement data in gui 
+6. 17:20 - 18:26, react to ship hit using fleet placement data in gui
+
+### 18
+
+1. 05:47 - , 
 
 ### Plan
 

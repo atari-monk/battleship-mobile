@@ -4,7 +4,7 @@ import {
 } from './../libs/component_service/index.js'
 import { DataServiceFactory } from './../libs/data_service/index.js'
 
-export const guiContener = new GUIContenerFactory().generete()
+export const guiContener = new GUIContenerFactory().generete('./../../../page/components')
 export const serviceContener = new ServiceContenerFactory().generete()
 const dataService = new DataServiceFactory().generete()
 
