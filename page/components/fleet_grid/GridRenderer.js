@@ -1,24 +1,24 @@
 export class GridRenderer {
-  constructor(cssClass, html) {
-    this.cssClass = cssClass
-    this.html = html
+  constructor(config) {
+    this.config = config
     this.gridItems = null
   }
 
   generateGridItems() {
-    const container = document.querySelector(this.cssClass.dot.grid)
+    const selector = this.config.dot(this.config.cssClass.fleetGridGrid)
+    const container = document.querySelector(selector)
     if (!container) {
-      throw new Error(
-        `Container with selector ${this.cssClass.dot.grid} not found.`
-      )
+      throw new Error(`Container with selector ${selector} not found.`)
     }
 
     for (let i = 1; i <= 100; i++) {
-      const gridItem = document.createElement(this.html.div)
-      gridItem.classList.add(this.cssClass.cell)
+      const gridItem = document.createElement(this.config.html.div)
+      gridItem.classList.add(this.config.cssClass.fleetGridCell)
       container.appendChild(gridItem)
     }
-    this.gridItems = document.querySelectorAll(this.cssClass.dot.cell)
+    this.gridItems = document.querySelectorAll(
+      this.config.dot(this.config.cssClass.fleetGridCell)
+    )
   }
 
   getGridItems() {
@@ -30,7 +30,7 @@ export class GridRenderer {
 
   getCellIndex(x, y) {
     const cellSize = document
-      .querySelector(this.cssClass.dot.cell)
+      .querySelector(this.config.dot(this.config.cssClass.fleetGridCell))
       .getBoundingClientRect()
     const col = Math.floor(x / cellSize.width)
     const row = Math.floor(y / cellSize.height)

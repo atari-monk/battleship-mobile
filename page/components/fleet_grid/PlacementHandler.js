@@ -4,13 +4,13 @@ export class PlacementHandler {
     placementValidator,
     shipPreview,
     fleetService,
-    colors
+    config
   ) {
     this.gridRenderer = gridRenderer
     this.placementValidator = placementValidator
     this.shipPreview = shipPreview
     this.fleetService = fleetService
-    this.colors = colors
+    this.config = config
     this.currentHoverPosition = null
   }
 
@@ -42,7 +42,7 @@ export class PlacementHandler {
         this.fleetService.isHorizontal,
         this.fleetService.placedShips,
         gridItems,
-        this.colors.green
+        this.config.color.green
       )
     } else {
       this.shipPreview.paintPreview(
@@ -51,7 +51,7 @@ export class PlacementHandler {
         this.fleetService.isHorizontal,
         this.fleetService.placedShips,
         gridItems,
-        this.colors.red
+        this.config.color.red
       )
     }
   }
@@ -66,7 +66,7 @@ export class PlacementHandler {
         this.placementValidator,
         this.shipPreview,
         gridItems,
-        this.colors
+        this.config
       )
     ) {
       if (this.fleetService.isPlacementComplete()) {

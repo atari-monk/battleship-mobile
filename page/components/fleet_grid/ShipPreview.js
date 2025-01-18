@@ -1,7 +1,6 @@
 export class ShipPreview {
-  constructor(cssClass, colors) {
-    this.cssClass = cssClass
-    this.colors = colors
+  constructor(config) {
+    this.config = config
   }
 
   paintPreview(
@@ -38,7 +37,7 @@ export class ShipPreview {
 
   resetPreview(gridItems) {
     gridItems.forEach((item) => {
-      if (item.style.backgroundColor === this.colors.blue) {
+      if (item.style.backgroundColor === this.config.color.blue) {
         return
       }
       if (item.style.backgroundColor) {

@@ -1,25 +1,22 @@
 export class FleetGridConfig {
   constructor() {
+    this.component = { battleGrid: 'battle_grid' }
+    this.color = { blue: 'blue', green: 'green', red: 'red' }
     this.cssClass = {
-      dot: {
-        root: '.fleet-grid',
-        grid: '.fleet-grid__grid',
-        cell: '.fleet-grid__item',
-        toogle: '.toggle',
-      },
-      cell: 'fleet-grid__item',
+      fleetGrid: 'fleet-grid',
+      fleetGridGrid: 'fleet-grid__grid',
+      fleetGridCell: 'fleet-grid__item',
+      toogle: 'toggle',
       battleGrid: 'battle-grid',
     }
-    this.component = { battleGrid: 'battle_grid' }
-    this.styles = { hidden: 'hidden' }
-    this.colors = { blue: 'blue', green: 'green', red: 'red' }
+    this.style = { hidden: 'hidden' }
     this.html = { div: 'div' }
-    this.messages = {
+    this.message = {
       initMsg: 'fleet grid',
       complete: 'fleet placement complete!',
       player1Grid: 'player1 grid array:',
     }
-    this.events = {
+    this.event = {
       click: 'click',
       mousemove: 'mousemove',
       mouseenter: 'mouseenter',
@@ -27,5 +24,9 @@ export class FleetGridConfig {
       touchstart: 'touchstart',
       wheel: 'wheel',
     }
+  }
+
+  dot(text) {
+    return `.${text}`
   }
 }

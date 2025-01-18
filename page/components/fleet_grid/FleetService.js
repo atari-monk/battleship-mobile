@@ -7,7 +7,6 @@ export class FleetService {
 
   constructor(config, shipSizes = [5, 4, 3, 3, 2]) {
     this.config = config
-    this.cssClass = config.cssClass
     this.shipSizes = shipSizes
     this.currentShipIndex = 0
     this.isHorizontal = true
@@ -19,13 +18,7 @@ export class FleetService {
     this.isHorizontal = !this.isHorizontal
   }
 
-  validateAndPlaceShip(
-    index,
-    placementValidator,
-    shipPreview,
-    gridItems,
-    colors
-  ) {
+  validateAndPlaceShip(index, placementValidator, shipPreview, gridItems) {
     const shipSize = this.shipSizes[this.currentShipIndex]
 
     if (
@@ -42,7 +35,7 @@ export class FleetService {
         this.isHorizontal,
         this.placedShips,
         gridItems,
-        colors.blue
+        this.config.color.blue
       )
 
       if (this.isHorizontal) {
@@ -86,11 +79,11 @@ export class FleetService {
       this._dataService.player1.grid = this.gridArray
 
       document
-        .querySelector(this.cssClass.dot.root)
-        .classList.add(this.config.styles.hidden)
+        .querySelector(this.config.dot(this.config.cssClass.fleetGrid))
+        .classList.add(this.config.style.hidden)
       document
-        .querySelector(this.cssClass.dot.toogle)
-        .classList.add(this.config.styles.hidden)
+        .querySelector(this.config.dot(this.config.cssClass.toogle))
+        .classList.add(this.config.style.hidden)
 
       await guiContener.loadComponent(
         this.config.component.battleGrid,

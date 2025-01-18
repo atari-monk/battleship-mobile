@@ -70,7 +70,8 @@
 
 ### 18
 
-1. 05:47 - , 
+1. 05:47 - 06:19, feat(data): add game turn model
+2. 06:20 - 07:10, refactor(config): fix config format
 
 ### Plan
 
