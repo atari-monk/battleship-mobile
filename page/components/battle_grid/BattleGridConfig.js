@@ -2,9 +2,9 @@ export class BattleGridConfig {
   constructor() {
     this.color = { blue: 'blue', green: 'green', red: 'red' }
     this.cssClass = {
-      fleetGrid: 'battle-grid',
-      fleetGridGrid: 'battle-grid__grid',
-      fleetGridCell: 'battle-grid__item',
+      battleGrid: 'battle-grid',
+      battleGridGrid: 'battle-grid__grid',
+      battleGridCell: 'battle-grid__item',
     }
     this.html = { div: 'div' }
     this.message = {

@@ -75,8 +75,9 @@ export class FleetService {
   }
 
   async saveGridData() {
-    if (this._dataService) {
-      this._dataService.player1.grid = this.gridArray
+    const dataService = this._dataService
+    if (dataService) {
+      dataService.player1.grid = this.gridArray
 
       document
         .querySelector(this.config.dot(this.config.cssClass.fleetGrid))
@@ -85,13 +86,20 @@ export class FleetService {
         .querySelector(this.config.dot(this.config.cssClass.toogle))
         .classList.add(this.config.style.hidden)
 
-      this._dataService.initializeTurn()
-      this._dataService.turn.printTurnInfo()
+      dataService.initializeTurn()
+      dataService.turn.printTurnInfo()
 
       await guiContener.loadComponent(
         this.config.component.battleGrid,
         this.config.cssClass.battleGrid
       )
+
+      const battleGrid = guiContener.getComponentInstance(
+        this.config.component.battleGrid
+      )
+      if (dataService && battleGrid) {
+        battleGrid.gridRenderer.dataService = dataService
+      }
     }
   }
 }
