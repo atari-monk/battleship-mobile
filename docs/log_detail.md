@@ -18,3 +18,4 @@
 ### 18
 
 - now log needs to tell the story of a game
+- need to load battle grid with turn 1 player data

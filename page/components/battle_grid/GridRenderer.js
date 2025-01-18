@@ -45,8 +45,7 @@ export class GridRenderer {
     return row * 10 + col
   }
 
-  handleAtack(cell, cellIndex) {
-    const playerGrid = this._dataService.player2.grid
+  handleAtack(cell, cellIndex, playerGrid) {
     const row = Math.floor(cellIndex / 10)
     const col = cellIndex % 10
 
@@ -73,7 +72,15 @@ export class GridRenderer {
     const cell = this.gridItems[cellIndex]
 
     if (cell) {
-      this.handleAtack(cell, cellIndex)
+      this.handleAtack(
+        cell,
+        cellIndex,
+        this._dataService.getCurrentPlayerGrid()
+      )
+    } else {
+      throw new Error('No cell found!')
     }
+
+    //this._dataService.turn.incrementTurn()
   }
 }
