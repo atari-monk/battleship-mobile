@@ -70,7 +70,6 @@ export class PlacementHandler {
       )
     ) {
       if (this.fleetService.isPlacementComplete()) {
-        console.debug(this.config.message.complete)
         document
           .querySelector('.fleet-grid__grid')
           .removeEventListener('click', this.handleClick.bind(this))

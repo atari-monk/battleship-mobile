@@ -8,7 +8,7 @@ export class BattleGrid {
 
     this.config = config
     this.gridRenderer = gridRenderer
-    this.counter = 10
+    this.counter = 8
   }
 
   init(id) {

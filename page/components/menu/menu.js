@@ -40,7 +40,7 @@ async function showGridStatic() {
     grid1.jsInstance.fleetService.dataService = dataService
   }
 
-  grid1.jsInstance.init()
+  //grid1.jsInstance.init()
 
   const {
     name: toggleName,
@@ -48,6 +48,5 @@ async function showGridStatic() {
     ids: { id1: toggleId1 },
   } = config.component.toggle
   await guiContener.loadComponentResources(toggleName)
-  const toggle1 = guiContener.createInstance(toggleName, toggleClass, toggleId1)
-  toggle1.jsInstance()
+  guiContener.createInstance(toggleName, toggleClass, toggleId1)
 }

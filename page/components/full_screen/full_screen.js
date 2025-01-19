@@ -41,12 +41,11 @@ const goFullScreen = async () => {
 
 async function showMenu() {
   await guiContener.loadComponentResources(componentFile.menu)
-  const menu = guiContener.createInstance(
+  guiContener.createInstance(
     componentFile.menu,
     'game-menu',
     'game-menu-1'
   )
-  menu.jsInstance()
 }
 
 export default function init() {

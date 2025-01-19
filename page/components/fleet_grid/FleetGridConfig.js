@@ -13,9 +13,8 @@ export class FleetGridConfig {
     this.html = { div: 'div' }
     this.message = {
       initMsg: '5. Load component: fleet_grid',
-      complete: '7. Load data: Fleet placement',
       player1Data: (output) =>
-        `9. Load data:\n\tPlayer 1\n\tFleet:\n\t\t${output}`,
+        `7. Load data:\n\tPlayer 1\n\tFleet:\n\t\t${output}`,
     }
     this.event = {
       click: 'click',

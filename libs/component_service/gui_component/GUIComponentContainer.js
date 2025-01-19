@@ -60,8 +60,11 @@ export class GUIComponentContainer {
     document.body.appendChild(container)
 
     let jsInstance = null
-    if (component.jsModule && component.jsModule.default) {
-      jsInstance = component.jsModule.default
+    if (
+      component.jsModule &&
+      typeof component.jsModule.default === 'function'
+    ) {
+      jsInstance = component.jsModule.default()
     }
 
     this.instanceStorage.addInstance(

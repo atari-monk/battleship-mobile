@@ -88,6 +88,14 @@
 
 1. 09:36 - 10:22, refactor(log): improved numbered logs
 2. 13:25 - 14:10, fix(grid): bugs in selectors of battle grid renderer 
+3. 14:11 - 16:49, debuging why it dosent work
+4. 20:14 - 22:54, fix(grid): component now provides factory to gen new instance 
+
+- Total 409 ÷ 60 = 6 hours 49 minutes
+- Important bug fixed.  
+  The bug was that the component was using a single instance of the battle grid when it actually needed two instances for separate UI updates.  
+  Because there was only one shared instance of the grid, only one UI was being updated, leading to incorrect rendering.  
+  After adding a factory to generate two separate instances of the grid, it properly handles multiple turns and ensure both grids rendered and updated correctly.
 
 ### Plan
 

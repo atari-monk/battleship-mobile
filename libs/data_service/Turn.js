@@ -3,6 +3,7 @@ export class Turn {
     this.nr = 0
     this.players = [player1Name, player2Name]
     this.currentPlayer = null
+    this.counter = 10
   }
 
   randomlySelectPlayer() {
@@ -13,6 +14,7 @@ export class Turn {
 
   incrementTurn() {
     this.nr += 1
+    this.counter++
     const currentIndex = this.players.indexOf(this.currentPlayer)
     this.currentPlayer = this.players[(currentIndex + 1) % this.players.length]
   }
@@ -23,6 +25,12 @@ export class Turn {
   }
 
   printTurnInfo() {
-    console.debug(`8. Turn: ${this.nr}, Current Player: '${this.currentPlayer}'`)
+    const currentIndex = this.players.indexOf(this.currentPlayer)
+
+    console.debug(
+      `${this.counter}. Turn: ${this.nr}, ${
+        currentIndex === 0 ? 'Player 1' : 'Player 2'
+      } - '${this.currentPlayer}'`
+    )
   }
 }

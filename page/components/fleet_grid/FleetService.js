@@ -86,7 +86,6 @@ export class FleetService {
       .classList.add(this.config.style.hidden)
 
     this._dataService.initializeTurn()
-    this._dataService.turn.printTurnInfo()
 
     await guiContener.loadComponentResources(this.config.component.battleGrid)
 
@@ -115,5 +114,7 @@ export class FleetService {
       document
         .getElementById('battle-grid-2')
         .classList.add('battle-grid--hidden')
+
+    this._dataService.turn.printTurnInfo()
   }
 }

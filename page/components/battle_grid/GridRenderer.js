@@ -6,6 +6,7 @@ export class GridRenderer {
   constructor(config) {
     this.gridItems = null
     this.config = config
+    this.isFiring = true
   }
 
   generateGridItems(id) {
@@ -63,6 +64,19 @@ export class GridRenderer {
   }
 
   handleGlobalAtack(event, id) {
+    if (this.isFiring) {
+      console.debug('fireing...')
+      this.atack(id, event)
+      this.isFiring = false
+      return
+    } else {
+      console.debug('ending turn...')
+      this.endTurn()
+      this.isFiring = true
+    }
+  }
+
+  atack(id, event) {
     const container = document.getElementById(id)
     const rect = container.getBoundingClientRect()
 
@@ -73,15 +87,37 @@ export class GridRenderer {
     const cell = this.gridItems[cellIndex]
 
     if (cell) {
-      this.handleAtack(
-        cell,
-        cellIndex,
-        this._dataService.getCurrentPlayerGrid()
-      )
+      this.handleAtack(cell, cellIndex, this._dataService.getEnemyGrid())
     } else {
       throw new Error('No cell found!')
     }
+  }
 
+  endTurn() {
     this._dataService.turn.incrementTurn()
+    this._dataService.turn.printTurnInfo()
+    if (
+      this._dataService.turn.currentPlayer === this._dataService.player1.name
+    ) {
+      document
+        .getElementById('battle-grid-1')
+        .classList.add('battle-grid--hidden')
+      document
+        .getElementById('battle-grid-2')
+        .classList.remove('battle-grid--hidden')
+      console.debug('show battle-grid-2')
+    }
+
+    if (
+      this._dataService.turn.currentPlayer === this._dataService.player2.name
+    ) {
+      document
+        .getElementById('battle-grid-1')
+        .classList.remove('battle-grid--hidden')
+      document
+        .getElementById('battle-grid-2')
+        .classList.add('battle-grid--hidden')
+      console.debug('show battle-grid-1')
+    }
   }
 }

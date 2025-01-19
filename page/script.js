@@ -13,12 +13,11 @@ const dataService = new DataServiceFactory().generete()
 async function init() {
   serviceContener.loadService('data_service', dataService)
   await guiContener.loadComponentResources('full_screen')
-  const fullScreen = guiContener.createInstance(
+  guiContener.createInstance(
     'full_screen',
     'fs-overlay',
     'fs-overlay-1'
   )
-  fullScreen.jsInstance()
 }
 
 document.addEventListener('DOMContentLoaded', init)
