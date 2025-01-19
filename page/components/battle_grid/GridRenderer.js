@@ -10,10 +10,10 @@ export class GridRenderer {
 
   generateGridItems(id) {
     const { cssClass: css, html, event, dot } = this.config
-    const selector = `#${id} .battle-grid__grid`
-    const container = document.querySelector(selector)
+    const grid = `#${id} ${dot(css.battleGridGrid)}`
+    const container = document.querySelector(grid)
     if (!container) {
-      throw new Error(`Container with selector ${selector} not found.`)
+      throw new Error(`Container with selector ${grid} not found.`)
     }
 
     for (let i = 1; i <= 100; i++) {
@@ -21,10 +21,12 @@ export class GridRenderer {
       gridItem.classList.add(css.battleGridCell)
       container.appendChild(gridItem)
     }
-    this.gridItems = document.querySelectorAll(dot(css.battleGridCell))
+    this.gridItems = document.querySelectorAll(
+      `#${id} ${dot(css.battleGridCell)}`
+    )
 
     container.addEventListener(event.click, (event) =>
-      this.handleGlobalAtack(event)
+      this.handleGlobalAtack(event, id)
     )
   }
 
@@ -35,10 +37,10 @@ export class GridRenderer {
     return this.gridItems
   }
 
-  getCellIndex(x, y) {
+  getCellIndex(x, y, id) {
     const { cssClass: css, dot } = this.config
     const cellSize = document
-      .querySelector(dot(css.battleGridCell))
+      .querySelector(`#${id} ${dot(css.battleGridCell)}`)
       .getBoundingClientRect()
     const col = Math.floor(x / cellSize.width)
     const row = Math.floor(y / cellSize.height)
@@ -60,15 +62,14 @@ export class GridRenderer {
     }
   }
 
-  handleGlobalAtack(event) {
-    const { cssClass: css, dot } = this.config
-    const container = document.querySelector(dot(css.battleGrid))
+  handleGlobalAtack(event, id) {
+    const container = document.getElementById(id)
     const rect = container.getBoundingClientRect()
 
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
 
-    const cellIndex = this.getCellIndex(x, y)
+    const cellIndex = this.getCellIndex(x, y, id)
     const cell = this.gridItems[cellIndex]
 
     if (cell) {
@@ -81,6 +82,6 @@ export class GridRenderer {
       throw new Error('No cell found!')
     }
 
-    //this._dataService.turn.incrementTurn()
+    this._dataService.turn.incrementTurn()
   }
 }

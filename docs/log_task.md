@@ -87,6 +87,7 @@
 ### 19
 
 1. 09:36 - 10:22, refactor(log): improved numbered logs
+2. 13:25 - 14:10, fix(grid): bugs in selectors of battle grid renderer 
 
 ### Plan
 

@@ -8,7 +8,7 @@ export class BattleGridConfig {
     }
     this.html = { div: 'div' }
     this.message = {
-      initMsg: '10. Load component: battle_grid',
+      initMsg: (i, id) => `${i}. Load component: ${id}`,
     }
     this.event = {
       click: 'click',
