@@ -10,7 +10,7 @@ export class MenuConfig {
         id: { menuStartButton: 'gameMenuStartButton' },
         style: { hidden: 'game-menu--hidden' },
         msg: {
-          initMsg: '7. Component:\n\tmenu',
+          initMsg: '4. Load component: menu',
         },
         event: { click: 'click' },
       },

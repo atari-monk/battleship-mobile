@@ -4,7 +4,7 @@ let isToggled = false
 let isTouch = false
 
 const messages = {
-  initMsg: 'toggle button',
+  initMsg: '6. Component: toggle',
 }
 
 export default function init() {

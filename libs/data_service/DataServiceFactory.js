@@ -15,7 +15,7 @@ export class DataServiceFactory {
 
     const output = grid2.map((row) => row.join(' ')).join('\n\t\t')
     console.debug(
-      `1. Setting data... \n\tPlayer 1 - '${name1}'\n\tPlayer 2 - '${name2}'\n\tFleet:\n\t\t${output}`
+      `1. Load data: \n\tPlayer 1 - '${name1}'\n\tPlayer 2 - '${name2}'\n\tFleet:\n\t\t${output}`
     )
 
     return dataService

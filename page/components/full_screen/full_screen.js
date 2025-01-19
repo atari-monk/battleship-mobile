@@ -17,7 +17,7 @@ const events = {
 }
 
 const messages = {
-  initMsg: '3. Compoment:\n\tfull_screen',
+  initMsg: '3. Load component: full_screen',
 }
 
 const componentFile = {

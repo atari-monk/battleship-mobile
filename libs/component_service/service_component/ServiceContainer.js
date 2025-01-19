@@ -7,7 +7,7 @@ export class ServiceContainer {
       SERVICE_ALREADY_LOADED: (serviceName) =>
         `Service already loaded: ${serviceName}`,
       SERVICE_NOT_LOADED: (serviceName) => `Service not loaded: ${serviceName}`,
-      SERVICE_LOADED: (serviceName) => `2. Service loaded:\n\t${serviceName}`,
+      SERVICE_LOADED: (serviceName) => `2. Load service: ${serviceName}`,
       SERVICE_UNLOADED: (serviceName) => `Service unloaded: ${serviceName}`,
     }
   }

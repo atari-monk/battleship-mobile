@@ -12,10 +12,10 @@ export class FleetGridConfig {
     this.style = { hidden: 'hidden' }
     this.html = { div: 'div' }
     this.message = {
-      initMsg: '3. Component:\n\tfleet grid',
-      complete: '4. Fleet placement complete!',
+      initMsg: '5. Load component: fleet_grid',
+      complete: '7. Load data: Fleet placement',
       player1Data: (output) =>
-        `6. Setting Player 1 data...\n\tFleet:\n\t\t${output}`,
+        `9. Load data:\n\tPlayer 1\n\tFleet:\n\t\t${output}`,
     }
     this.event = {
       click: 'click',
