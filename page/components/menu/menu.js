@@ -1,5 +1,6 @@
 import { guiContener, serviceContener } from '../../script.js'
 import { MenuConfig } from './MenuConfig.js'
+import { logger } from './../../../libs/log_service/LogService.js'
 
 const config = new MenuConfig()
 
@@ -7,18 +8,36 @@ export default function init() {
   document
     .getElementById(config.component.menu.id.menuStartButton)
     .addEventListener(config.component.menu.event.click, async () => {
-      await showGridStatic()
+      await handleClick()
     })
-  console.log(config.component.menu.msg.initMsg)
+  logger.debug(config.component.menu.msg.initMsg)
 }
 
-async function showGridStatic() {
+async function handleClick() {
+  hideMenu()
+
+  const dataService = serviceContener.getServiceByName(
+    config.service.dataService.name
+  )
+
+  if (dataService.config.enableFleetGrid) {
+    await loadFleetGrid(dataService)
+    await loadToggle()
+  } else {
+    dataService.initializeTurn()
+    await loadBattleGrid(dataService)
+  }
+}
+
+function hideMenu() {
   const {
     cssClass: { component: menuClass },
     style: { hidden: menuStyle },
   } = config.component.menu
   document.querySelector(config.dot(menuClass)).classList.add(menuStyle)
+}
 
+async function loadFleetGrid(dataService) {
   const {
     name: fleetGridName,
     cssClass: { component: fleetGridClass },
@@ -27,9 +46,6 @@ async function showGridStatic() {
   } = config.component.fleetGrid
   await guiContener.loadComponentResources(fleetGridName, scripts)
 
-  const dataService = serviceContener.getServiceByName(
-    config.service.dataService.name
-  )
   const fleetGrid = guiContener.createInstance(
     fleetGridName,
     fleetGridClass,
@@ -39,7 +55,9 @@ async function showGridStatic() {
   if (dataService && fleetGrid) {
     fleetGrid.jsInstance.dataService = dataService
   }
+}
 
+async function loadToggle() {
   const {
     name: toggleName,
     cssClass: { component: toggleClass },
@@ -47,4 +65,35 @@ async function showGridStatic() {
   } = config.component.toggle
   await guiContener.loadComponentResources(toggleName)
   guiContener.createInstance(toggleName, toggleClass, toggleId1)
+}
+
+async function loadBattleGrid(dataService) {
+  await guiContener.loadComponentResources('battle_grid')
+  const battleGrid1 = guiContener.createInstance(
+    'battle_grid',
+    'battle-grid',
+    'battle-grid-1'
+  ).jsInstance
+  const battleGrid2 = guiContener.createInstance(
+    'battle_grid',
+    'battle-grid',
+    'battle-grid-2'
+  ).jsInstance
+  battleGrid1.init('battle-grid-1')
+  battleGrid2.init('battle-grid-2')
+  if (dataService && battleGrid1 && battleGrid2) {
+    battleGrid1.gridRenderer.dataService = dataService
+    battleGrid2.gridRenderer.dataService = dataService
+  }
+
+  if (dataService.turn.currentPlayer === dataService.player1.name)
+    document
+      .getElementById('battle-grid-1')
+      .classList.add('battle-grid--hidden')
+  if (dataService.turn.currentPlayer === dataService.player2.name)
+    document
+      .getElementById('battle-grid-2')
+      .classList.add('battle-grid--hidden')
+
+  dataService.turn.printTurnInfo()
 }

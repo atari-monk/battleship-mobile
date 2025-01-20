@@ -78,17 +78,24 @@ export class FleetService {
     if (!this._dataService) return
     this._dataService.player1.grid = this.gridArray
 
+    this.hideFleetGrid()
+
+    this._dataService.initializeTurn()
+
+    await this.loadBattleGrid()
+  }
+
+  hideFleetGrid() {
     document
       .querySelector(this.config.dot(this.config.cssClass.fleetGrid))
       .classList.add(this.config.style.hidden)
     document
       .querySelector(this.config.dot(this.config.cssClass.toogle))
       .classList.add(this.config.style.hidden)
+  }
 
-    this._dataService.initializeTurn()
-
+  async loadBattleGrid() {
     await guiContener.loadComponentResources(this.config.component.battleGrid)
-
     const battleGrid1 = guiContener.createInstance(
       'battle_grid',
       'battle-grid',

@@ -100,6 +100,7 @@
 ### 20
 
 1. 13:14 - 13:44, fix(log): consistent log format
+2. 13:45 - 14:57, feat(data): fleet data for test; numbered logger; disable fleetGrid
 
 ### Plan
 

@@ -1,4 +1,5 @@
 import { guiContener } from '../../script.js'
+import { logger } from './../../../libs/log_service/LogService.js'
 
 const className = {
   fsOverlay: '.fs-overlay',
@@ -17,7 +18,7 @@ const events = {
 }
 
 const messages = {
-  initMsg: '3. Load component: full_screen',
+  initMsg: 'Load component: full_screen',
 }
 
 const componentFile = {
@@ -41,15 +42,11 @@ const goFullScreen = async () => {
 
 async function showMenu() {
   await guiContener.loadComponentResources(componentFile.menu)
-  guiContener.createInstance(
-    componentFile.menu,
-    'game-menu',
-    'game-menu-1'
-  )
+  guiContener.createInstance(componentFile.menu, 'game-menu', 'game-menu-1')
 }
 
 export default function init() {
   const button = document.getElementById(ids.fsOverlayButton)
   button.addEventListener(events.click, goFullScreen)
-  console.log(messages.initMsg)
+  logger.debug(messages.initMsg)
 }

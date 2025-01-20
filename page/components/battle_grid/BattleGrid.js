@@ -1,3 +1,5 @@
+import { logger } from './../../../libs/log_service/LogService.js'
+
 export class BattleGrid {
   set dataService(dataService) {
     this._dataService = dataService
@@ -10,9 +12,9 @@ export class BattleGrid {
     this.gridRenderer = gridRenderer
   }
 
-  init(logNr, id) {
+  init(id) {
     this.gridRenderer.generateGridItems(id)
     this.gridItems = this.gridRenderer.getGridItems()
-    console.debug(this.config.message.initMsg(logNr, id))
+    logger.debug(this.config.message.initMsg(id))
   }
 }
