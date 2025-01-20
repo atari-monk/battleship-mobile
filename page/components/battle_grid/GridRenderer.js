@@ -65,12 +65,10 @@ export class GridRenderer {
 
   handleGlobalAtack(event, id) {
     if (this.isFiring) {
-      console.debug('fireing...')
       this.atack(id, event)
       this.isFiring = false
       return
     } else {
-      console.debug('ending turn...')
       this.endTurn()
       this.isFiring = true
     }
@@ -105,7 +103,6 @@ export class GridRenderer {
       document
         .getElementById('battle-grid-2')
         .classList.remove('battle-grid--hidden')
-      console.debug('show battle-grid-2')
     }
 
     if (
@@ -117,7 +114,6 @@ export class GridRenderer {
       document
         .getElementById('battle-grid-2')
         .classList.add('battle-grid--hidden')
-      console.debug('show battle-grid-1')
     }
   }
 }

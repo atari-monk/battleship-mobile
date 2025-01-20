@@ -8,13 +8,11 @@ export class BattleGrid {
 
     this.config = config
     this.gridRenderer = gridRenderer
-    this.counter = 8
   }
 
-  init(id) {
+  init(logNr, id) {
     this.gridRenderer.generateGridItems(id)
     this.gridItems = this.gridRenderer.getGridItems()
-    console.log(this.config.message.initMsg(this.counter, id))
-    this.counter++
+    console.debug(this.config.message.initMsg(logNr, id))
   }
 }

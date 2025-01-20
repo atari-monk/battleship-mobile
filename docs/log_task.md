@@ -62,7 +62,7 @@
 ### 17
 
 1. 06:24 - 06:45, set fleet for player2
-2. 06:46 - 07:30, battle grid SOLID 
+2. 06:46 - 07:30, battle grid SOLID
 3. 08:09 - 08:49, hide fleet grid and toogle
 4. 08:50 - 09:06, load battle grid
 5. 09:51 - 12:34, test grid in component battle grid fleet (test page in component folder)
@@ -87,15 +87,19 @@
 ### 19
 
 1. 09:36 - 10:22, refactor(log): improved numbered logs
-2. 13:25 - 14:10, fix(grid): bugs in selectors of battle grid renderer 
+2. 13:25 - 14:10, fix(grid): bugs in selectors of battle grid renderer
 3. 14:11 - 16:49, debuging why it dosent work
-4. 20:14 - 22:54, fix(grid): component now provides factory to gen new instance 
+4. 20:14 - 22:54, fix(grid): component now provides factory to gen new instance
 
 - Total 409 ÷ 60 = 6 hours 49 minutes
 - Important bug fixed.  
   The bug was that the component was using a single instance of the battle grid when it actually needed two instances for separate UI updates.  
   Because there was only one shared instance of the grid, only one UI was being updated, leading to incorrect rendering.  
   After adding a factory to generate two separate instances of the grid, it properly handles multiple turns and ensure both grids rendered and updated correctly.
+
+### 20
+
+1. 13:14 - 13:44, fix(log): consistent log format
 
 ### Plan
 

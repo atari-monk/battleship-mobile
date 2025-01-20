@@ -8,6 +8,7 @@ import { ShipPreview } from './ShipPreview.js'
 export class FleetGrid {
   set dataService(dataService) {
     this.fleetService.dataService = dataService
+    this.placementHandler.dataService = dataService
   }
 
   constructor(config) {

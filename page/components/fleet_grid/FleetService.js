@@ -99,8 +99,8 @@ export class FleetService {
       'battle-grid',
       'battle-grid-2'
     ).jsInstance
-    battleGrid1.init('battle-grid-1')
-    battleGrid2.init('battle-grid-2')
+    battleGrid1.init(8, 'battle-grid-1')
+    battleGrid2.init(9, 'battle-grid-2')
     if (this._dataService && battleGrid1 && battleGrid2) {
       battleGrid1.gridRenderer.dataService = this._dataService
       battleGrid2.gridRenderer.dataService = this._dataService

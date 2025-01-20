@@ -1,4 +1,8 @@
 export class PlacementHandler {
+  set dataService(dataService) {
+    this._dataService = dataService
+  }
+
   constructor(
     gridRenderer,
     placementValidator,
@@ -75,10 +79,12 @@ export class PlacementHandler {
           .removeEventListener('click', this.handleClick.bind(this))
 
         this.fleetService.saveGridData()
-        const output = this.fleetService.gridArray
+        const fleet = this.fleetService.gridArray
           .map((row) => row.join(' '))
           .join('\n\t\t')
-        console.debug(this.config.message.player1Data(output))
+        console.debug(
+          this.config.message.player1Data(this._dataService.player1.name, fleet)
+        )
       }
     }
   }

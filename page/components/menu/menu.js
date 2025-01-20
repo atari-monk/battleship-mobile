@@ -30,17 +30,15 @@ async function showGridStatic() {
   const dataService = serviceContener.getServiceByName(
     config.service.dataService.name
   )
-  const grid1 = guiContener.createInstance(
+  const fleetGrid = guiContener.createInstance(
     fleetGridName,
     fleetGridClass,
     fleetGridId1
   )
 
-  if (dataService && grid1) {
-    grid1.jsInstance.fleetService.dataService = dataService
+  if (dataService && fleetGrid) {
+    fleetGrid.jsInstance.dataService = dataService
   }
-
-  //grid1.jsInstance.init()
 
   const {
     name: toggleName,
