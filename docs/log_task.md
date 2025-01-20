@@ -101,15 +101,15 @@
 
 1. 13:14 - 13:44, fix(log): consistent log format
 2. 13:45 - 14:57, feat(data): fleet data for test; numbered logger; disable fleetGrid
+3. 17:41 - 18:35, refactor(board): Extract board class, toStrings
 
 ### Plan
 
-1. Start first turn for random player.
-2. Code ai player turn.
-3. Show battle grid for player1.
-4. Code player turn.
-5. Code end condition.
-6. Generate overlay component with game messages.
-7. Polish the game.
-8. release single player game.
-9. Generate multiplayer version.
+1. Code ai player turn.
+2. Show battle grid for player1.
+3. Code player turn.
+4. Code end condition.
+5. Generate overlay component with game messages.
+6. Polish the game.
+7. release single player game.
+8. Generate multiplayer version.

@@ -76,7 +76,7 @@ export class FleetLogic {
 
   saveGridData() {
     if (this._dataService) {
-      this._dataService.player1.grid = this.gridArray
+      this._dataService.player1.board.matrix = this.gridArray
     }
   }
 }

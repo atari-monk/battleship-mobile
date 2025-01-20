@@ -76,7 +76,7 @@ export class FleetService {
 
   async saveGridData() {
     if (!this._dataService) return
-    this._dataService.player1.grid = this.gridArray
+    this._dataService.player1.board.matrix = this.gridArray
 
     this.hideFleetGrid()
 

@@ -172,8 +172,8 @@ function handleClick(event) {
         .removeEventListener(events.click, handleClick)
 
       console.log(messages.player1Grid)
-      _dataService.player1.grid = gridArray
-      console.table(_dataService.player1.grid)
+      _dataService.player1.board.matrix = gridArray
+      console.table(_dataService.player1.board.matrix)
     }
   }
 }

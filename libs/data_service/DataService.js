@@ -1,4 +1,5 @@
 import { Turn } from './Turn.js'
+import { logger } from './../log_service/LogService.js'
 
 export class DataService {
   constructor() {
@@ -19,10 +20,22 @@ export class DataService {
 
   getEnemyGrid() {
     const player1 = this.turn.currentPlayer === this.player1.name
-    return player1 ? this.player2.grid : this.player1.grid
+    return player1 ? this.player2.board.matrix : this.player1.board.matrix
   }
 
-  log(log) {
-    this.config.log(log)
+  toString() {
+    const { board: board1 } = this.player1
+    const { board: board2 } = this.player2
+    return [
+      this.player1.toString(),
+      board1.toString(),
+      '\n\t',
+      this.player2.toString(),
+      board2.toString(),
+    ].join('')
+  }
+
+  logPlayers() {
+    logger.debug(`Load data: \n\t${this.toString()}`)
   }
 }
