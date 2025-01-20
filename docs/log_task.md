@@ -101,7 +101,8 @@
 
 1. 13:14 - 13:44, fix(log): consistent log format
 2. 13:45 - 14:57, feat(data): fleet data for test; numbered logger; disable fleetGrid
-3. 17:41 - 18:35, refactor(board): Extract board class, toStrings
+3. 17:41 - 18:35, refactor(board): extract board class, toStrings
+4. 18:36 - 19:31, feat(board): load data from json
 
 ### Plan
 

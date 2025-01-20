@@ -8,6 +8,6 @@ export class Player {
   }
 
   toString() {
-    return `${this.role} - '${this.name}'\n\t`
+    return `${this.role} - '${this.name}'\n\t${this.board.toString()}`
   }
 }

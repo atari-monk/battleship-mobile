@@ -1,10 +1,11 @@
 import { guiContener } from '../../script.js'
+import { logger } from './../../../libs/log_service/LogService.js'
 
 let isToggled = false
 let isTouch = false
 
 const messages = {
-  initMsg: '6. Load component: toggle',
+  initMsg: 'Load component: toggle',
 }
 
 export default function init() {
@@ -48,5 +49,5 @@ export default function init() {
 
   toggleButton.classList.add('toggle__button--toggled-off')
 
-  console.log(messages.initMsg)
+  logger.debug(messages.initMsg)
 }

@@ -8,16 +8,12 @@ export const guiContener = new GUIContenerFactory().generete(
   './../../../page/components'
 )
 export const serviceContener = new ServiceContenerFactory().generete()
-const dataService = new DataServiceFactory().generete()
 
 async function init() {
+  const dataService = await new DataServiceFactory().generete()
   serviceContener.loadService('data_service', dataService)
   await guiContener.loadComponentResources('full_screen')
-  guiContener.createInstance(
-    'full_screen',
-    'fs-overlay',
-    'fs-overlay-1'
-  )
+  guiContener.createInstance('full_screen', 'fs-overlay', 'fs-overlay-1')
 }
 
 document.addEventListener('DOMContentLoaded', init)

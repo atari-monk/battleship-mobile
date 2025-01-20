@@ -1,3 +1,5 @@
+import { logger } from './../../../libs/log_service/LogService.js'
+
 export class PlacementHandler {
   set dataService(dataService) {
     this._dataService = dataService
@@ -82,7 +84,7 @@ export class PlacementHandler {
         const fleet = this.fleetService.gridArray
           .map((row) => row.join(' '))
           .join('\n\t\t')
-        console.debug(
+        logger.debug(
           this.config.message.player1Data(this._dataService.player1.name, fleet)
         )
       }

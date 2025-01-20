@@ -10,7 +10,11 @@ export class Board {
   }
 
   set matrix(newMatrix) {
-    if (Array.isArray(newMatrix) && newMatrix.length === 10 && newMatrix.every(row => Array.isArray(row) && row.length === 10)) {
+    if (
+      Array.isArray(newMatrix) &&
+      newMatrix.length === 10 &&
+      newMatrix.every((row) => Array.isArray(row) && row.length === 10)
+    ) {
       this._matrix = newMatrix
     } else {
       throw new Error('Invalid matrix format')
@@ -61,25 +65,6 @@ export class Board {
           placed = true
         }
       }
-    }
-  }
-
-  setTestFleet(atEnd = true) {
-    const length = 17
-    let col = atEnd ? 9 : 0
-    let row = atEnd ? 9 : 0
-    const step = atEnd ? -1 : 1
-
-    for (let i = 0; i < length; i++) {
-      if (atEnd && col < 0) {
-        row -= 1
-        col = 9
-      } else if (!atEnd && col > 9) {
-        row += 1
-        col = 0
-      }
-      this._matrix[row][col] = 1
-      col += step
     }
   }
 

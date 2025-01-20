@@ -4,6 +4,7 @@ import { GridRenderer } from './GridRenderer.js'
 import { PlacementHandler } from './PlacementHandler.js'
 import { PlacementValidator } from './PlacementValidator.js'
 import { ShipPreview } from './ShipPreview.js'
+import { logger } from './../../../libs/log_service/LogService.js'
 
 export class FleetGrid {
   set dataService(dataService) {
@@ -47,6 +48,6 @@ export class FleetGrid {
     this.gridRenderer.generateGridItems()
     this.gridItems = this.gridRenderer.getGridItems()
     this.eventHandler.attachEvents()
-    console.log(this.config.message.initMsg)
+    logger.debug(this.config.message.initMsg)
   }
 }
