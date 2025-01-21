@@ -79,7 +79,7 @@ async function loadBattleGrid(dataService) {
     'battle-grid',
     'battle-grid-2'
   ).jsInstance
-  battleGrid1.init('battle-grid-1')
+  battleGrid1.init('battle-grid-1', true)
   battleGrid2.init('battle-grid-2')
   if (dataService && battleGrid1 && battleGrid2) {
     battleGrid1.gridRenderer.dataService = dataService

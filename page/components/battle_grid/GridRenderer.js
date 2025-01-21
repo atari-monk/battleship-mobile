@@ -9,26 +9,32 @@ export class GridRenderer {
     this.isFiring = true
   }
 
-  generateGridItems(id) {
+  generateGridItems(id, isAI = false) {
     const { cssClass: css, html, event, dot } = this.config
-    const grid = `#${id} ${dot(css.battleGridGrid)}`
-    const container = document.querySelector(grid)
-    if (!container) {
-      throw new Error(`Container with selector ${grid} not found.`)
+    const gridId = `#${id} ${dot(css.battleGridGrid)}`
+    const grid = document.querySelector(gridId)
+    if (!grid) {
+      throw new Error(`Container with selector ${gridId} not found.`)
     }
 
     for (let i = 1; i <= 100; i++) {
       const gridItem = document.createElement(html.div)
       gridItem.classList.add(css.battleGridCell)
-      container.appendChild(gridItem)
+      grid.appendChild(gridItem)
     }
     this.gridItems = document.querySelectorAll(
       `#${id} ${dot(css.battleGridCell)}`
     )
 
-    container.addEventListener(event.click, (event) =>
+    grid.addEventListener(event.click, (event) =>
       this.handleGlobalAtack(event, id)
     )
+
+    if (!isAI) return
+    const board = document.getElementById(id)
+    this.onVisibilityChange(board, () => {
+      this.handleGlobalAtack({ clientX: 0, clientY: 0 }, id)
+    })
   }
 
   getGridItems() {
@@ -115,5 +121,17 @@ export class GridRenderer {
         .getElementById('battle-grid-2')
         .classList.add('battle-grid--hidden')
     }
+  }
+
+  onVisibilityChange(element, callback) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          callback()
+        }
+      })
+    })
+
+    observer.observe(element)
   }
 }

@@ -12,8 +12,8 @@ export class BattleGrid {
     this.gridRenderer = gridRenderer
   }
 
-  init(id) {
-    this.gridRenderer.generateGridItems(id)
+  init(id, isAI = false) {
+    this.gridRenderer.generateGridItems(id, isAI)
     this.gridItems = this.gridRenderer.getGridItems()
     logger.debug(this.config.message.initMsg(id))
   }

@@ -104,6 +104,10 @@
 3. 17:41 - 18:35, refactor(board): extract board class, toStrings
 4. 18:36 - 19:31, feat(board): load data from json
 
+### 21
+
+1. 06:33 - 07:24, feat(board): callback for AI
+
 ### Plan
 
 1. Code ai player turn.
