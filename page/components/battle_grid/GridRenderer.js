@@ -1,3 +1,5 @@
+import { logger } from './../../../libs/log_service/LogService.js'
+
 export class GridRenderer {
   set dataService(dataService) {
     this._dataService = dataService
@@ -33,8 +35,31 @@ export class GridRenderer {
     if (!isAI) return
     const board = document.getElementById(id)
     this.onVisibilityChange(board, () => {
-      this.handleGlobalAtack({ clientX: 0, clientY: 0 }, id)
+      this.handleGlobalAtack(this.aiMove(), id)
     })
+  }
+
+  aiMove() {
+    const xy = this._dataService.player2.board.move(
+      this._dataService.player1.fleet
+    )
+    const screenCoords = this.matrixToScreenCoords(xy[0], xy[1])
+    logger.debug(`AI move: ${xy}`)
+    logger.debug(this._dataService.player2.board.toString())
+    return { clientX: screenCoords.x, clientY: screenCoords.y }
+  }
+
+  matrixToScreenCoords(row, col) {
+    const { cssClass: css, dot } = this.config
+    const cell = document.querySelector(`#battle-grid-1 ${dot(css.battleGridCell)}`)
+    const cellSize = cell.getBoundingClientRect()
+    const container = document.getElementById('battle-grid-1')
+    const containerRect = container.getBoundingClientRect()
+
+    const x = containerRect.left + col * cellSize.width + cellSize.width / 2
+    const y = containerRect.top + row * cellSize.height + cellSize.height / 2
+
+    return { x, y }
   }
 
   getGridItems() {
@@ -54,16 +79,14 @@ export class GridRenderer {
     return row * 10 + col
   }
 
-  handleAtack(cell, cellIndex, playerGrid) {
+  handleAtack(cell, cellIndex, fleet, board) {
     const row = Math.floor(cellIndex / 10)
     const col = cellIndex % 10
 
-    if (playerGrid[row][col] === 2) return
-    const isHit = playerGrid[row][col] === 1
+    const isHit = board.hit(row, col, fleet)
 
     if (isHit) {
       cell.style.backgroundColor = 'rgba(255, 0, 0, 0.7)'
-      playerGrid[row][col] = 2
     } else {
       cell.style.backgroundColor = 'rgba(128, 128, 128, 0.7)'
     }
@@ -91,7 +114,12 @@ export class GridRenderer {
     const cell = this.gridItems[cellIndex]
 
     if (cell) {
-      this.handleAtack(cell, cellIndex, this._dataService.getEnemyGrid())
+      this.handleAtack(
+        cell,
+        cellIndex,
+        this._dataService.getEnemyFleet(),
+        this._dataService.getBoard()
+      )
     } else {
       throw new Error('No cell found!')
     }

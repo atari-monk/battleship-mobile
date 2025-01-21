@@ -107,6 +107,7 @@
 ### 21
 
 1. 06:33 - 07:24, feat(board): callback for AI
+2. 09:32 - 11:19, feat(board): battleship ai
 
 ### Plan
 

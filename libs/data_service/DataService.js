@@ -25,16 +25,21 @@ export class DataService {
         throw new Error('Network response was not ok')
       }
       const data = await response.json()
-      this.player1.board.matrix = data.player1.matrix
-      this.player2.board.matrix = data.player2.matrix
+      this.player1.fleet.matrix = data.player1.matrix
+      this.player2.fleet.matrix = data.player2.matrix
     } catch (error) {
       throw new Error('Failed to load matrices from URL')
     }
   }
 
-  getEnemyGrid() {
+  getEnemyFleet() {
     const player1 = this.turn.currentPlayer === this.player1.name
-    return player1 ? this.player2.board.matrix : this.player1.board.matrix
+    return player1 ? this.player2.fleet : this.player1.fleet
+  }
+
+  getBoard() {
+    const player1 = this.turn.currentPlayer === this.player1.name
+    return player1 ? this.player1.board : this.player2.board
   }
 
   toString() {

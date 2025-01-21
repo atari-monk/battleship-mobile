@@ -21,56 +21,25 @@ export class Board {
     }
   }
 
-  isValidPlacement(row, col, length, direction) {
-    if (direction === 'horizontal') {
-      if (col + length > 10) return false
-      for (let i = 0; i < length; i++) {
-        if (this._matrix[row][col + i] !== 0) return false
-      }
-    } else {
-      if (row + length > 10) return false
-      for (let i = 0; i < length; i++) {
-        if (this._matrix[row + i][col] !== 0) return false
-      }
-    }
-    return true
-  }
-
-  placeShip(row, col, length, direction) {
-    if (direction === 'horizontal') {
-      for (let i = 0; i < length; i++) {
-        this._matrix[row][col + i] = 1
-      }
-    } else {
-      for (let i = 0; i < length; i++) {
-        this._matrix[row + i][col] = 1
-      }
-    }
-  }
-
-  setFleetRandomly() {
-    const ships = [5, 4, 3, 3, 2]
-    const directions = ['horizontal', 'vertical']
-
-    for (const ship of ships) {
-      let placed = false
-
-      while (!placed) {
-        const row = Math.floor(Math.random() * 10)
-        const col = Math.floor(Math.random() * 10)
-        const direction = directions[Math.floor(Math.random() * 2)]
-
-        if (this.isValidPlacement(row, col, ship, direction)) {
-          this.placeShip(row, col, ship, direction)
-          placed = true
-        }
-      }
-    }
-  }
-
   toString() {
-    return `Fleet:\n\t\t${this._matrix
+    return `Board:\n\t\t${this._matrix
       .map((row) => row.join(' '))
       .join('\n\t\t')}`
+  }
+
+  move(fleet) {
+    const [x, y] = this.getHitXY()
+    this.hit(x, y, fleet)
+    return [x, y]
+  }
+
+  hit(x, y, fleet) {
+    if (fleet.hit(x, y)) {
+      this._matrix[x][y] = 1
+      return true
+    } else {
+      this._matrix[x][y] = -1
+      return false
+    }
   }
 }
