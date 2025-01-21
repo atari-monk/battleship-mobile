@@ -104,6 +104,8 @@
 3. 17:41 - 18:35, refactor(board): extract board class, toStrings
 4. 18:36 - 19:31, feat(board): load data from json
 
+- Total 211 ÷ 60 = 3 hours 31 minutes
+
 ### 21
 
 1. 06:33 - 07:24, feat(board): callback for AI
@@ -113,10 +115,13 @@
 5. 15:29 - 16:31, feat(board): boilerplate to predictions of board
 6. 17:04 - 18:31, feat(prototype): check free spaces on board
 
+- Total 434 ÷ 60 = 7 hours 14 minutes
+- Calculating enemy move 
+
 ### Plan
 
 1. Code end condition.
 2. Generate overlay component with game messages.
 3. Polish the game.
-4. release single player game.
+4. Release single player game.
 5. Generate multiplayer version.
