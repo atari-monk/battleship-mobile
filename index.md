@@ -16,6 +16,7 @@
 2. [Menu](component/002_menu/index.html)
 3. [Toggle](component/003_toggle/index.html)
 4. [Modular](component/004_modular/index.html)
+5. [Predictor](component/008_predictor/index.html)
 
 ## 3. Grid
 

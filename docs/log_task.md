@@ -110,7 +110,7 @@
 2. 09:32 - 11:19, feat(board): battleship ai
 3. 13:15 - 14:11, refactor(AI): simple ai
 4. 14:17 - 15:28, feat(board): predict ships
-5. 15:29 - , 
+5. 15:29 - 16:31, feat(board): boilerplate to predictions of board
 
 ### Plan
 

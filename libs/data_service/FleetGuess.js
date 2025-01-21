@@ -34,70 +34,9 @@ export class FleetGuess {
 
   predictFleetPlacement() {
     this.copyBoardMatrix()
-    const ships = [5, 4, 3, 3, 2]
-    const directions = ['horizontal', 'vertical']
-    const predictions = []
-
-    for (const ship of ships) {
-      let placed = false
-
-      while (!placed) {
-        const row = Math.floor(Math.random() * 10)
-        const col = Math.floor(Math.random() * 10)
-        const direction = directions[Math.floor(Math.random() * 2)]
-
-        if (this.isValidPlacement(row, col, ship, direction)) {
-          this.placeShip(row, col, ship, direction)
-          predictions.push({ row, col, length: ship, direction })
-          placed = true
-        }
-      }
-    }
-
-    return predictions
-  }
-
-  isValidPlacement(row, col, length, direction) {
-    if (direction === 'horizontal') {
-      if (col + length > 10) return false
-      for (let i = 0; i < length; i++) {
-        if (this._matrix[row][col + i] !== 0) return false
-      }
-    } else {
-      if (row + length > 10) return false
-      for (let i = 0; i < length; i++) {
-        if (this._matrix[row + i][col] !== 0) return false
-      }
-    }
-    return true
-  }
-
-  placeShip(row, col, length, direction) {
-    if (direction === 'horizontal') {
-      for (let i = 0; i < length; i++) {
-        if (this._matrix[row][col + i] === 0) {
-          this._matrix[row][col + i] = 3
-        }
-      }
-    } else {
-      for (let i = 0; i < length; i++) {
-        if (this._matrix[row + i][col] === 0) {
-          this._matrix[row + i][col] = 3
-        }
-      }
-    }
   }
 
   getHitXY() {
-    this.predictFleetPlacement()
-    for (let row = 0; row < 10; row++) {
-      for (let col = 0; col < 10; col++) {
-        if (this._matrix[row][col] === 3) {
-          return [row, col]
-        }
-      }
-    }
-
     return [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)]
   }
 }

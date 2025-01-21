@@ -10,12 +10,6 @@ export class SimpleAI {
   }
 
   getHitXY() {
-    let x, y
-    do {
-      x = Math.floor(Math.random() * 10)
-      y = Math.floor(Math.random() * 10)
-    } while (this.board.matrix[x][y] !== 0)
-
-    return [x, y]
+    return [Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)]
   }
 }
