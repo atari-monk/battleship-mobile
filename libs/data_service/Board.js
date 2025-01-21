@@ -33,7 +33,7 @@ export class Board {
       this._matrix[x][y] = 1
       return true
     } else {
-      this._matrix[x][y] = -1
+      this._matrix[x][y] = 2
       return false
     }
   }

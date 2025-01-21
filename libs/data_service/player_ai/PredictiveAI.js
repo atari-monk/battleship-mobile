@@ -1,6 +1,7 @@
 export class PredictiveAI {
-  constructor(board) {
+  constructor(board, fleetGuess) {
     this.board = board
+    this.fleetGuess = fleetGuess
   }
 
   move() {
@@ -10,12 +11,10 @@ export class PredictiveAI {
   }
 
   getHitXY() {
-    let x, y
-    do {
-      x = Math.floor(Math.random() * 10)
-      y = Math.floor(Math.random() * 10)
-    } while (this.board.matrix[x][y] !== 0)
+    return this.fleetGuess.getHitXY()
+  }
 
-    return [x, y]
+  toString() {
+    return this.fleetGuess.toString()
   }
 }

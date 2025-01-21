@@ -10,4 +10,8 @@ export class PlayerAI {
   getHitXY() {
     this.ai.getHitXY()
   }
+
+  toString() {
+    return this.ai.toString()
+  }
 }
