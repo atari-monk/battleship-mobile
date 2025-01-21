@@ -7,6 +7,7 @@ export class DataService {
     this.player2 = null
     this.turn = null
     this.config = null
+    this.playerAI = null
   }
 
   initializeTurn() {

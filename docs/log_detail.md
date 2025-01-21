@@ -20,3 +20,7 @@
 - now log needs to tell the story of a game
 - need to load battle grid with turn 1 player data
 - research what needs to be done to add second component of same kind
+
+### 21
+
+- generate PlayerAI class

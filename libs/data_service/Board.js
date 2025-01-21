@@ -1,5 +1,6 @@
 export class Board {
-  constructor() {
+  constructor(fleet) {
+    this.fleet = fleet
     this._matrix = Array(10)
       .fill()
       .map(() => Array(10).fill(0))
@@ -27,14 +28,8 @@ export class Board {
       .join('\n\t\t')}`
   }
 
-  move(fleet) {
-    const [x, y] = this.getHitXY()
-    this.hit(x, y, fleet)
-    return [x, y]
-  }
-
-  hit(x, y, fleet) {
-    if (fleet.hit(x, y)) {
+  hit(x, y) {
+    if (this.fleet.hit(x, y)) {
       this._matrix[x][y] = 1
       return true
     } else {

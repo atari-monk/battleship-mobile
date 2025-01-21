@@ -40,18 +40,16 @@ export class GridRenderer {
   }
 
   aiMove() {
-    const xy = this._dataService.player2.board.move(
-      this._dataService.player1.fleet
-    )
+    const xy = this._dataService.playerAI.move()
     const screenCoords = this.matrixToScreenCoords(xy[0], xy[1])
-    logger.debug(`AI move: ${xy}`)
-    logger.debug(this._dataService.player2.board.toString())
     return { clientX: screenCoords.x, clientY: screenCoords.y }
   }
 
   matrixToScreenCoords(row, col) {
     const { cssClass: css, dot } = this.config
-    const cell = document.querySelector(`#battle-grid-1 ${dot(css.battleGridCell)}`)
+    const cell = document.querySelector(
+      `#battle-grid-1 ${dot(css.battleGridCell)}`
+    )
     const cellSize = cell.getBoundingClientRect()
     const container = document.getElementById('battle-grid-1')
     const containerRect = container.getBoundingClientRect()

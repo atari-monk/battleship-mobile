@@ -108,6 +108,7 @@
 
 1. 06:33 - 07:24, feat(board): callback for AI
 2. 09:32 - 11:19, feat(board): battleship ai
+3. 13:15 - 14:11, refactor(AI): simple ai
 
 ### Plan
 
