@@ -111,14 +111,12 @@
 3. 13:15 - 14:11, refactor(AI): simple ai
 4. 14:17 - 15:28, feat(board): predict ships
 5. 15:29 - 16:31, feat(board): boilerplate to predictions of board
+6. 17:04 - 18:31, feat(prototype): check free spaces on board
 
 ### Plan
 
-1. Code ai player turn.
-2. Show battle grid for player1.
-3. Code player turn.
-4. Code end condition.
-5. Generate overlay component with game messages.
-6. Polish the game.
-7. release single player game.
-8. Generate multiplayer version.
+1. Code end condition.
+2. Generate overlay component with game messages.
+3. Polish the game.
+4. release single player game.
+5. Generate multiplayer version.
