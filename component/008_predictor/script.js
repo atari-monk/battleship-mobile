@@ -3,36 +3,23 @@ import { BoardPredictor } from './lib/BoardPredictor.js'
 import { SimpleSpaceCounter } from './lib/SimpleSpaceCounter.js'
 import { SpaceCounter } from './lib/SpaceCounter.js'
 
-const data1 = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 2, 0, 0, 0, 0, 0, 0, 0],
-  [0, 2, 0, 1, 0, 0, 2, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 2, 0, 0, 1, 0, 2, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-]
-const data = [
-  [0, 0, 0],
-  [0, 1, 0],
-  [2, 2, 2],
-]
-
 const config = {
   simpleCounter: true,
 }
-const board = new Board(data)
+
+const board = new Board()
+board.generateBoard(2, 2)
 const predictor = new BoardPredictor(
   board,
-  config.simpleCounter ? new SimpleSpaceCounter(board) : new SpaceCounter(board)
+  config.simpleCounter
+    ? new SimpleSpaceCounter(board)
+    : new SpaceCounter(board),
+  [5, 4, 3, 3, 2]
 )
+
+//predictor.predictShipPositions()
 
 predictor.printBoard()
 predictor.renderBoard()
 predictor.printFleetPrediction()
 predictor.renderFleetPrediction()
-
-predictor.countSpace()

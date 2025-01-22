@@ -1,5 +1,13 @@
 export class Board {
-  constructor(data) {
+  constructor() {
+    this._data = []
+  }
+
+  generateBoard(rows, cols) {
+    this._data = Array.from({ length: rows }, () => Array(cols).fill(0))
+  }
+
+  setData(data) {
     this._data = data
   }
 

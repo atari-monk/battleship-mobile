@@ -1,11 +1,12 @@
 import { Board } from './Board.js'
 
 export class BoardPredictor {
-  constructor(board, spaceCounter) {
+  constructor(board, spaceCounter, shipData) {
     this.board = board
     this.spaceCounter = spaceCounter
-    this.ships = [5, 4, 3, 3, 2]
-    this.fleetPrediction = new Board(board.getDataCopy())
+    this.ships = shipData
+    this.fleetPrediction = new Board()
+    this.fleetPrediction.setData(this.board.getDataCopy())
   }
 
   printBoard() {
