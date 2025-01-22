@@ -69,12 +69,27 @@ export class SimpleSpaceCounter {
   }
 
   countSpace() {
-    this.board.log(1, 1)
-    this.board.log(2, 3)
-    this.board.log(5, 6)
+    const counts = []
 
-    this.logSpace(1, 1)
-    this.logSpace(2, 3)
-    this.logSpace(5, 6)
+    for (let i = 0; i < this.board.length(); i++) {
+      for (let j = 0; j < this.board.rowLength(i); j++) {
+        if (this.board.getCell(i, j) === 1) {
+          counts.push({
+            position: [i, j],
+            freeSpaces: this.countSpaceForPoint(i, j),
+          })
+        }
+      }
+    }
+
+    let logString = counts
+      .map(({ position, freeSpaces }) => {
+        return `Position: [${position[0]}, ${position[1]}]\n  Left: ${freeSpaces[0]}\n  Up: ${freeSpaces[1]}\n  Right: ${freeSpaces[2]}\n  Down: ${freeSpaces[3]}\n-----------------------------`
+      })
+      .join('\n')
+
+    console.log(logString)
+
+    return counts
   }
 }

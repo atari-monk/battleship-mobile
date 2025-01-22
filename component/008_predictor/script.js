@@ -3,7 +3,7 @@ import { BoardPredictor } from './lib/BoardPredictor.js'
 import { SimpleSpaceCounter } from './lib/SimpleSpaceCounter.js'
 import { SpaceCounter } from './lib/SpaceCounter.js'
 
-const data = [
+const data1 = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 1, 2, 0, 0, 0, 0, 0, 0, 0],
   [0, 2, 0, 1, 0, 0, 2, 0, 0, 0],
@@ -14,6 +14,11 @@ const data = [
   [0, 0, 0, 0, 0, 0, 2, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+]
+const data = [
+  [0, 0, 0],
+  [0, 1, 0],
+  [2, 2, 2],
 ]
 
 const config = {
