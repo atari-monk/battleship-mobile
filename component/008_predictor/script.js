@@ -1,8 +1,9 @@
-import { BattleshipBoard } from './BattleshipBoard.js'
-import { printGrid } from './printGrid.js'
-import { renderGrid } from './renderGrid.js'
+import { Board } from './lib/Board.js'
+import { BoardPredictor } from './lib/BoardPredictor.js'
+import { SimpleSpaceCounter } from './lib/SimpleSpaceCounter.js'
+import { SpaceCounter } from './lib/SpaceCounter.js'
 
-const inputGrid = [
+const data = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 1, 2, 0, 0, 0, 0, 0, 0, 0],
   [0, 2, 0, 1, 0, 0, 2, 0, 0, 0],
@@ -15,22 +16,18 @@ const inputGrid = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ]
 
-const board = new BattleshipBoard(inputGrid)
-const predictedGrid = board.getPredictedGrid()
+const config = {
+  simpleCounter: true,
+}
+const board = new Board(data)
+const predictor = new BoardPredictor(
+  board,
+  config.simpleCounter ? new SimpleSpaceCounter(board) : new SpaceCounter(board)
+)
 
-console.log('Input Grid:')
-printGrid(inputGrid)
+predictor.printBoard()
+predictor.renderBoard()
+predictor.printFleetPrediction()
+predictor.renderFleetPrediction()
 
-console.log('\nPredicted Grid:')
-printGrid(predictedGrid)
-
-console.log(`inputGrid[1][1]: ${inputGrid[1][1]}`)
-console.log(`inputGrid[2][3]: ${inputGrid[2][3]}`)
-console.log(`inputGrid[5][6]: ${inputGrid[5][6]}`)
-board.logFreeSpaces(1, 1)
-board.logFreeSpaces(2, 3)
-board.logFreeSpaces(5, 6)
-board.countSpace()
-
-renderGrid(inputGrid, 'inputGrid')
-renderGrid(predictedGrid, 'predictedGrid')
+predictor.countSpace()
