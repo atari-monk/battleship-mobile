@@ -15,6 +15,14 @@ export class Board {
     return this._data.map((row) => [...row])
   }
 
+  fillValueAt(x, y, value) {
+    if (x >= 0 && x < this._data.length && y >= 0 && y < this._data[0].length) {
+      this._data[x][y] = value
+    } else {
+      console.log('Invalid coordinates')
+    }
+  }
+
   getCell(x, y) {
     return this._data[x][y]
   }
@@ -72,6 +80,60 @@ export class Board {
         row.appendChild(cell)
       }
       table.appendChild(row)
+    }
+  }
+
+  placeShip(shipSize) {
+    let shipsPlaced = 0
+
+    // Loop until all ships are placed
+    while (shipsPlaced < this._data.length * this._data[0].length) {
+      let placed = false
+
+      for (let i = 0; i < this._data.length; i++) {
+        for (let j = 0; j < this._data[i].length; j++) {
+          // Try placing the ship horizontally if possible
+          if (j + shipSize <= this._data[i].length) {
+            let canPlaceHorizontally = true
+            for (let k = j; k < j + shipSize; k++) {
+              if (this._data[i][k] !== 0) {
+                canPlaceHorizontally = false
+                break
+              }
+            }
+            if (canPlaceHorizontally) {
+              for (let k = j; k < j + shipSize; k++) {
+                this.fillValueAt(i, k, 3) // Place ship
+              }
+              shipsPlaced++
+              placed = true
+              break // Ship placed, exit loop
+            }
+          }
+
+          // Try placing the ship vertically if possible
+          if (i + shipSize <= this._data.length) {
+            let canPlaceVertically = true
+            for (let k = i; k < i + shipSize; k++) {
+              if (this._data[k][j] !== 0) {
+                canPlaceVertically = false
+                break
+              }
+            }
+            if (canPlaceVertically) {
+              for (let k = i; k < i + shipSize; k++) {
+                this.fillValueAt(k, j, 3) // Place ship
+              }
+              shipsPlaced++
+              placed = true
+              break // Ship placed, exit loop
+            }
+          }
+        }
+        if (placed) break // Exit outer loop if ship has been placed
+      }
+
+      if (!placed) break // Stop if no more ships can be placed
     }
   }
 }

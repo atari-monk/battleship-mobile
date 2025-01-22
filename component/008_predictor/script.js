@@ -1,25 +1,80 @@
 import { Board } from './lib/Board.js'
-import { BoardPredictor } from './lib/BoardPredictor.js'
 import { SimpleSpaceCounter } from './lib/SimpleSpaceCounter.js'
 import { SpaceCounter } from './lib/SpaceCounter.js'
 
 const config = {
-  simpleCounter: true,
+  spaceCounter: { isOn: false, simpleCounter: true },
 }
 
-const board = new Board()
-board.generateBoard(2, 2)
-const predictor = new BoardPredictor(
-  board,
-  config.simpleCounter
-    ? new SimpleSpaceCounter(board)
-    : new SpaceCounter(board),
-  [5, 4, 3, 3, 2]
-)
+const fleet = new Board()
+const shot = new Board()
+const forecast = new Board()
 
-//predictor.predictShipPositions()
+function setBoards() {
+  fleet.generateBoard(2, 2)
+  fleet.fillValueAt(0, 1, 1)
+  fleet.fillValueAt(1, 1, 1)
 
-predictor.printBoard()
-predictor.renderBoard()
-predictor.printFleetPrediction()
-predictor.renderFleetPrediction()
+  shot.generateBoard(2, 2)
+
+  forecast.generateBoard(2, 2)
+  forecast.placeShip(2)
+}
+
+function print() {
+  shot.print('Shot:')
+  forecast.print('Forecast:')
+}
+
+function render() {
+  shot.render('shot')
+  forecast.render('forecast')
+}
+
+function show(i = -1) {
+  if (i >= 0) console.log(`Boards at shot ${i+1}:`)
+  print()
+  render()
+}
+
+setBoards()
+console.log('Initial boards:')
+fleet.print('Fleet:')
+fleet.render('fleet')
+show()
+
+const shots = []
+shots.push({ x: 0, y: 0, v: 2 })
+shots.push({ x: 1, y: 0, v: 2 })
+shots.push({ x: 0, y: 1, v: 1 })
+shots.push({ x: 1, y: 1, v: 1 })
+shots.push('restart')
+let i = 0
+
+const button = document.getElementById('next')
+button.addEventListener('click', () => {
+  if (shots[i] === 'restart') {
+    i = 0
+    setBoards()
+    console.log('Initial boards:')
+    fleet.print('Fleet:')
+    fleet.render('fleet')
+    show(i)
+    return
+  }
+  const { x, y, v } = shots[i]
+  shot.fillValueAt(x, y, v)
+
+  forecast.setData(shot.getDataCopy())
+  forecast.placeShip(2)
+
+  show(i)
+  i++
+})
+
+if (config.spaceCounter.isOn) {
+  const spaceCounter = config.spaceCounter.simpleCounter
+    ? new SimpleSpaceCounter(shot)
+    : new SpaceCounter(shot)
+  spaceCounter.countSpace()
+}
