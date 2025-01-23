@@ -1,10 +1,4 @@
 import { Board } from './lib/Board.js'
-import { SimpleSpaceCounter } from './lib/SimpleSpaceCounter.js'
-import { SpaceCounter } from './lib/SpaceCounter.js'
-
-const config = {
-  spaceCounter: { isOn: false, simpleCounter: true },
-}
 
 const fleet = new Board()
 const shot = new Board()
@@ -75,10 +69,3 @@ button.addEventListener('click', () => {
   show(i)
   i++
 })
-
-if (config.spaceCounter.isOn) {
-  const spaceCounter = config.spaceCounter.simpleCounter
-    ? new SimpleSpaceCounter(shot)
-    : new SpaceCounter(shot)
-  spaceCounter.countSpace()
-}
