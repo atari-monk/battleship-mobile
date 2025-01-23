@@ -340,4 +340,33 @@ export class Board {
       }
     }
   }
+
+  convertCoordinates(coord) {
+    if (typeof coord !== 'string' || coord.length < 2) {
+      throw new Error('Invalid coordinate format')
+    }
+
+    const column = coord.charAt(0).toUpperCase()
+    const row = coord.slice(1)
+
+    const x = parseInt(row, 10) - 1
+    const y = column.charCodeAt(0) - 65
+
+    if (
+      isNaN(x) ||
+      x < 0 ||
+      y < 0 ||
+      y >= this._data[0].length ||
+      x >= this._data.length
+    ) {
+      throw new Error('Invalid coordinate range')
+    }
+
+    return { x, y }
+  }
+
+  fillCoordAt(coord, value) {
+    const { x, y } = this.convertCoordinates(coord)
+    this.fillValueAt(x, y, value)
+  }
 }

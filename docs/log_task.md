@@ -125,6 +125,8 @@
 3. 21:21 - 22:43, feat(board): initialize board data and allow dynamic board generation
 4. 22:44 - 23:55, feat(predictor): for 2x2 game, problem framing
 
+- Total 296 ÷ 60 = 4 hours 56 minutes
+
 ### 23
 
 1. 08:40 - 09:15, feat(predictor): ship placement logic horizontal and vertical methods
@@ -133,10 +135,14 @@
 4. 10:04 - 10:39, feat(predictor): implement multiple game handling
 5. 10:40 - 11:56, feat(predictor): enhance ship placement logic with new methods
 6. 11:57 - 13:39, feat(predictor): add cell counting and filler methods for enhanced board prediction
+7. 16:48 - 18:04, feat(predictor): add coordinate conversion for improved board interaction 
+
+- Total 348 ÷ 60 = 5 hours 48 minutes
+- Pain of slow 2x2 board prediction
 
 ### Plan
 
-1. Code end condition.
+1. Game end condition.
 2. Generate overlay component with game messages.
 3. Polish the game.
 4. Release single player game.

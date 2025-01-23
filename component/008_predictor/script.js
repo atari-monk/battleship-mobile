@@ -36,25 +36,25 @@ function show(j, i) {
 
 const games = [
   [
-    { x: 0, y: 0, v: 2 },
-    { x: 1, y: 0, v: 2 },
-    { x: 0, y: 1, v: 1 },
-    { x: 1, y: 1, v: 1 },
+    { c: 'A1', v: 2 },
+    { c: 'A2', v: 2 },
+    { c: 'B1', v: 1 },
+    { c: 'B2', v: 1 },
     0,
   ],
   [
-    { x: 1, y: 0, v: 2 },
-    { x: 0, y: 0, v: 2 },
-    { x: 0, y: 1, v: 1 },
-    { x: 1, y: 1, v: 1 },
+    { c: 'A2', v: 2 },
+    { c: 'A1', v: 2 },
+    { c: 'B1', v: 1 },
+    { c: 'B2', v: 1 },
     0,
   ],
-  [{ x: 0, y: 1, v: 1 }, { x: 0, y: 0, v: 2 }, { x: 1, y: 1, v: 1 }, 0],
-  [{ x: 0, y: 1, v: 1 }, { x: 1, y: 1, v: 1 }, 0],
+  [{ c: 'B1', v: 1 }, { c: 'A1', v: 2 }, { c: 'B2', v: 1 }, 0],
+  [{ c: 'B1', v: 1 }, { c: 'B2', v: 1 }, 0],
 ]
 
 const isSelectGameActive = true
-const selectGame = 3
+const selectGame = 2
 
 let j = 0
 let i = 0
@@ -74,8 +74,11 @@ button.addEventListener('click', () => {
     show(j, i)
     return
   }
-  const { x, y, v } = games[j][i]
-  shot.fillValueAt(x, y, v)
+  const { c, v: vc } = games[j][i]
+  const { x, y, v: vxy } = games[j][i]
+  if (c) shot.fillCoordAt(c, vc)
+  else shot.fillValueAt(x, y, vxy)
+
   forecast.setData(shot.getDataCopy())
   forecast.placeShipOrFillBoard(2)
 
