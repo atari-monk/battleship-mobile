@@ -125,6 +125,10 @@
 3. 21:21 - 22:43, feat(board): initialize board data and allow dynamic board generation
 4. 22:44 - 23:55, feat(predictor): for 2x2 game, problem framing
 
+### 23
+
+1. 08:40 - 09:15, feat(predictor): ship placement logic horizontal and vertical methods
+
 ### Plan
 
 1. Code end condition.

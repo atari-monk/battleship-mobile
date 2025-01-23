@@ -18,7 +18,8 @@ function setBoards() {
   shot.generateBoard(2, 2)
 
   forecast.generateBoard(2, 2)
-  forecast.placeShip(2)
+  forecast.placeShipHorizontally(0, 0, 2)
+  forecast.placeShipHorizontally(1, 0, 2)
 }
 
 function print() {
@@ -32,7 +33,7 @@ function render() {
 }
 
 function show(i = -1) {
-  if (i >= 0) console.log(`Boards at shot ${i+1}:`)
+  if (i >= 0) console.log(`Boards at shot ${i + 1}:`)
   print()
   render()
 }
@@ -66,7 +67,14 @@ button.addEventListener('click', () => {
   shot.fillValueAt(x, y, v)
 
   forecast.setData(shot.getDataCopy())
-  forecast.placeShip(2)
+  if (i === 0) {
+    forecast.placeShipHorizontally(1, 0, 2)
+    forecast.placeShipVertically(0, 1, 2)
+  } else if (i === 1) {
+    forecast.placeShipVertically(0, 1, 2)
+  } else if (i === 2) {
+    forecast.placeShipVertically(0, 1, 2)
+  }
 
   show(i)
   i++

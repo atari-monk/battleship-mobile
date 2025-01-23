@@ -83,57 +83,65 @@ export class Board {
     }
   }
 
-  placeShip(shipSize) {
-    let shipsPlaced = 0
-
-    // Loop until all ships are placed
-    while (shipsPlaced < this._data.length * this._data[0].length) {
-      let placed = false
-
-      for (let i = 0; i < this._data.length; i++) {
-        for (let j = 0; j < this._data[i].length; j++) {
-          // Try placing the ship horizontally if possible
-          if (j + shipSize <= this._data[i].length) {
-            let canPlaceHorizontally = true
-            for (let k = j; k < j + shipSize; k++) {
-              if (this._data[i][k] !== 0) {
-                canPlaceHorizontally = false
-                break
-              }
-            }
-            if (canPlaceHorizontally) {
-              for (let k = j; k < j + shipSize; k++) {
-                this.fillValueAt(i, k, 3) // Place ship
-              }
-              shipsPlaced++
-              placed = true
-              break // Ship placed, exit loop
-            }
-          }
-
-          // Try placing the ship vertically if possible
-          if (i + shipSize <= this._data.length) {
-            let canPlaceVertically = true
-            for (let k = i; k < i + shipSize; k++) {
-              if (this._data[k][j] !== 0) {
-                canPlaceVertically = false
-                break
-              }
-            }
-            if (canPlaceVertically) {
-              for (let k = i; k < i + shipSize; k++) {
-                this.fillValueAt(k, j, 3) // Place ship
-              }
-              shipsPlaced++
-              placed = true
-              break // Ship placed, exit loop
-            }
-          }
-        }
-        if (placed) break // Exit outer loop if ship has been placed
-      }
-
-      if (!placed) break // Stop if no more ships can be placed
+  placeShipHorizontally(startX, startY, length, mark = 3) {
+    if (
+      startX < 0 ||
+      startX >= this._data.length ||
+      startY < 0 ||
+      startY + length > this._data[0].length
+    ) {
+      console.log('Invalid placement: Ship goes out of bounds')
+      return false
     }
+
+    for (let i = 0; i < length; i++) {
+      if (
+        this._data[startX][startY + i] !== 0 &&
+        this._data[startX][startY + i] !== 3 &&
+        this._data[startX][startY + i] !== 1
+      ) {
+        console.log('Invalid placement: Space already occupied')
+        return false
+      }
+    }
+
+    for (let i = 0; i < length; i++) {
+      if (this._data[startX][startY + i] !== 1) {
+        this._data[startX][startY + i] = mark
+      }
+    }
+
+    return true
+  }
+
+  placeShipVertically(startX, startY, length, mark = 3) {
+    if (
+      startX < 0 ||
+      startX + length > this._data.length ||
+      startY < 0 ||
+      startY >= this._data[0].length
+    ) {
+      console.log('Invalid placement: Ship goes out of bounds')
+      return false
+    }
+
+    for (let i = 0; i < length; i++) {
+      if (
+        this._data[startX + i][startY] !== 0 &&
+        this._data[startX + i][startY] !== 3 &&
+        this._data[startX + i][startY] !== 1
+      ) {
+        console.log('Invalid placement: Space already occupied')
+        return false
+      }
+    }
+
+    for (let i = 0; i < length; i++) {
+      if (this._data[startX + i][startY] !== 1) {
+        this._data[startX + i][startY] = mark
+      }
+    }
+
+    return true
   }
 }
