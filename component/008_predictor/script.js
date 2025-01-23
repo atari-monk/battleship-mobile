@@ -27,45 +27,55 @@ function render() {
   forecast.render('forecast')
 }
 
-function show(i = -1) {
-  console.log(`Turn ${i + 1}:`)
+function show(j, i) {
+  console.log(`Game ${j}:`)
+  console.log(`Turn ${i}:`)
   print()
   render()
 }
 
-setBoards()
-show()
+const games = [
+  [
+    { x: 0, y: 0, v: 2 },
+    { x: 1, y: 0, v: 2 },
+    { x: 0, y: 1, v: 1 },
+    { x: 1, y: 1, v: 1 },
+    0,
+  ],
+  [
+    { x: 1, y: 0, v: 2 },
+    { x: 0, y: 0, v: 2 },
+    { x: 0, y: 1, v: 1 },
+    { x: 1, y: 1, v: 1 },
+    0,
+  ],
+  [{ x: 0, y: 1, v: 1 }, 0],
+]
 
-const shots = []
-shots.push({ x: 0, y: 0, v: 2 })
-shots.push({ x: 1, y: 0, v: 2 })
-shots.push({ x: 0, y: 1, v: 1 })
-shots.push({ x: 1, y: 1, v: 1 })
-shots.push('restart')
+let j = 2
 let i = 0
+
+setBoards()
+show(j, i)
 
 const button = document.getElementById('next')
 button.addEventListener('click', () => {
-  if (shots[i] === 'restart') {
+  if (games[j][i] === 0) {
     i = 0
+    j++
+    if (j === games.length) j = 0
     setBoards()
     console.clear()
-    show()
+    show(j, i)
     return
   }
-  const { x, y, v } = shots[i]
+  const { x, y, v } = games[j][i]
   shot.fillValueAt(x, y, v)
 
   forecast.setData(shot.getDataCopy())
-  if (i === 0) {
-    forecast.fillBoardWithShips()
-  } else if (i === 1) {
-    forecast.fillBoardWithShips()
-  } else if (i === 2) {
-    forecast.fillBoardWithShips()
-  }
+  forecast.fillBoardWithShips()
 
-  console.clear()
-  show(i)
   i++
+  console.clear()
+  show(j, i)
 })
