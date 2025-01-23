@@ -49,11 +49,16 @@ const games = [
     { x: 1, y: 1, v: 1 },
     0,
   ],
-  [{ x: 0, y: 1, v: 1 }, { x: 0, y: 0, v: 2 }, 0],
+  [{ x: 0, y: 1, v: 1 }, { x: 0, y: 0, v: 2 }, { x: 1, y: 1, v: 1 }, 0],
+  [{ x: 0, y: 1, v: 1 }, { x: 1, y: 1, v: 1 }, 0],
 ]
 
-let j = 2
+const isSelectGameActive = true
+const selectGame = 3
+
+let j = 0
 let i = 0
+if (isSelectGameActive) j = selectGame
 
 setBoards()
 show(j, i)
@@ -62,8 +67,8 @@ const button = document.getElementById('next')
 button.addEventListener('click', () => {
   if (games[j][i] === 0) {
     i = 0
-    j++
-    if (j === games.length) j = 0
+    if (!isSelectGameActive) j++
+    if (!isSelectGameActive && j === games.length) j = 0
     setBoards()
     console.clear()
     show(j, i)
@@ -71,7 +76,6 @@ button.addEventListener('click', () => {
   }
   const { x, y, v } = games[j][i]
   shot.fillValueAt(x, y, v)
-
   forecast.setData(shot.getDataCopy())
   forecast.placeShipOrFillBoard(2)
 
