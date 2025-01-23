@@ -43,18 +43,45 @@ const games = [
     0,
   ],
   [
+    { c: 'A1', v: 2 },
+    { c: 'A2', v: 2 },
+    { c: 'B2', v: 1 },
+    { c: 'B1', v: 1 },
+    0,
+  ],
+  [{ c: 'A1', v: 2 }, { c: 'B1', v: 1 }, { c: 'B2', v: 1 }, 0],
+  [{ c: 'A1', v: 2 }, { c: 'B2', v: 1 }, { c: 'B1', v: 1 }, 0],
+  [
     { c: 'A2', v: 2 },
     { c: 'A1', v: 2 },
     { c: 'B1', v: 1 },
     { c: 'B2', v: 1 },
     0,
   ],
+  [
+    { c: 'A2', v: 2 },
+    { c: 'A1', v: 2 },
+    { c: 'B2', v: 1 },
+    { c: 'B1', v: 1 },
+    0,
+  ],
+  [
+    { c: 'A2', v: 2 },
+    { c: 'B1', v: 1 },
+    { c: 'A1', v: 2 },
+    { c: 'B2', v: 1 },
+    0,
+  ],
+  [{ c: 'A2', v: 2 }, { c: 'B1', v: 1 }, { c: 'B2', v: 1 }, 0],
+  [{ c: 'A2', v: 2 }, { c: 'B2', v: 1 }, { c: 'B1', v: 1 }, 0],
   [{ c: 'B1', v: 1 }, { c: 'A1', v: 2 }, { c: 'B2', v: 1 }, 0],
   [{ c: 'B1', v: 1 }, { c: 'B2', v: 1 }, 0],
+  [{ c: 'B2', v: 1 }, { c: 'A2', v: 2 }, { c: 'B1', v: 1 }, 0],
+  [{ c: 'B2', v: 1 }, { c: 'B1', v: 1 }, 0],
 ]
 
-const isSelectGameActive = true
-const selectGame = 2
+const isSelectGameActive = false
+const selectGame = 0
 
 let j = 0
 let i = 0

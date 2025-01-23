@@ -180,7 +180,7 @@ export class Board {
   placeShipVerticallyBottomToTop(startX, startY, length, mark = 3) {
     if (
       startX < 0 ||
-      startX - length < 0 ||
+      startX - (length - 1) < 0 ||
       startY < 0 ||
       startY >= this._data[0].length
     ) {
@@ -267,7 +267,6 @@ export class Board {
     for (const { x, y } of hitPoints) {
       const placed = this.placeShipAtHitPoint(x, y, length)
       if (placed) {
-        this.fillers()
         return true
       }
     }
@@ -287,58 +286,6 @@ export class Board {
     }
 
     return hitPoints
-  }
-
-  countCells() {
-    const count = { hit: 0, miss: 0, forecast: 0 }
-    for (let x = 0; x < this._data.length; x++) {
-      for (let y = 0; y < this._data[0].length; y++) {
-        if (this._data[x][y] === 1) {
-          count.hit++
-        }
-        if (this._data[x][y] === 2) {
-          count.miss++
-        }
-        if (this._data[x][y] === 3) {
-          count.forecast++
-        }
-      }
-    }
-    return count
-  }
-
-  fillers(shipSize = 2) {
-    const count = this.countCells()
-    this.fillEmptyWithMiss(shipSize, count)
-    this.fillForecastWithMiss(shipSize, count)
-  }
-
-  fillEmptyWithMiss(shipSize, count) {
-    if (
-      shipSize === 2 &&
-      count.hit + count.forecast + count.miss ===
-        this._data.length * this._data[0].length - 1
-    ) {
-      for (let x = 0; x < this._data.length; x++) {
-        for (let y = 0; y < this._data[0].length; y++) {
-          if (this._data[x][y] === 0) {
-            this._data[x][y] = 2
-          }
-        }
-      }
-    }
-  }
-
-  fillForecastWithMiss(shipSize, count) {
-    if (shipSize === 2 && count.hit === shipSize) {
-      for (let x = 0; x < this._data.length; x++) {
-        for (let y = 0; y < this._data[0].length; y++) {
-          if (this._data[x][y] === 3) {
-            this._data[x][y] = 2
-          }
-        }
-      }
-    }
   }
 
   convertCoordinates(coord) {
