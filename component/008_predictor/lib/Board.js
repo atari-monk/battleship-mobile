@@ -83,7 +83,7 @@ export class Board {
     }
   }
 
-  placeShipHorizontally(startX, startY, length, mark = 3) {
+  placeShipHorizontallyLeftToRight(startX, startY, length, mark = 3) {
     if (
       startX < 0 ||
       startX >= this._data.length ||
@@ -112,7 +112,43 @@ export class Board {
     return true
   }
 
-  placeShipVertically(startX, startY, length, mark = 3) {
+  placeShipHorizontallyRightToLeft(startX, startY, length, mark = 3) {
+    if (
+      startX < 0 ||
+      startX >= this._data.length ||
+      startY < 0 ||
+      startY - (length - 1) < 0
+    ) {
+      return false
+    }
+
+    for (let i = 0; i < length; i++) {
+      if (
+        this._data[startX][startY - i] !== 0 &&
+        this._data[startX][startY - i] !== 3 &&
+        this._data[startX][startY - i] !== 1
+      ) {
+        return false
+      }
+    }
+
+    for (let i = 0; i < length; i++) {
+      if (this._data[startX][startY - i] !== 1) {
+        this._data[startX][startY - i] = mark
+      }
+    }
+
+    return true
+  }
+
+  placeShipHorizontally(startX, startY, length, mark = 3) {
+    return (
+      this.placeShipHorizontallyLeftToRight(startX, startY, length, mark) ||
+      this.placeShipHorizontallyRightToLeft(startX, startY, length, mark)
+    )
+  }
+
+  placeShipVerticallyTopToBottom(startX, startY, length, mark = 3) {
     if (
       startX < 0 ||
       startX + length > this._data.length ||
@@ -141,7 +177,43 @@ export class Board {
     return true
   }
 
-  fillBoardWithShips() {
+  placeShipVerticallyBottomToTop(startX, startY, length, mark = 3) {
+    if (
+      startX < 0 ||
+      startX - length < 0 ||
+      startY < 0 ||
+      startY >= this._data[0].length
+    ) {
+      return false
+    }
+
+    for (let i = 0; i < length; i++) {
+      if (
+        this._data[startX - i][startY] !== 0 &&
+        this._data[startX - i][startY] !== 3 &&
+        this._data[startX - i][startY] !== 1
+      ) {
+        return false
+      }
+    }
+
+    for (let i = 0; i < length; i++) {
+      if (this._data[startX - i][startY] !== 1) {
+        this._data[startX - i][startY] = mark
+      }
+    }
+
+    return true
+  }
+
+  placeShipVertically(startX, startY, length, mark = 3) {
+    return (
+      this.placeShipVerticallyTopToBottom(startX, startY, length, mark) ||
+      this.placeShipVerticallyBottomToTop(startX, startY, length, mark)
+    )
+  }
+
+  fillBoardWithShipsRandomly() {
     const maxAttempts = 1000
     const shipLengths = [2]
     let attempts = 0
@@ -153,7 +225,7 @@ export class Board {
       const isHorizontal = Math.random() < 0.5
 
       const placed = isHorizontal
-        ? this.placeShipHorizontally(startX, startY, length)
+        ? this.placeShipHorizontallyLeftToRight(startX, startY, length)
         : this.placeShipVertically(startX, startY, length)
 
       if (placed) {
@@ -176,5 +248,43 @@ export class Board {
       }
     }
     return true
+  }
+
+  placeShipAtHitPoint(x, y, length) {
+    let result = false
+    if (this.placeShipHorizontally(x, y, length)) {
+      result = true
+    }
+    if (this.placeShipVertically(x, y, length)) {
+      result = true
+    }
+    return result
+  }
+
+  placeShipOrFillBoard(length) {
+    const hitPoints = this.findHitPoints()
+
+    for (const { x, y } of hitPoints) {
+      const placed = this.placeShipAtHitPoint(x, y, length)
+      if (placed) {
+        return true
+      }
+    }
+
+    return this.fillBoardWithShipsRandomly()
+  }
+
+  findHitPoints() {
+    const hitPoints = []
+
+    for (let x = 0; x < this._data.length; x++) {
+      for (let y = 0; y < this._data[0].length; y++) {
+        if (this._data[x][y] === 1) {
+          hitPoints.push({ x, y })
+        }
+      }
+    }
+
+    return hitPoints
   }
 }

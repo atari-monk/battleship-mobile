@@ -12,7 +12,7 @@ function setBoards() {
   shot.generateBoard(2, 2)
 
   forecast.generateBoard(2, 2)
-  forecast.fillBoardWithShips()
+  forecast.fillBoardWithShipsRandomly()
 }
 
 function print() {
@@ -49,7 +49,7 @@ const games = [
     { x: 1, y: 1, v: 1 },
     0,
   ],
-  [{ x: 0, y: 1, v: 1 }, 0],
+  [{ x: 0, y: 1, v: 1 }, { x: 0, y: 0, v: 2 }, 0],
 ]
 
 let j = 2
@@ -73,7 +73,7 @@ button.addEventListener('click', () => {
   shot.fillValueAt(x, y, v)
 
   forecast.setData(shot.getDataCopy())
-  forecast.fillBoardWithShips()
+  forecast.placeShipOrFillBoard(2)
 
   i++
   console.clear()
