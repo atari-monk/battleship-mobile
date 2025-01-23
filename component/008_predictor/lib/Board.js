@@ -90,7 +90,6 @@ export class Board {
       startY < 0 ||
       startY + length > this._data[0].length
     ) {
-      console.log('Invalid placement: Ship goes out of bounds')
       return false
     }
 
@@ -100,7 +99,6 @@ export class Board {
         this._data[startX][startY + i] !== 3 &&
         this._data[startX][startY + i] !== 1
       ) {
-        console.log('Invalid placement: Space already occupied')
         return false
       }
     }
@@ -121,7 +119,6 @@ export class Board {
       startY < 0 ||
       startY >= this._data[0].length
     ) {
-      console.log('Invalid placement: Ship goes out of bounds')
       return false
     }
 
@@ -131,7 +128,6 @@ export class Board {
         this._data[startX + i][startY] !== 3 &&
         this._data[startX + i][startY] !== 1
       ) {
-        console.log('Invalid placement: Space already occupied')
         return false
       }
     }
@@ -142,6 +138,43 @@ export class Board {
       }
     }
 
+    return true
+  }
+
+  fillBoardWithShips() {
+    const maxAttempts = 1000
+    const shipLengths = [2]
+    let attempts = 0
+
+    while (attempts < maxAttempts) {
+      const startX = Math.floor(Math.random() * this._data.length)
+      const startY = Math.floor(Math.random() * this._data[0].length)
+      const length = shipLengths[Math.floor(Math.random() * shipLengths.length)]
+      const isHorizontal = Math.random() < 0.5
+
+      const placed = isHorizontal
+        ? this.placeShipHorizontally(startX, startY, length)
+        : this.placeShipVertically(startX, startY, length)
+
+      if (placed) {
+        if (this.isBoardFull()) {
+          return true
+        }
+      }
+
+      attempts++
+    }
+
+    console.log('Unable to fill the board completely within the attempt limit')
+    return false
+  }
+
+  isBoardFull() {
+    for (let row of this._data) {
+      if (row.includes(0)) {
+        return false
+      }
+    }
     return true
   }
 }

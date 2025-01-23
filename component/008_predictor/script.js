@@ -18,30 +18,28 @@ function setBoards() {
   shot.generateBoard(2, 2)
 
   forecast.generateBoard(2, 2)
-  forecast.placeShipHorizontally(0, 0, 2)
-  forecast.placeShipHorizontally(1, 0, 2)
+  forecast.fillBoardWithShips()
 }
 
 function print() {
+  fleet.print('Fleet:')
   shot.print('Shot:')
   forecast.print('Forecast:')
 }
 
 function render() {
+  fleet.render('fleet')
   shot.render('shot')
   forecast.render('forecast')
 }
 
 function show(i = -1) {
-  if (i >= 0) console.log(`Boards at shot ${i + 1}:`)
+  console.log(`Turn ${i + 1}:`)
   print()
   render()
 }
 
 setBoards()
-console.log('Initial boards:')
-fleet.print('Fleet:')
-fleet.render('fleet')
 show()
 
 const shots = []
@@ -57,10 +55,8 @@ button.addEventListener('click', () => {
   if (shots[i] === 'restart') {
     i = 0
     setBoards()
-    console.log('Initial boards:')
-    fleet.print('Fleet:')
-    fleet.render('fleet')
-    show(i)
+    console.clear()
+    show()
     return
   }
   const { x, y, v } = shots[i]
@@ -68,14 +64,14 @@ button.addEventListener('click', () => {
 
   forecast.setData(shot.getDataCopy())
   if (i === 0) {
-    forecast.placeShipHorizontally(1, 0, 2)
-    forecast.placeShipVertically(0, 1, 2)
+    forecast.fillBoardWithShips()
   } else if (i === 1) {
-    forecast.placeShipVertically(0, 1, 2)
+    forecast.fillBoardWithShips()
   } else if (i === 2) {
-    forecast.placeShipVertically(0, 1, 2)
+    forecast.fillBoardWithShips()
   }
 
+  console.clear()
   show(i)
   i++
 })
