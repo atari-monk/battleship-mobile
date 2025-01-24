@@ -141,6 +141,10 @@
 - Total 435 ÷ 60 = 7 hours 15 minutes
 - Predicted all combinations of 2x2 game case, to learn something about predicting batleship grid
 
+### 24
+
+1. 11:10 - 11:25, chore(predictor): move 2x2 predictor prototype
+
 ### Plan
 
 1. Game end condition.

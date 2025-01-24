@@ -16,7 +16,6 @@
 2. [Menu](component/002_menu/index.html)
 3. [Toggle](component/003_toggle/index.html)
 4. [Modular](component/004_modular/index.html)
-5. [Predictor](component/008_predictor/index.html)
 
 ## 3. Grid
 
@@ -38,5 +37,9 @@
 1. [Proto](component/007_battle_grid/001_proto/001_proto.html)
 2. [Solid](component/007_battle_grid/002_solid/002_solid.html)
 3. [Fleet](component/007_battle_grid/003_fleet/index.html)
+
+## 3. Prototyping
+
+1. [Predictor](prototype/001_2x2_predictor/index.html)
 
 ## 6. [Page](page/index.html)
