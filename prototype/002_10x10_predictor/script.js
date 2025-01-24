@@ -8,8 +8,7 @@ const size = 10
 
 function setBoards() {
   fleet.generateBoard(size, size)
-  fleet.fillValueAt(0, 1, 1)
-  fleet.fillValueAt(1, 1, 1)
+  fleet.placeFleetRandomly()
 
   shot.generateBoard(size, size)
 

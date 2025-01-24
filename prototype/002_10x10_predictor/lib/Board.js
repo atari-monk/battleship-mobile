@@ -250,7 +250,7 @@ export class Board {
     return true
   }
 
-  placeShipAtHitPoint(x, y, length) {
+  placeShipFromCell(x, y, length) {
     let result = false
     if (this.placeShipHorizontally(x, y, length)) {
       result = true
@@ -265,7 +265,7 @@ export class Board {
     const hitPoints = this.findHitPoints()
 
     for (const { x, y } of hitPoints) {
-      const placed = this.placeShipAtHitPoint(x, y, length)
+      const placed = this.placeShipFromCell(x, y, length)
       if (placed) {
         return true
       }
@@ -315,5 +315,110 @@ export class Board {
   fillCoordAt(coord, value) {
     const { x, y } = this.convertCoordinates(coord)
     this.fillValueAt(x, y, value)
+  }
+
+  distanceSquared(x1, y1, x2, y2) {
+    return (x1 - x2) ** 2 + (y1 - y2) ** 2
+  }
+
+  takeRandomCell() {
+    const x = Math.floor(Math.random() * this._data.length)
+    const y = Math.floor(Math.random() * this._data[0].length)
+    return { x, y }
+  }
+
+  takeRandomCellInXLimit(minX, maxX) {
+    minX = Math.max(0, minX)
+    maxX = Math.min(this._data.length - 1, maxX)
+    const x = Math.floor(Math.random() * (maxX - minX + 1)) + minX
+    const y = Math.floor(Math.random() * this._data[0].length)
+    return { x, y }
+  }
+
+  takeRandomCellInLimits(minX, maxX, minY, maxY) {
+    minX = Math.max(0, minX)
+    maxX = Math.min(this._data.length - 1, maxX)
+    minY = Math.max(0, minY)
+    maxY = Math.min(this._data[0].length - 1, maxY)
+    const x = Math.floor(Math.random() * (maxX - minX + 1)) + minX
+    const y = Math.floor(Math.random() * (maxY - minY + 1)) + minY
+    return { x, y }
+  }
+
+  takeFleetCells() {
+    const cells = []
+    const limits = [
+      { x1: 0, x2: 9, y1: 0, y2: 2 },
+      { x1: 0, x2: 9, y1: 2, y2: 4 },
+      { x1: 0, x2: 9, y1: 4, y2: 6 },
+      { x1: 0, x2: 9, y1: 6, y2: 8 },
+      { x1: 0, x2: 9, y1: 8, y2: 9 },
+    ]
+    for (let i = 0; i < limits.length; i++) {
+      const { x1, x2, y1, y2 } = limits[i]
+      cells.push(this.takeRandomCellInLimits(x1, x2, y1, y2))
+    }
+    return cells
+  }
+
+  showCells(cells) {
+    for (const { x, y } of cells) {
+      this.fillValueAt(x, y, 1)
+    }
+  }
+
+  cointToss() {
+    const random = Math.random()
+    return random < 0.5 ? true : false
+  }
+
+  shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const randomIndex = Math.floor(Math.random() * (i + 1))
+      ;[array[i], array[randomIndex]] = [array[randomIndex], array[i]]
+    }
+    return array
+  }
+
+  countFilledCells(array2D) {
+    let count = 0
+
+    for (let row of array2D) {
+      for (let cell of row) {
+        if (cell !== 0) {
+          count++
+        }
+      }
+    }
+
+    return count
+  }
+
+  sumArray(arr) {
+    return arr.reduce((sum, current) => sum + current, 0)
+  }
+
+  shipsOverlaping(ships) {
+    const filledCells = this.countFilledCells(this._data)
+    const shipsCells = this.sumArray(ships)
+    return filledCells !== shipsCells
+  }
+
+  placeFleetRandomly(fleet = [5, 4]) {
+    const placed = []
+    console.log('asdfdasfasfasd')
+    fleet = this.shuffleArray(fleet)
+    const cells = this.takeFleetCells()
+    this.showCells(cells)
+    for (let i = 0; i < fleet.length; i++) {
+      const { x, y } = cells[i]
+      const shipLength = fleet[i]
+      placed.push(shipLength)
+      if (this.cointToss()) this.placeShipHorizontally(x, y, shipLength)
+      else this.placeShipVertically(x, y, shipLength)
+    }
+    if (this.shipsOverlaping(fleet)) {
+      console.warn('ships overlaping')
+    }
   }
 }
