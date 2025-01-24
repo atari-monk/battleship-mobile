@@ -17,7 +17,7 @@
 3. [Toggle](component/003_toggle/index.html)
 4. [Modular](component/004_modular/index.html)
 
-## 3. Grid
+### 1. Grid
 
 1. [Proto](component/005_grid/001_proto/index.html)
 2. [Click](component/005_grid/002_click/index.html)
@@ -27,12 +27,12 @@
 6. [Placement](component/005_grid/006_placement/index.html)
 7. [Toggle](component/005_grid/007_toggle/index.html)
 
-## 4. Fleet Grid
+### 2. Fleet Grid
 
 1. [Proto](component/006_fleet_grid/001_proto/001_proto.html)
 2. [Solid](component/006_fleet_grid/002_solid/002_solid.html)
 
-## 5. Battle Grid
+### 3. Battle Grid
 
 1. [Proto](component/007_battle_grid/001_proto/001_proto.html)
 2. [Solid](component/007_battle_grid/002_solid/002_solid.html)
@@ -40,6 +40,7 @@
 
 ## 3. Prototyping
 
-1. [Predictor](prototype/001_2x2_predictor/index.html)
+1. [2x2 Predictor](prototype/001_2x2_predictor/index.html)
+1. [10x10 Predictor](prototype/002_10x10_predictor/index.html)
 
-## 6. [Page](page/index.html)
+## 4. [Page](page/index.html)

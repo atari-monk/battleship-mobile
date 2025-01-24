@@ -1,0 +1,26 @@
+body {
+  background-color: black;
+  color: chocolate;
+}
+table {
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+td {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border: 1px solid rgba(255, 0, 0, 0.4);
+}
+.hit {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+.miss {
+  background-color: gray;
+}
+.prediction {
+  background-color: lightblue;
+}
+.empty {
+  background-color: rgba(255, 255, 255, 0.4);
+}
