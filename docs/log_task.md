@@ -147,6 +147,10 @@
 2. 11:26 - 11:43, feat(predictor): add 10x10 predictor prototype
 3. 15:25 - 18:10, feat(predictor): implement random fleet placement and utility methods for board management
 
+### 25
+
+1. 06:30 - 11:55, chore(predictor): remove unused 10x10 predictor files, hard fail
+
 ### Plan
 
 1. Game end condition.
